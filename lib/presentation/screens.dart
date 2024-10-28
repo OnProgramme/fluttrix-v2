@@ -1,0 +1,1 @@
+export 'package:fluttrix/presentation/home/home.screen.dart';
