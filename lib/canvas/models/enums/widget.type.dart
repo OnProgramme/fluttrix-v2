@@ -1,0 +1,11 @@
+enum WidgetType{
+  COLUMN,
+  ROW,
+  CONTAINER,
+  IMAGE,
+  LISTVIEW,
+  SCAFFOLD,
+  INPUT,
+  BUTTON,
+  TEXT,
+}

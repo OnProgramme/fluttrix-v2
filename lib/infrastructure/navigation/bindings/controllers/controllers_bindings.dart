@@ -1,1 +1,0 @@
-export 'package:fluttrix/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
