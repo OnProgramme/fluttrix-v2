@@ -5,4 +5,5 @@ class Routes {
   }
 
   static const HOME = '/home';
+  static const PREVIEW_CODE = '/preview-code';
 }

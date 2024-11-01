@@ -17,4 +17,5 @@ abstract class IWidget{
   OnWidgetUpdate onWidgetUpdate(ValueSetter<IWidget> callback);
   void handleUpdateWidget(IWidget widget);
   void update();
+  Map<String, dynamic> toJson();
 }

@@ -26,8 +26,7 @@ class FTrixCanvas implements IFTrixCanvas{
 
   @override
   Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    return _scaffold.toJson();
   }
 
   @override

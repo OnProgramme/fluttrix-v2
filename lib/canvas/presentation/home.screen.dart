@@ -20,6 +20,11 @@ class HomeScreen extends GetView<HomeController> {
           ToolbarSettingsComponent(),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
+          onPressed: controller.handlePreviewCode,
+        child: Icon(Icons.code, color: Colors.white,),
+      ),
     );
   }
 }

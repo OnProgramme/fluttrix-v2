@@ -12,7 +12,7 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
 class FTrixWidgetBuilder{
   FTrixWidgetBuilder._();
 
-  static build(WidgetType type){
+  static IWidget build(WidgetType type){
     Map<WidgetType, IWidget> widgets = {
       WidgetType.COLUMN: FTrixColumn(),
       WidgetType.ROW: FTrixRow(),
@@ -23,6 +23,10 @@ class FTrixWidgetBuilder{
       WidgetType.SCAFFOLD: FTrixScaffold(),
       WidgetType.LISTVIEW: FTrixListView(),
     };
-    return widgets[type];
+    final widget = widgets[type];
+    if(widget == null){
+      throw Exception('Invalid type');
+    }
+    return widget;
   }
 }

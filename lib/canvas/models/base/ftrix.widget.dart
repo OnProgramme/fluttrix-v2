@@ -41,7 +41,16 @@ abstract class FTrixWithDropWidget implements IWidget{
   void update() {
     setEventType(FTrixWidgetEventType.UPDATE);
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "type": type.name
+    };
+  }
 }
+
+
 
 abstract class FTrixWithoutDropWidget implements IWidget{
   @override
@@ -76,5 +85,12 @@ abstract class FTrixWithoutDropWidget implements IWidget{
   @override
   void update() {
     setEventType(FTrixWidgetEventType.UPDATE);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "type": type.name
+    };
   }
 }

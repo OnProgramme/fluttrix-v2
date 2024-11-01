@@ -1,0 +1,1 @@
+export 'package:fluttrix/infrastructure/navigation/bindings/controllers/preview_code.controller.binding.dart'; 

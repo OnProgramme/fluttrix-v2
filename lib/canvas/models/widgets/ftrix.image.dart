@@ -18,7 +18,8 @@ class FTrixImage extends FTrixWithoutDropWidget {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    // TODO: implement loadFromJson
+    type = WidgetType.IMAGE;
+    src = json["src"];
   }
 
   @override
@@ -29,5 +30,12 @@ class FTrixImage extends FTrixWithoutDropWidget {
   @override
   void handleUpdateWidget(IWidget widget) {
     // TODO: implement handleUpdateWidget
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return super.toJson()..addAll({
+      "src": src,
+    });
   }
 }

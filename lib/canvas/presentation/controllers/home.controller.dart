@@ -1,4 +1,5 @@
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
+import 'package:fluttrix/infrastructure/navigation/routes.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -16,5 +17,9 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void handlePreviewCode() {
+    Get.toNamed(Routes.PREVIEW_CODE);
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/utils/generateRandomImage.dart';
 
 import '../base/i.widget.dart';
 
@@ -22,7 +21,8 @@ class FTrixButton extends FTrixWithoutDropWidget {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-
+    type = WidgetType.BUTTON;
+    text = json["text"];
   }
 
 
@@ -47,6 +47,12 @@ class FTrixButton extends FTrixWithoutDropWidget {
 
   @override
   void handleUpdateWidget(IWidget widget) {
-    // TODO: implement handleUpdateWidget
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return super.toJson()..addAll({
+      "text": text,
+    });
   }
 }

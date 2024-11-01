@@ -18,6 +18,8 @@ dependencies:
   device_frame: ^1.2.0
   uuid: ^4.5.1
   flutter_layout_grid: ^2.0.7
+  monaco_editor: ^0.0.1+2
+  flutter_syntax_view: ^4.1.0
 
 dev_dependencies:
   flutter_test:

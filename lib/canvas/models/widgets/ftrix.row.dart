@@ -4,7 +4,7 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 
 
-class FTrixRow extends FTrixWidgetChildren {
+class FTrixRow extends FTrixWidgetUnScrollChildren {
 
   @override
   late WidgetType type;
@@ -14,10 +14,6 @@ class FTrixRow extends FTrixWidgetChildren {
     streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
   }
 
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    // TODO: implement loadFromJson
-  }
 
   @override
   Widget render() {

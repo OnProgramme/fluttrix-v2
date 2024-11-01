@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/infrastructure/navigation/bindings/controllers/controllers_bindings.dart';
+import 'package:fluttrix/presentation/preview_code/preview_code.screen.dart';
+
+import 'package:get/get.dart';
+
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/controllers/home.controller.binding.dart';
 import 'package:fluttrix/canvas/presentation/home.screen.dart';
-
-import 'package:get/get.dart';
 
 import '../../config.dart';
 import 'routes.dart';
@@ -33,7 +36,13 @@ class Nav {
         page: () => const HomeScreen(),
         binding: HomeControllerBinding(),
         bindings: [
-          FCanvasControllerBinding(), FTrixToolbarSettingsControllerBinding(),
+          FCanvasControllerBinding(),
+          FTrixToolbarSettingsControllerBinding(),
         ]),
+    GetPage(
+      name: Routes.PREVIEW_CODE,
+      page: () => const PreviewCodeScreen(),
+      binding: PreviewCodeControllerBinding(),
+    ),
   ];
 }

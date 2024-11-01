@@ -58,4 +58,11 @@ class FTrixScaffold extends FTrixWithDropWidget {
   void handleUpdateWidget(IWidget widget) {
     // TODO: implement handleUpdateWidget
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return super.toJson()..addAll({
+      "body": body?.toJson(),
+    });
+  }
 }
