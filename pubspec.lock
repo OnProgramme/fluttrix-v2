@@ -81,11 +81,35 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flex_color_picker:
+    dependency: "direct main"
+    description:
+      name: flex_color_picker
+      sha256: "12dc855ae8ef5491f529b1fc52c655f06dcdf4114f1f7fdecafa41eec2ec8d79"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.0"
+  flex_seed_scheme:
+    dependency: transitive
+    description:
+      name: flex_seed_scheme
+      sha256: "7639d2c86268eff84a909026eb169f008064af0fb3696a651b24b0fa24a40334"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.1"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      sha256: "969de5f6f9e2a570ac660fb7b501551451ea2a1ab9e2097e89475f60e07816ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_layout_grid:
     dependency: "direct main"
     description:
@@ -112,11 +136,6 @@ packages:
     version: "4.1.0"
   flutter_test:
     dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -200,30 +219,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
-  monaco_editor:
+  mocktail:
+    dependency: transitive
+    description:
+      name: mocktail
+      sha256: "890df3f9688106f25755f26b1c60589a92b3ab91a22b8b224947ad041bf172d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  oktoast:
     dependency: "direct main"
     description:
-      name: monaco_editor
-      sha256: "17da0ff4c7ff18090354b302d5af75e2c1116afc773b259c4140a03f86e9e579"
+      name: oktoast
+      sha256: f1366c5c793ddfb8f55bc6fc3e45db43c45debf173b765fb4c5ec096cbdeb84a
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1+2"
-  monaco_editor_platform_interface:
-    dependency: transitive
-    description:
-      name: monaco_editor_platform_interface
-      sha256: "170b54e9da67e4e2c4702b0c970379caffb9670b772272db16a7661a125723f9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1+2"
-  monaco_editor_web:
-    dependency: transitive
-    description:
-      name: monaco_editor_web
-      sha256: "10cb569f41025776ebc0ff2c6e4a8f3eca2d0f5358f84073014171c7e0987b87"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1+2"
+    version: "3.4.0"
   path:
     dependency: transitive
     description:
@@ -232,14 +243,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
-  plugin_platform_interface:
-    dependency: transitive
-    description:
-      name: plugin_platform_interface
-      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.8"
   quiver:
     dependency: transitive
     description:
@@ -345,10 +348,18 @@ packages:
     dependency: transitive
     description:
       name: web
-      sha256: "97da13628db363c635202ad97068d47c5b8aa555808e7a9411963c533b449b27"
+      sha256: cd3543bd5798f6ad290ea73d210f423502e71900302dde696f8bff84bf89a1cb
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "1.1.0"
+  web_color_picker:
+    dependency: "direct main"
+    description:
+      name: web_color_picker
+      sha256: "0eb5fca0141850629057965db1be09c09987465f37b3a16e9718840aee4a2b9d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
 sdks:
   dart: ">=3.5.3 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.24.0"

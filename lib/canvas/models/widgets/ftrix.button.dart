@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../base/i.widget.dart';
 
-class FTrixButton extends FTrixWithoutDropWidget {
+class FTrixButton extends FTrixDroppableWidgetWithSingleChild {
   @override
   late WidgetType type;
   String text;
@@ -14,9 +17,11 @@ class FTrixButton extends FTrixWithoutDropWidget {
   FTrixButton({
     this.text = 'Button',
     this.onPressed,
+    super.parentId,
   }) {
     type = WidgetType.BUTTON;
     streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
+    setting = FTrixButtonSetting.zero;
   }
 
   @override
@@ -25,34 +30,41 @@ class FTrixButton extends FTrixWithoutDropWidget {
     text = json["text"];
   }
 
-
   @override
   Widget render() {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      height: 50,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
+    final setting = this.setting as FTrixButtonSetting;
+    return FTrixBaseComponent(
+      widget: this,
+      isSelected: isWidgetSelected,
+      onDrop: handleDropWidget,
+      setting: setting,
+      disablePadding: true,
+      child: MaterialButton(
+        shape: RoundedRectangleBorder(borderRadius: setting.radiusValue),
+        color: setting.style.color ?? Colors.blue,
+        padding: setting.paddingValue,
+        onPressed: select,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
-        onPressed: (){
-          setEventType(FTrixWidgetEventType.SELECT);
-        },
-        child: Text(text, style: TextStyle(
-          color: Colors.white,
-        ),),
       ),
     );
   }
 
   @override
-  void handleUpdateWidget(IWidget widget) {
-  }
+  void handleUpdateWidget(FTrixWidgetEventType type, IWidget widget) {}
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "text": text,
-    });
+    return super.toJson()
+      ..addAll({
+        "text": text,
+      });
   }
+
+  @override
+  late FTrixWidgetSetting setting;
 }

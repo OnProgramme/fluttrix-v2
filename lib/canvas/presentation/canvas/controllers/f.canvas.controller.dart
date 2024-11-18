@@ -21,7 +21,6 @@ class FCanvasController extends GetxController {
 
   void handleUpdateCanvas(){
     canvas.value.update.listen((type){
-      print(canvas.value.toJson());
       canvas.refresh();
     });
   }

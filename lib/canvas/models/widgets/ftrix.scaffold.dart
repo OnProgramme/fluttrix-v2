@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
@@ -9,28 +11,40 @@ import 'package:get/get.dart';
 class FTrixScaffold extends FTrixWithDropWidget {
   @override
   late WidgetType type;
-
-  FTrixScaffold({String? id, this.body}) {
-    type = WidgetType.SCAFFOLD;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
-  }
-
   IWidget? body;
 
+  FTrixScaffold({String? id, this.body, super.parentId}) {
+    type = WidgetType.SCAFFOLD;
+    streamUpdate.listen(onWidgetUpdate((type, widget){
+      if(type == FTrixWidgetEventType.DELETE && widget.id == body?.id){
+        deleteBody();
+        widget.unselect();
+      }
+    }));
+  }
+
+
+  void deleteBody(){
+    body = null;
+  }
+
   void setBody(WidgetType type) {
-    body = FTrixWidgetBuilder.build(type);
+    body = FTrixWidgetBuilder.build(type, id);
     notifyUpdate();
   }
 
   @override
-  void handleDropWidget(WidgetType type) {
-    setBody(type);
+  void handleDropWidget(dynamic type) {
+    if(type is WidgetType){
+      setBody(type);
+    }
   }
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
     // TODO: implement loadFromJson
   }
+
 
 
   @override
@@ -47,16 +61,12 @@ class FTrixScaffold extends FTrixWithDropWidget {
         width: Get.width,
         height: Get.height,
         child: FTrixDragTarget(
-          onDrop: handleDropWidget,
+          isExpended: true,
+          onDrop:(details)=> handleDropWidget(details.data),
           child: body?.render(),
         ),
       ),
     );
-  }
-
-  @override
-  void handleUpdateWidget(IWidget widget) {
-    // TODO: implement handleUpdateWidget
   }
 
   @override
@@ -65,4 +75,7 @@ class FTrixScaffold extends FTrixWithDropWidget {
       "body": body?.toJson(),
     });
   }
+
+  @override
+  late FTrixWidgetSetting setting;
 }

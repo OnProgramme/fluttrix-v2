@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
@@ -7,6 +8,7 @@ import 'package:fluttrix/canvas/presentation/toolbar/settings/components/button.
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/image.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/text.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/textfield.toolbar.setting.component.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 import 'package:get/get.dart';
 
 class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
@@ -35,6 +37,10 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
               if(controller.selectedWidget.value is FTrixText)...[
                 TextToolBarSettingComponent(
                     widget: controller.selectedWidget.value as FTrixText
+                )],
+              if(controller.selectedWidget.value is FTrixImage)...[
+                ImageToolBarSettingComponent(
+                    widget: controller.selectedWidget.value as FTrixImage
                 )],
             ],
           );

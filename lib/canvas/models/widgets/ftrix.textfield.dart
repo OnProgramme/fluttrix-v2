@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/utils/generateRandomImage.dart';
 
-import '../base/ftrix.stream.dart';
-import '../base/i.widget.dart';
 
-class FTrixTextField extends FTrixWithoutDropWidget {
+class FTrixTextField extends FTrixDroppableWidgetWithSingleChild {
   @override
   late WidgetType type;
   String? label;
@@ -16,9 +14,9 @@ class FTrixTextField extends FTrixWithoutDropWidget {
   FTrixTextField({
     this.label,
     this.hint,
+    super.parentId,
   }) {
     type = WidgetType.INPUT;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
   }
 
   @override
@@ -46,14 +44,13 @@ class FTrixTextField extends FTrixWithoutDropWidget {
   }
 
   @override
-  void handleUpdateWidget(IWidget widget) {
-  }
-
-  @override
   Map<String, dynamic> toJson() {
     return super.toJson()..addAll({
       "hint": hint,
       "label": label,
     });
   }
+
+  @override
+  late FTrixWidgetSetting setting;
 }

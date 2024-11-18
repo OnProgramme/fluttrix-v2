@@ -12,16 +12,16 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
 class FTrixWidgetBuilder{
   FTrixWidgetBuilder._();
 
-  static IWidget build(WidgetType type){
+  static IWidget build(WidgetType type, [String? parentId]){
     Map<WidgetType, IWidget> widgets = {
-      WidgetType.COLUMN: FTrixColumn(),
-      WidgetType.ROW: FTrixRow(),
-      WidgetType.TEXT: FTrixText(),
-      WidgetType.IMAGE: FTrixImage(),
-      WidgetType.INPUT: FTrixTextField(),
-      WidgetType.BUTTON: FTrixButton(),
-      WidgetType.SCAFFOLD: FTrixScaffold(),
-      WidgetType.LISTVIEW: FTrixListView(),
+      WidgetType.COLUMN: FTrixColumn(parentId: parentId),
+      WidgetType.ROW: FTrixRow(parentId: parentId),
+      WidgetType.TEXT: FTrixText(parentId: parentId),
+      WidgetType.IMAGE: FTrixImage(parentId: parentId),
+      WidgetType.INPUT: FTrixTextField(parentId: parentId),
+      WidgetType.BUTTON: FTrixButton(parentId: parentId),
+      WidgetType.SCAFFOLD: FTrixScaffold(parentId: parentId),
+      WidgetType.LISTVIEW: FTrixListView(parentId: parentId),
     };
     final widget = widgets[type];
     if(widget == null){

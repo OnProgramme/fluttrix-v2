@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 
 
@@ -9,7 +9,7 @@ class FTrixRow extends FTrixWidgetUnScrollChildren {
   @override
   late WidgetType type;
 
-  FTrixRow(){
+  FTrixRow({super.parentId}){
     type = WidgetType.ROW;
     streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
   }
@@ -23,8 +23,7 @@ class FTrixRow extends FTrixWidgetUnScrollChildren {
     );
   }
 
+
   @override
-  void handleUpdateWidget(IWidget widget) {
-    // TODO: implement handleUpdateWidget
-  }
+  late FTrixWidgetSetting setting;
 }

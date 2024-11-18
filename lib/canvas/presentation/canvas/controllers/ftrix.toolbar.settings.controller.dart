@@ -20,7 +20,8 @@ class FTrixToolbarSettingsController extends GetxController{
     FTrixStream.instance.stream.listen((event){
       if(event.type == FTrixWidgetEventType.SELECT){
         handleWidgetSelected(event.widget);
-      }else{
+      }
+      if(event.type == FTrixWidgetEventType.UNSELECT){
         handleWidgetSelected(null);
       }
     });
@@ -28,6 +29,6 @@ class FTrixToolbarSettingsController extends GetxController{
 
 
   void handleWidgetSelected(IWidget? widget){
-    selectedWidget(widget);
+    selectedWidget.value = widget;
   }
 }

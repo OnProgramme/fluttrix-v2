@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
+
 import '../enums/widget.type.dart';
 
-class FTrixText extends FTrixWithoutDropWidget {
+class FTrixText extends FTrixDroppableWidgetWithSingleChild {
   String text;
-  TextStyle? style;
+  TextStyle style = TextStyle();
   int? maxLines;
 
-  FTrixText({this.text = "Hello Word", this.style, this.maxLines}){
+  FTrixText({this.text = "Hello Word", this.maxLines, super.parentId}){
     type = WidgetType.TEXT;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
   }
 
   @override
@@ -37,14 +37,12 @@ class FTrixText extends FTrixWithoutDropWidget {
   late WidgetType type;
 
   @override
-  void handleUpdateWidget(IWidget widget) {
-
-  }
-
-  @override
   Map<String, dynamic> toJson() {
     return super.toJson()..addAll({
       "text": text,
     });
   }
+
+  @override
+  late FTrixWidgetSetting setting;
 }

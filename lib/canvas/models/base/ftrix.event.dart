@@ -1,15 +1,26 @@
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
+import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 
-enum FTrixWidgetEventType{
+enum FTrixWidgetEventType {
   UPDATE,
   SELECT,
+  DELETE,
   UNSELECT,
   UPDATE_ALL,
+  DROP,
 }
 
-class FTrixWidgetEvent{
+class FTrixWidgetEvent {
   String id;
   IWidget widget;
   FTrixWidgetEventType type;
-  FTrixWidgetEvent({required this.id, required this.widget, required this.type,});
+  final DropPosition dropPosition;
+  final String? dragTargetWidgetId;
+  FTrixWidgetEvent({
+    required this.id,
+    required this.widget,
+    required this.type,
+    this.dropPosition = DropPosition.NONE,
+    this.dragTargetWidgetId,
+  });
 }

@@ -18,8 +18,12 @@ dependencies:
   device_frame: ^1.2.0
   uuid: ^4.5.1
   flutter_layout_grid: ^2.0.7
-  monaco_editor: ^0.0.1+2
+#  monaco_editor: ^0.0.1+2
   flutter_syntax_view: ^4.1.0
+  flex_color_picker: ^3.6.0
+  flutter_colorpicker: ^1.1.0
+  oktoast: ^3.4.0
+  web_color_picker: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -43,9 +47,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

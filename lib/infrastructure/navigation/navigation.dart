@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/infrastructure/navigation/bindings/controllers/controllers_bindings.dart';
-import 'package:fluttrix/presentation/preview_code/preview_code.screen.dart';
-
-import 'package:get/get.dart';
-
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/controllers/home.controller.binding.dart';
 import 'package:fluttrix/canvas/presentation/home.screen.dart';
+import 'package:fluttrix/infrastructure/navigation/bindings/controllers/controllers_bindings.dart';
+import 'package:fluttrix/presentation/preview_code/preview_code.screen.dart';
+import 'package:get/get.dart';
 
 import '../../config.dart';
 import 'routes.dart';
 
 class EnvironmentsBadge extends StatelessWidget {
   final Widget child;
-  const EnvironmentsBadge({required this.child});
+  const EnvironmentsBadge({super.key, required this.child});
   @override
   Widget build(BuildContext context) {
     var env = ConfigEnvironments.getEnvironments()['env'];

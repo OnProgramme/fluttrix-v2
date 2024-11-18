@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
-import 'package:uuid/uuid.dart';
+import 'package:fluttrix/files/ftrix.base.file.dart';
 
-import '../enums/widget.type.dart';
 
 abstract class IFTrixCanvas{
   Map<String, dynamic> toJson();
@@ -11,4 +10,5 @@ abstract class IFTrixCanvas{
   void loadFromJson(Map<String, dynamic> json);
   Widget render();
   Stream get update;
+  List<FTrixBaseFile> get files;
 }

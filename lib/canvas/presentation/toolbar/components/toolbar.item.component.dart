@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/toolbar/ftrix.toolbar.item.dart';
-import 'package:get/get.dart';
 
 class ToolbarItemComponent extends StatelessWidget {
   const ToolbarItemComponent({
@@ -10,7 +8,7 @@ class ToolbarItemComponent extends StatelessWidget {
     this.feedback,
     required this.item,
   });
-  final Widget ?feedback;
+  final Widget? feedback;
   final FTrixToolbarItem item;
 
   @override
@@ -31,10 +29,9 @@ class ToolbarItemComponent extends StatelessWidget {
     );
     return Draggable<WidgetType>(
       data: item.type,
-        feedback: feedback??widget,
-        childWhenDragging: widget,
-        child: widget,
-        onDragStarted: ()=>print("Start ${item.type}"),
+      feedback: feedback ?? widget,
+      childWhenDragging: widget,
+      child: widget,
     );
   }
 }

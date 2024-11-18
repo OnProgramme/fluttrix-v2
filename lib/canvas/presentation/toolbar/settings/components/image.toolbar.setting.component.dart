@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
-import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
-import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
-import 'package:get/get.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
 
 class ImageToolBarSettingComponent extends StatelessWidget {
   const ImageToolBarSettingComponent({super.key, required this.widget});
@@ -14,16 +10,27 @@ class ImageToolBarSettingComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-        // FTextField(
-        //   label: "Text",
-        //   initialValue: widget.text,
-        //   onChanged: (value){
-        //     widget.text = value;
-        //     widget.update();
-        //   },
-        // ),
+        FTrixEditPaddingOrMargin(
+          setting: widget.setting.padding,
+          onUpdated: () => widget.update(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FTrixEditPaddingOrMargin(
+          isMargin: true,
+          setting: widget.setting.margin,
+          onUpdated: () => widget.update(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FTrixEditRadius(
+          setting: widget.setting.radius,
+          onUpdated: () => widget.update(),
+        ),
       ],
     );
   }

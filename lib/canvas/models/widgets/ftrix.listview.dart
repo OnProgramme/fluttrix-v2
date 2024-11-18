@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.listview.component.dart';
 
 class FTrixListView extends FTrixWidgetChildren {
 
   @override
   late WidgetType type;
 
-  FTrixListView(){
+  FTrixListView({super.parentId}){
     type = WidgetType.LISTVIEW;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
   }
 
   @override
@@ -21,18 +21,15 @@ class FTrixListView extends FTrixWidgetChildren {
 
   @override
   Widget render() {
-    return FTrixDragTarget(
-      onDrop: handleDropWidget,
-      child: ListView(
-        padding: EdgeInsets.all(15),
-        key: ValueKey(id),
-        children: children.map((c)=>c.render()).toList(),
-      ),
+    return FTrixListViewComponent(
+      widget: this,
+      onTap: select,
+      key: ValueKey(id),
+      children: children.map((c)=>c.render()).toList(),
+      onDrop: (e)=>handleDropWidget(e),
     );
   }
 
   @override
-  void handleUpdateWidget(IWidget widget) {
-    // TODO: implement handleUpdateWidget
-  }
+  late FTrixWidgetSetting setting;
 }

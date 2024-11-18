@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
-import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
-import 'package:get/get.dart';
 
 class ButtonToolBarSettingComponent extends StatelessWidget {
   const ButtonToolBarSettingComponent({super.key, required this.widget});
@@ -13,9 +12,11 @@ class ButtonToolBarSettingComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final setting = widget.setting as FTrixButtonSetting;
     return  Column(
       children: [
         FTextField(
+          key: ValueKey(widget.text),
           label: "Text",
           initialValue: widget.text,
           onChanged: (value){
@@ -23,6 +24,25 @@ class ButtonToolBarSettingComponent extends StatelessWidget {
             widget.update();
           },
         ),
+        SizedBox(height: 10),
+        FTrixEditSize(
+          width: setting.style.width,
+          height: setting.style.height,
+          onSizeChanged: (width, height) {
+            setting.style.width = width;
+            setting.style.height = height;
+            widget.update();
+          },
+        ),
+        SizedBox(height: 10),
+        FTrixColorPicker(
+          initialColor: setting.style.color,
+          onChanged: (color){
+            print(color);
+            setting.style.color = color;
+            widget.update();
+          },
+        )
       ],
     );
   }

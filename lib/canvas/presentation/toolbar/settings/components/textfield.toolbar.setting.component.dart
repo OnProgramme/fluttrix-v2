@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
-import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
-import 'package:get/get.dart';
 
 class TextFieldToolBarSettingComponent extends StatefulWidget {
   const TextFieldToolBarSettingComponent({super.key, required this.widget});
