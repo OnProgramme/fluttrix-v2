@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/i.ftrix.canvas.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/files/ftrix.base.file.dart';
 import 'package:fluttrix/files/ftrix.file.dart';
@@ -9,9 +10,11 @@ import 'package:fluttrix/files/ftrix.folder.dart';
 
 import '../base/i.widget.dart';
 
-class FTrixCanvas implements IFTrixCanvas{
+class FTrixCanvas implements IFTrixCanvas {
 
-  final _scaffold = FTrixScaffold();
+  final _scaffold = FTrixScaffold(
+    setting: FTrixScaffoldSetting.zero,
+  );
 
   @override
   IWidget getSelectedWidget() {
@@ -40,7 +43,8 @@ class FTrixCanvas implements IFTrixCanvas{
   }
 
   @override
-  Stream get update => _scaffold.streamUpdate.where(shouldTriggerUpdate);
+  Stream<FTrixWidgetEvent> get update =>
+      _scaffold.streamUpdate.where(shouldTriggerUpdate);
 
   bool shouldTriggerUpdate(FTrixWidgetEvent event) {
     return event.type == FTrixWidgetEventType.UPDATE ||
@@ -49,31 +53,31 @@ class FTrixCanvas implements IFTrixCanvas{
         event.type == FTrixWidgetEventType.UPDATE_ALL;
   }
 
-  List<String> get widgetsImported => [WidgetType.INPUT,WidgetType.TEXT,WidgetType.BUTTON]
-      .where((el) => toJson().toString().contains('type: ${el.name}'))
-      .map((type)=>_customFileNameByType(type))
-      .toList();
+  List<String> get widgetsImported =>
+      [WidgetType.INPUT, WidgetType.TEXT, WidgetType.BUTTON]
+          .where((el) => toJson().toString().contains('type: ${el.name}'))
+          .map((type) => _customFileNameByType(type))
+          .toList();
 
   @override
-  List<FTrixBaseFile> get files{
+  List<FTrixBaseFile> get files {
     final libFolder = FTrixFolder(name: "Lib", files: [
-      FTrixFolder(name: "home", files: [
-        FTrixFile('home.dart')
-      ])
+      FTrixFolder(name: "home", files: [FTrixFile('home.dart')])
     ]);
 
-    if(widgetsImported.isNotEmpty){
-      libFolder.files.add(FTrixFolder(name: "widgets", files: widgetsImported.map((name){
-        return FTrixFile(name);
-      }).toList()));
+    if (widgetsImported.isNotEmpty) {
+      libFolder.files.add(FTrixFolder(
+          name: "widgets",
+          files: widgetsImported.map((name) {
+            return FTrixFile(name);
+          }).toList()));
     }
-    
-    
+
     return [libFolder];
   }
 
-  String _customFileNameByType(WidgetType type){
-    switch(type){
+  String _customFileNameByType(WidgetType type) {
+    switch (type) {
       case WidgetType.INPUT:
         return "ftrix.input.dart";
       case WidgetType.TEXT:
@@ -83,6 +87,10 @@ class FTrixCanvas implements IFTrixCanvas{
       default:
         throw Exception("Invalid type");
     }
+  }
 
+  @override
+  void select() {
+    _scaffold.select();
   }
 }

@@ -39,6 +39,11 @@ final widgets = [
     icon: Icons.image_outlined,
     type: WidgetType.IMAGE,
   ),
+  FTrixToolbarItem(
+    title: "Container",
+    icon: Icons.square_outlined,
+    type: WidgetType.CONTAINER,
+  ),
 ];
 
 class WidgetsToolBar extends StatelessWidget {

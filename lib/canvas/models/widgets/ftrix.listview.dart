@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
+import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.listview.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.listview.component.dart';
 
 class FTrixListView extends FTrixWidgetChildren {
@@ -12,6 +13,7 @@ class FTrixListView extends FTrixWidgetChildren {
 
   FTrixListView({super.parentId}){
     type = WidgetType.LISTVIEW;
+    setting = FTrixListViewSetting.zero;
   }
 
   @override
@@ -20,12 +22,23 @@ class FTrixListView extends FTrixWidgetChildren {
   }
 
   @override
+  IWidget clone([String? parentId]) {
+    return this;
+  }
+
+
+  @override
   Widget render() {
+    final setting = this.setting as FTrixListViewSetting;
     return FTrixListViewComponent(
+      setting: setting,
       widget: this,
       onTap: select,
       key: ValueKey(id),
-      children: children.map((c)=>c.render()).toList(),
+      children: children.map((c)=>Align(
+        alignment: Alignment.centerLeft,
+        child: c.render(),
+      )).toList(),
       onDrop: (e)=>handleDropWidget(e),
     );
   }

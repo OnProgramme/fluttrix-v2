@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
+import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-
+import 'package:fluttrix/canvas/models/settings/ftrix.textfield.setting.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.textfield.component.dart';
 
 class FTrixTextField extends FTrixDroppableWidgetWithSingleChild {
   @override
   late WidgetType type;
-  String? label;
-  String? hint;
 
   FTrixTextField({
-    this.label,
-    this.hint,
     super.parentId,
   }) {
     type = WidgetType.INPUT;
+    setting = FTrixTextFieldSetting.zero;
   }
 
   @override
@@ -25,30 +24,29 @@ class FTrixTextField extends FTrixDroppableWidgetWithSingleChild {
   }
 
   @override
+  IWidget clone([String? parentId]) {
+    return this;
+  }
+
+
+  @override
   Widget render() {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: TextFormField(
-        onTap: (){
-          setEventType(FTrixWidgetEventType.SELECT);
-        },
-        decoration: InputDecoration(
-            labelText: label,
-            hintText: hint,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6)
-            )
-        ),
-      ),
+    final setting = this.setting as FTrixTextFieldSetting;
+    return FtrixTextFieldComponent(
+      setting: setting,
+      widget: this,
+      onTap: select,
+      isSelected: isWidgetSelected,
+      onDrop: handleDropWidget,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "hint": hint,
-      "label": label,
-    });
+    return super.toJson()
+      ..addAll({
+        "setting": setting.toJson(),
+      });
   }
 
   @override

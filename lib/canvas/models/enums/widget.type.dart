@@ -8,4 +8,5 @@ enum WidgetType{
   INPUT,
   BUTTON,
   TEXT,
+  APPBAR,
 }

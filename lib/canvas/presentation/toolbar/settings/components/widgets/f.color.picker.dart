@@ -38,31 +38,91 @@ class _FTrixColorPickerState extends State<FTrixColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return WebColorPicker.builder(
-      initialColor: selectedColor,
-      onChange: (c, e) => setColor(c),
-      onInput: (c, e) => setColor(c),
-      builder: (context, selectedColor) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (widget.label != null)
+          Text(
+            widget.label!,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        Wrap(
+          spacing: 4,
           children: [
-            Container(
-              width: 20,
-              height: 20,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: selectedColor,
+            ...[
+              Colors.white,
+              Color(0xFFdde5b6),
+              Color(0xFFadc178),
+              Color(0xFFa98467),
+              Color(0xFF6c584c),
+            ].map((color) => InkWell(
+                  onTap: () => setColor(color),
+                  child: Card(
+                    elevation: 2,
+                    color: color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: SizedBox(
+                      width: 32,
+                      height: 32,
+                    ),
+                  ),
+                )),
+            SizedBox(
+              width: 40,
+              child: WebColorPicker.builder(
+                initialColor: selectedColor,
+                onChange: (c, e) => setColor(c),
+                onInput: (c, e) => setColor(c),
+                builder: (context, selectedColor) {
+                  return InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 2,
+                      color: selectedColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: Icon(Icons.color_lens_outlined),
+                      ),
+                    ),
+                  );
+                  return Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Card(
+                        elevation: 2,
+                        color: selectedColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: SizedBox(
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        widget.label ?? 'Sélectionner une couleur',
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              widget.label ?? 'Sélectionner une couleur',
-            ),
           ],
-        );
-      },
+        ),
+      ],
     );
   }
 }
+

@@ -1,29 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../enums/widget.type.dart';
 
-class FTrixText extends FTrixDroppableWidgetWithSingleChild {
+class FTrixAppBar extends FTrixWidgetWithChild {
   String text;
-  int? maxLines;
+  TextStyle style = TextStyle();
 
-  FTrixText({
-    this.text = "Hello Word",
-    this.maxLines, super.parentId,
-    required this.setting,
-  }){
-    type = WidgetType.TEXT;
+  FTrixAppBar({this.text = "Fluttrix", super.parentId}) {
+    type = WidgetType.APPBAR;
+    setting = FTrixWidgetSetting.zero;
   }
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
     text = json['text'];
-    maxLines = json['maxLines'];
   }
 
   @override
@@ -31,31 +28,18 @@ class FTrixText extends FTrixDroppableWidgetWithSingleChild {
     return this;
   }
 
-
   @override
   Widget render() {
-    final setting = this.setting as FTrixTextSetting;
     return FTrixBaseComponent(
-      widget: this,
-      isSelected: isWidgetSelected,
-      constraints: BoxConstraints(
-        minWidth: 100
-      ),
       setting: setting,
+      widget: this,
+      isDraggable: false,
       onTap: select,
-      child: Text(
-        text,
-        style: TextStyle(
-          decoration: setting.decorationValue,
-          fontSize: setting.fontSize,
-          color: setting.color,
-          fontWeight: setting.fontWeightValue,
-        ),
-        maxLines: maxLines,
-        textAlign: setting.textAlign,
+      child: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(text, style: TextStyle(color: Colors.white),),
       ),
     );
-
   }
 
   @override
@@ -63,11 +47,15 @@ class FTrixText extends FTrixDroppableWidgetWithSingleChild {
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "text": text,
-    });
+    return super.toJson()
+      ..addAll({
+        "text": text,
+      });
   }
 
   @override
   late FTrixWidgetSetting setting;
+
+  @override
+  IWidget? child;
 }

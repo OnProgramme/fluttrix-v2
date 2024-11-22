@@ -12,17 +12,12 @@ class FTrixButton extends FTrixDroppableWidgetWithSingleChild {
   @override
   late WidgetType type;
   String text;
-  VoidCallback? onPressed;
 
   FTrixButton({
     this.text = 'Button',
-    this.onPressed,
     super.parentId,
-  }) {
-    type = WidgetType.BUTTON;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
-    setting = FTrixButtonSetting.zero;
-  }
+    required this.setting,
+  }) : type = WidgetType.BUTTON;
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
@@ -31,31 +26,47 @@ class FTrixButton extends FTrixDroppableWidgetWithSingleChild {
   }
 
   @override
+  IWidget clone([String? parentId]) {
+    return FTrixButton(
+      setting: FTrixButtonSetting.fromJson(setting.toJson()),
+      text: text,
+      parentId: parentId ?? this.parentId,
+    );
+  }
+
+  @override
   Widget render() {
     final setting = this.setting as FTrixButtonSetting;
+
     return FTrixBaseComponent(
       widget: this,
       isSelected: isWidgetSelected,
       onDrop: handleDropWidget,
       setting: setting,
       disablePadding: true,
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(borderRadius: setting.radiusValue),
-        color: setting.style.color ?? Colors.blue,
-        padding: setting.paddingValue,
-        onPressed: select,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
+      child: SizedBox(
+        width: setting.fullWidth ? double.infinity : setting.width,
+        child: MaterialButton(
+          height: setting.height,
+          shape: RoundedRectangleBorder(
+            borderRadius: setting.radiusValue,
+            side: BorderSide(
+              color: setting.borderColor ?? setting.color ?? Colors.blue,
+            ),
+          ),
+          color: setting.color ?? Colors.blue,
+          padding: setting.paddingValue,
+          onPressed: select,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: setting.textColor ?? Colors.white,
+            ),
           ),
         ),
       ),
     );
   }
-
-  @override
-  void handleUpdateWidget(FTrixWidgetEventType type, IWidget widget) {}
 
   @override
   Map<String, dynamic> toJson() {

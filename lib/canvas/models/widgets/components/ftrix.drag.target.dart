@@ -23,6 +23,18 @@ class _FTrixDragTargetState<T extends Object>
 
   @override
   Widget build(BuildContext context) {
+    return DragTarget<T>(
+      onLeave: (_) => setState(() => isHovering = false),
+      onMove: (_) => setState(() => isHovering = true),
+      builder: (context, candidateData, rejectedData) {
+        return widget.child ?? SizedBox();
+      },
+      onAcceptWithDetails: (details) {
+        widget.onDrop(details);
+        setState(() => isHovering = false);
+      },
+      onWillAcceptWithDetails: (e) => true,
+    );
     return Stack(
       fit: widget.isExpended ? StackFit.expand : StackFit.loose,
       children: [

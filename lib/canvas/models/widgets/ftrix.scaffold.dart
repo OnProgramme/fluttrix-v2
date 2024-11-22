@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.component.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
 import 'package:get/get.dart';
 
 class FTrixScaffold extends FTrixWithDropWidget {
@@ -13,31 +17,35 @@ class FTrixScaffold extends FTrixWithDropWidget {
   late WidgetType type;
   IWidget? body;
 
-  FTrixScaffold({String? id, this.body, super.parentId}) {
+  FTrixScaffold(
+      {required this.setting, String? id, this.body, super.parentId}) {
     type = WidgetType.SCAFFOLD;
-    streamUpdate.listen(onWidgetUpdate((type, widget){
-      if(type == FTrixWidgetEventType.DELETE && widget.id == body?.id){
+    streamUpdate.listen(onWidgetUpdate((type, widget) {
+      if (type == FTrixWidgetEventType.DELETE && widget.id == body?.id) {
         deleteBody();
         widget.unselect();
       }
     }));
   }
 
-
-  void deleteBody(){
+  void deleteBody() {
     body = null;
   }
 
-  void setBody(WidgetType type) {
-    body = FTrixWidgetBuilder.build(type, id);
+  void setBody(dynamic value) {
+    if (body != null) return;
+    if (value is WidgetType) {
+      body = FTrixWidgetBuilder.build(value, id);
+    }
+    if (value is IWidget) {
+      body = value;
+    }
     notifyUpdate();
   }
 
   @override
-  void handleDropWidget(dynamic type) {
-    if(type is WidgetType){
-      setBody(type);
-    }
+  void handleDropWidget(DroppedWidgetEvent event) {
+    setBody(event.value);
   }
 
   @override
@@ -45,37 +53,32 @@ class FTrixScaffold extends FTrixWithDropWidget {
     // TODO: implement loadFromJson
   }
 
-
+  @override
+  IWidget clone([String? parentId]) {
+    return this;
+  }
 
   @override
   Widget render() {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text(
-          "Fluttrix",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: SizedBox(
-        width: Get.width,
-        height: Get.height,
-        child: FTrixDragTarget(
-          isExpended: true,
-          onDrop:(details)=> handleDropWidget(details.data),
-          child: body?.render(),
-        ),
-      ),
+    return FTrixScaffoldComponent(
+      onDrop: handleDropWidget,
+      setting: setting as FTrixScaffoldSetting,
+      isSelected: isWidgetSelected,
+      widget: this,
+      select: select,
+      appBar: FTrixAppBar(),
+      child: body?.render(),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "body": body?.toJson(),
-    });
+    return super.toJson()
+      ..addAll({
+        "body": body?.toJson(),
+      });
   }
 
   @override
-  late FTrixWidgetSetting setting;
+  FTrixWidgetSetting setting;
 }

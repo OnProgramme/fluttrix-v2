@@ -24,7 +24,6 @@ class HomeController extends GetxController {
     });
   }
 
-
   @override
   void onClose() {
     super.onClose();
@@ -35,14 +34,8 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.PREVIEW_CODE);
   }
 
-  void handleListenerKeyboardEvent(KeyEvent event) {
-    if (event is KeyUpEvent || !kIsWeb) return;
-    final userAgent = html.window.navigator.userAgent.toLowerCase();
-
-    if ((userAgent.contains('macintosh') &&
-            event.logicalKey == LogicalKeyboardKey.backspace ||
-        event.logicalKey == LogicalKeyboardKey.delete) && selectedWidget != null) {
-      selectedWidget!.delete();
-    }
+  void handleListenerKeyboardEvent() {
+    if (selectedWidget == null) return;
+    selectedWidget!.delete();
   }
 }

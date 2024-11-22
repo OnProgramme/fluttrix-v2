@@ -8,12 +8,16 @@ class FTextField extends StatelessWidget {
     this.initialValue,
     this.controller,
     this.hint,
+    this.maxLines = 1,
+    this.minLines = 1
   });
   final String? label;
   final String? hint;
   final ValueSetter<String>? onChanged;
   final String? initialValue;
   final TextEditingController? controller;
+  final int minLines;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,8 @@ class FTextField extends StatelessWidget {
           controller: controller,
           initialValue: initialValue,
           onChanged: onChanged,
+          minLines: minLines,
+          maxLines: maxLines,
           decoration: InputDecoration(
             hintText: hint,
             isDense: true,

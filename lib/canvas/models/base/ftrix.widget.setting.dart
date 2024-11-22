@@ -20,6 +20,18 @@ class EdgeInsetsSetting {
     right = json['right'];
   }
 
+  EdgeInsetsSetting copyWith({
+    double? top,
+    double? bottom,
+    double? left,
+    double? right,
+  })=> EdgeInsetsSetting(
+    top: top ?? this.top,
+    bottom: bottom ?? this.bottom,
+    left: left ?? this.left,
+    right: right ?? this.right,
+  );
+
   Map<String, dynamic> toJson() {
     return {
       'top': top,
@@ -31,6 +43,8 @@ class EdgeInsetsSetting {
 
   bool get isEqual =>
       top == bottom && top == left && top == right && top != null;
+
+
 }
 
 class BorderRadiusSetting {
@@ -70,12 +84,19 @@ class BorderRadiusSetting {
 }
 
 class FTrixWidgetSetting {
+  double? height;
+  double? width;
   EdgeInsetsSetting padding = EdgeInsetsSetting();
   EdgeInsetsSetting margin = EdgeInsetsSetting();
   BorderRadiusSetting radius = BorderRadiusSetting();
 
-  FTrixWidgetSetting(
-      {required this.padding, required this.margin, required this.radius});
+  FTrixWidgetSetting({
+    required this.padding,
+    required this.margin,
+    required this.radius,
+    this.width,
+    this.height,
+  });
 
   FTrixWidgetSetting.fromJson(Map<String, dynamic> json) {
     padding = json['padding'] != null
@@ -87,6 +108,8 @@ class FTrixWidgetSetting {
     radius = json['radius'] != null
         ? BorderRadiusSetting.fromJson(json['radius'])
         : BorderRadiusSetting();
+    height = json["height"];
+    width = json["width"];
   }
 
   FTrixWidgetSetting.copyWith(FTrixWidgetSetting setting) {
@@ -127,6 +150,8 @@ class FTrixWidgetSetting {
       'padding': padding.toJson(),
       'margin': margin.toJson(),
       'radius': radius.toJson(),
+      "height": height,
+      "width": width,
     }..removeWhere((key, value) => value == null);
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:uuid/uuid.dart' show Uuid;
@@ -58,7 +59,12 @@ abstract class FTrixWithDropWidget implements IWidget {
 
   @override
   Map<String, dynamic> toJson() {
-    return {"type": type.name};
+    return {
+      "type": type.name,
+      "id": id,
+      "parentId": parentId,
+      "setting": setting.toJson(),
+    };
   }
 
   @override
@@ -160,5 +166,3 @@ abstract class FTrixDroppableWidgetWithSingleChild
     ));
   }
 }
-
-abstract class FTrixWidgetWithSingleChild implements FTrixWithDropWidget {}

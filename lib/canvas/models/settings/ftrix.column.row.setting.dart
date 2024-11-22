@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
+import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
+import 'package:get/get.dart';
 
 class FTrixColumnRowSetting extends FTrixWidgetSetting {
   late MainAxisAlignment mainAxisAlignment;
@@ -23,8 +26,8 @@ class FTrixColumnRowSetting extends FTrixWidgetSetting {
         .firstWhere((el) => el.name == json["mainAxisAlignment"]);
     crossAxisAlignment = CrossAxisAlignment.values
         .firstWhere((el) => el.name == json["crossAxisAlignment"]);
-    mainAxisSize = MainAxisSize.values
-        .firstWhere((el) => el.name == json["mainAxisSize"]);
+    mainAxisSize =
+        MainAxisSize.values.firstWhere((el) => el.name == json["mainAxisSize"]);
   }
 
   static FTrixColumnRowSetting get zero => FTrixColumnRowSetting(
@@ -44,4 +47,17 @@ class FTrixColumnRowSetting extends FTrixWidgetSetting {
       ...super.toJson(),
     }..removeWhere((key, value) => value == null);
   }
+
+  List<InputDropdownItem<MainAxisAlignment>> get mainAxisAlignmentValue =>
+      MainAxisAlignment.values
+          .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
+          .toList();
+  List<InputDropdownItem<CrossAxisAlignment>> get crossAxisAlignmentValue =>
+      CrossAxisAlignment.values
+          .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
+          .toList();
+  List<InputDropdownItem<MainAxisSize>> get maxSizeValue =>
+      MainAxisSize.values.map((e) => InputDropdownItem(e.name.capitalizeFirst!, e)).toList();
+
+
 }

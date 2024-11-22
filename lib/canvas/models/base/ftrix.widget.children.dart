@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:get/get.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
@@ -50,7 +51,9 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
       if (value is IWidget) {
         final isWidgetExist = children.any((w) => w.id == value.id);
         if (isWidgetExist) return;
-        children.add(value);
+        final copyWidget = value.clone(id);
+        value.delete();
+        children.add(copyWidget);
       }
       notifyUpdate();
     } catch (e) {
@@ -151,27 +154,13 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
 // Abstract class for widget with un-scrollable children
 
 abstract class FTrixWidgetUnScrollChildren extends FTrixWidgetChildren {
-  MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start;
-  CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start;
 
   FTrixWidgetUnScrollChildren({super.parentId});
 
-  @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        "mainAxisAlignment": mainAxisAlignment.name,
-        "crossAxisAlignment": crossAxisAlignment.name,
-      });
-  }
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
     type = json['type'];
-    mainAxisAlignment = MainAxisAlignment.values
-        .firstWhere((el) => el.name == json["mainAxisAlignment"]);
-    crossAxisAlignment = CrossAxisAlignment.values
-        .firstWhere((el) => el.name == json["crossAxisAlignment"]);
     children = (json['children'] as List<Map<String, dynamic>>).map((child) {
       final widget = FTrixWidgetBuilder.build(type);
       widget.loadFromJson(child);

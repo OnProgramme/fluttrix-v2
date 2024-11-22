@@ -3,46 +3,102 @@ import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class ButtonToolBarSettingComponent extends StatelessWidget {
+class ButtonToolBarSettingComponent extends StatefulWidget {
   const ButtonToolBarSettingComponent({super.key, required this.widget});
   final FTrixButton widget;
 
   @override
+  State<ButtonToolBarSettingComponent> createState() => _ButtonToolBarSettingComponentState();
+}
+
+class _ButtonToolBarSettingComponentState extends State<ButtonToolBarSettingComponent> {
+  @override
   Widget build(BuildContext context) {
-    final setting = widget.setting as FTrixButtonSetting;
-    return  Column(
+    final setting = widget.widget.setting as FTrixButtonSetting;
+    return Column(
       children: [
         FTextField(
-          key: ValueKey(widget.text),
+          key: ValueKey(widget.widget.text),
           label: "Text",
-          initialValue: widget.text,
-          onChanged: (value){
-            widget.text = value;
-            widget.update();
+          initialValue: widget.widget.text,
+          onChanged: (value) {
+            widget.widget.text = value;
+            widget.widget.update();
           },
         ),
         SizedBox(height: 10),
         FTrixEditSize(
-          width: setting.style.width,
-          height: setting.style.height,
+          width: setting.width,
+          height: setting.height,
           onSizeChanged: (width, height) {
-            setting.style.width = width;
-            setting.style.height = height;
-            widget.update();
+            setting.width = width;
+            setting.height = height;
+            widget.widget.update();
+          },
+        ),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          value: setting.fullWidth,
+          onChanged: (value) {
+            setting.fullWidth = value!;
+            widget.widget.update();
+            setState(() {});
+          },
+          title: Text("Largeur de l'écran"),
+        ),
+        SizedBox(height: 10),
+        FTrixColorPicker(
+          label: "Background Color",
+          initialColor: setting.color,
+          onChanged: (color) {
+            setting.color = color;
+            widget.widget.update();
           },
         ),
         SizedBox(height: 10),
         FTrixColorPicker(
-          initialColor: setting.style.color,
-          onChanged: (color){
-            print(color);
-            setting.style.color = color;
-            widget.update();
+          label: "Text Color",
+          initialColor: setting.textColor,
+          onChanged: (color) {
+            setting.textColor = color;
+            widget.widget.update();
           },
-        )
+        ),
+        SizedBox(height: 10),
+        FTrixColorPicker(
+          label: "Border Color",
+          initialColor: setting.borderColor,
+          onChanged: (color) {
+            setting.borderColor = color;
+            widget.widget.update();
+          },
+        ),
+        FTrixEditPaddingOrMargin(
+          isMargin: true,
+          setting: setting.margin,
+          onUpdated: () => widget.widget.update(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FTrixEditRadius(
+          setting: setting.radius,
+          onUpdated: () => widget.widget.update(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FTrixEditPaddingOrMargin(
+          setting: setting.padding,
+          onUpdated: () => widget.widget.update(),
+        ),
       ],
     );
   }
