@@ -1,9 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.rich.text.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
@@ -19,11 +15,20 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
     this.maxLines,
     super.parentId,
     FTrixTextSetting? setting,
-  }):super(type: WidgetType.RICH_TEXT, setting: setting ?? FTrixTextSetting.zero){
+  }) : super(
+            type: WidgetType.RICH_TEXT,
+            setting: setting ?? FTrixTextSetting.zero) {
     final settingText = this.setting as FTrixTextSetting;
     text = [
-      FTrixRichTextSetting(text: "Hello ", setting: FTrixTextSetting.fromJson(settingText.toJson()), index: 0),
-      FTrixRichTextSetting(text: "World", setting: FTrixTextSetting.fromJson(settingText.toJson())..color = Colors.blue, index: 1),
+      FTrixRichTextSetting(
+          text: "Hello ",
+          setting: FTrixTextSetting.fromJson(settingText.toJson()),
+          index: 0),
+      FTrixRichTextSetting(
+          text: "World",
+          setting: FTrixTextSetting.fromJson(settingText.toJson())
+            ..color = Colors.blue,
+          index: 1),
     ];
   }
 

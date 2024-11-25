@@ -3,7 +3,6 @@ import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/i.ftrix.canvas.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/events/ftrix.update.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/files/ftrix.base.file.dart';
@@ -13,7 +12,6 @@ import 'package:fluttrix/files/ftrix.folder.dart';
 import '../base/i.widget.dart';
 
 class FTrixCanvas implements IFTrixCanvas {
-
   final _scaffold = FTrixScaffold(
     setting: FTrixScaffoldSetting.zero,
   );
@@ -45,7 +43,6 @@ class FTrixCanvas implements IFTrixCanvas {
 
   @override
   Stream<FTrixEventData> get update => FTrixStream.instance.updateCanvas;
-
 
   List<String> get widgetsImported =>
       [WidgetType.INPUT, WidgetType.TEXT, WidgetType.BUTTON]

@@ -1,14 +1,5 @@
-import 'package:fluttrix/canvas/models/settings/ftrix.align.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.wrap.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.center.dart';

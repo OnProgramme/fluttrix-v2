@@ -1,12 +1,9 @@
-import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/frame.canvas.dart';
 import 'package:fluttrix/canvas/presentation/canvas/tree/canvas.tree.widget.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/components/widgets.toolbar.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/toolbar.settings.component.dart';
-import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -43,22 +40,27 @@ class HomeScreen extends GetView<HomeController> {
                       color: AppColors.primary,
                       child: Column(
                         children: [
-                          IconButton(onPressed:() {
-                            controller.currentIndex(0);
-                          } , icon: Icon(LucideIcons.layoutList)),
-                          IconButton(onPressed:() {
-                            controller.currentIndex(1);
-                          } , icon: Icon(LucideIcons.folderTree))
+                          IconButton(
+                              onPressed: () {
+                                controller.currentIndex(0);
+                              },
+                              icon: Icon(LucideIcons.layoutList)),
+                          IconButton(
+                              onPressed: () {
+                                controller.currentIndex(1);
+                              },
+                              icon: Icon(LucideIcons.folderTree))
                         ],
                       ),
                     ),
                     Obx(
-                        ()=> IndexedStack(
-                          index: controller.currentIndex.value,
+                      () => IndexedStack(
+                        index: controller.currentIndex.value,
                         children: [
                           WidgetsToolBar(),
                           WidgetExplorerPanel(
-                            rootWidget: fCanvasController.canvas.value.getSelectedWidget(),
+                            rootWidget: fCanvasController.canvas.value
+                                .getSelectedWidget(),
                             onWidgetSelected: (p0) {},
                           ),
                         ],

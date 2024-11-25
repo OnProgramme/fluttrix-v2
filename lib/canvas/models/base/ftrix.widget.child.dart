@@ -1,9 +1,7 @@
-import 'dart:async';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
@@ -11,13 +9,17 @@ import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dar
 import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';
 
 abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
-
   IWidget? child;
 
-  FTrixWidgetWithChild({super.parentId, required super.setting, required super.type, this.child}) {
+  FTrixWidgetWithChild(
+      {super.parentId,
+      required super.setting,
+      required super.type,
+      this.child}) {
     FTrixStream.instance.wrapParentWidgetEvent
         .listen(_handleListenWhenChildWrapped);
-    FTrixStream.instance.deleteWidgetEvent.listen(_handleListenWhenChildDeleted);
+    FTrixStream.instance.deleteWidgetEvent
+        .listen(_handleListenWhenChildDeleted);
   }
 
   @override
@@ -61,7 +63,7 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
     if (parent is FTrixWidgetWithChildren) {
       parent.children.add(cloneChild);
     }
-    if(parent is FTrixWidgetWithChild){
+    if (parent is FTrixWidgetWithChild) {
       parent.setChild(cloneChild);
     }
     child = parent;
@@ -74,8 +76,6 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "child": child?.toJson()
-    });
+    return super.toJson()..addAll({"child": child?.toJson()});
   }
 }

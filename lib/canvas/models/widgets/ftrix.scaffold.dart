@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
-import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
-import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.component.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
-import 'package:get/get.dart';
 
 class FTrixScaffold extends FTrixWidgetWithChild {
   FTrixScaffold(

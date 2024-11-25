@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
@@ -12,10 +10,12 @@ class ImageToolBarSettingComponent extends StatefulWidget {
   final FTrixImage widget;
 
   @override
-  State<ImageToolBarSettingComponent> createState() => _ImageToolBarSettingComponentState();
+  State<ImageToolBarSettingComponent> createState() =>
+      _ImageToolBarSettingComponentState();
 }
 
-class _ImageToolBarSettingComponentState extends State<ImageToolBarSettingComponent> {
+class _ImageToolBarSettingComponentState
+    extends State<ImageToolBarSettingComponent> {
   @override
   Widget build(BuildContext context) {
     final setting = widget.widget.setting as FTrixImageSetting;

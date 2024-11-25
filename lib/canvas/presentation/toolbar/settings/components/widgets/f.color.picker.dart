@@ -95,28 +95,6 @@ class _FTrixColorPickerState extends State<FTrixColorPicker> {
                       ),
                     ),
                   );
-                  return Row(
-                    // mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Card(
-                        elevation: 2,
-                        color: selectedColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: SizedBox(
-                          width: 30,
-                          height: 30,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        widget.label ?? 'Sélectionner une couleur',
-                      ),
-                    ],
-                  );
                 },
               ),
             ),
@@ -126,4 +104,3 @@ class _FTrixColorPickerState extends State<FTrixColorPicker> {
     );
   }
 }
-

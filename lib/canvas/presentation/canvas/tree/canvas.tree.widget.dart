@@ -6,10 +6,6 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.listview.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.row.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
@@ -126,16 +122,21 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                   icon: Icon(LucideIcons.moreVertical),
                   itemBuilder: (context) {
                     return [
-                      if(widget.parentId != null)
-                      PopupMenuItem(
-                        child: Row(
-                          children: [
-                            Icon(LucideIcons.box),
-                            SizedBox(width: 10,),
-                            Text("Ajouter un parent", style: TextStyle(color: AppColors.white),)
-                          ],
-                        ),
-                      )
+                      if (widget.parentId != null)
+                        PopupMenuItem(
+                          child: Row(
+                            children: [
+                              Icon(LucideIcons.box),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Ajouter un parent",
+                                style: TextStyle(color: AppColors.white),
+                              )
+                            ],
+                          ),
+                        )
                     ];
                   },
                 )
@@ -205,10 +206,10 @@ class WidgetExplorerPanel extends StatelessWidget {
   final Function(IWidget) onWidgetSelected;
 
   const WidgetExplorerPanel({
-    Key? key,
+    super.key,
     required this.rootWidget,
     required this.onWidgetSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

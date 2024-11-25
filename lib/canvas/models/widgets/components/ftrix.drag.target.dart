@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 
 class FTrixDragTarget<T extends Object> extends StatefulWidget {
   const FTrixDragTarget({
@@ -34,30 +33,6 @@ class _FTrixDragTargetState<T extends Object>
         setState(() => isHovering = false);
       },
       onWillAcceptWithDetails: (e) => true,
-    );
-    return Stack(
-      fit: widget.isExpended ? StackFit.expand : StackFit.loose,
-      children: [
-        if (isHovering)
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [Text("Déposez-ici")],
-            ),
-          ),
-        DragTarget<T>(
-          onLeave: (_) => setState(() => isHovering = false),
-          onMove: (_) => setState(() => isHovering = true),
-          builder: (context, candidateData, rejectedData) {
-            return widget.child ?? SizedBox();
-          },
-          onAcceptWithDetails: (details) {
-            widget.onDrop(details);
-            setState(() => isHovering = false);
-          },
-          onWillAcceptWithDetails: (e) => true,
-        ),
-      ],
     );
   }
 }

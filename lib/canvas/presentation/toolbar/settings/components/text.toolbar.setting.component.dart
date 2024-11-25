@@ -1,4 +1,3 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.text.dart';

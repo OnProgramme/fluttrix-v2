@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.align.setting.dart';
-import 'package:fluttrix/canvas/models/utils/abbreviateCamelCase.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.divider.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 

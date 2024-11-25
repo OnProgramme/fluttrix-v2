@@ -1,9 +1,6 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.rich.text.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.rich.text.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.text.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.small.input.dart';
@@ -73,8 +70,7 @@ class _RichTextToolBarSettingComponentState
                     },
                   ),
                 ),
-                if (text.index <= 1)
-                  SizedBox(width: 10),
+                if (text.index <= 1) SizedBox(width: 10),
                 if (text.index > 1)
                   IconButton(
                     padding: EdgeInsets.all(7),

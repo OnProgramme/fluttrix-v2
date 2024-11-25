@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
@@ -32,7 +30,9 @@ abstract class IWidget {
   }
 
   void _handleListenWhenWidgetSelected(FTrixSelectWidgetEventData event) {
-    if (isWidgetSelected && event.selectWidget.id == id && event.type == FTrixWidgetEventType.SELECT) return;
+    if (isWidgetSelected &&
+        event.selectWidget.id == id &&
+        event.type == FTrixWidgetEventType.SELECT) return;
     if (isWidgetSelected || event.selectWidget.id == id) {
       isWidgetSelected = event.selectWidget.id == id;
       update();

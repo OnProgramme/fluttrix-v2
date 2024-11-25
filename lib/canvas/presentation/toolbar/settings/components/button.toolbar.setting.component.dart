@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
@@ -7,7 +6,6 @@ import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ButtonToolBarSettingComponent extends StatefulWidget {
   const ButtonToolBarSettingComponent({super.key, required this.widget});

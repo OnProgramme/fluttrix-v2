@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
@@ -8,8 +6,6 @@ import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:get/get.dart';
-
-import '../ftrix.image.dart';
 
 class FTrixBaseComponent extends StatefulWidget {
   const FTrixBaseComponent({
@@ -121,7 +117,6 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
     });
   }
 
-
   void _removeOverlay() {
     _overlayEntry?.remove();
     _overlayEntry = null;
@@ -131,7 +126,6 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

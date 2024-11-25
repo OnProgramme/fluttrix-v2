@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
@@ -36,7 +35,6 @@ class FTrixButton extends FTrixDroppableWidgetWithoutChild {
   @override
   Widget render() {
     final setting = this.setting as FTrixButtonSetting;
-
     return FTrixBaseComponent(
       widget: this,
       isSelected: isWidgetSelected,
@@ -74,7 +72,4 @@ class FTrixButton extends FTrixDroppableWidgetWithoutChild {
         "text": text,
       });
   }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

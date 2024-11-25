@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
@@ -13,7 +12,9 @@ class FTrixImage extends FTrixDroppableWidgetWithoutChild {
     this.src = '',
     super.parentId,
     FTrixImageSetting? setting,
-  }):super(type: WidgetType.IMAGE, setting: setting ?? FTrixImageSetting.zero) {
+  }) : super(
+            type: WidgetType.IMAGE,
+            setting: setting ?? FTrixImageSetting.zero) {
     src = src.isEmpty ? generateRandomImage() : src;
   }
 

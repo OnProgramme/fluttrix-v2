@@ -26,9 +26,6 @@ import 'package:fluttrix/canvas/presentation/toolbar/settings/components/rich.te
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/scaffold.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/text.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/textfield.toolbar.setting.component.dart';
-import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
-import 'package:fluttrix/main.dart';
-import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 
@@ -52,7 +49,9 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                 height: 60,
                 margin: EdgeInsets.only(bottom: 10),
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: AppColors.background))),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(color: AppColors.background))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -61,11 +60,11 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                         Icon(
                           widgets
                               .firstWhere((w) => w.type == widget?.type,
-                              orElse: () => FTrixToolbarItem(
-                                type: WidgetType.SCAFFOLD,
-                                title: "Scaffold",
-                                icon: Icons.app_blocking,
-                              ))
+                                  orElse: () => FTrixToolbarItem(
+                                        type: WidgetType.SCAFFOLD,
+                                        title: "Scaffold",
+                                        icon: Icons.app_blocking,
+                                      ))
                               .icon,
                           size: 20,
                         ),
@@ -94,7 +93,8 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                 children: [
                   if (controller.selectedWidget.value is FTrixTextField) ...[
                     TextFieldToolBarSettingComponent(
-                        widget: controller.selectedWidget.value as FTrixTextField)
+                        widget:
+                            controller.selectedWidget.value as FTrixTextField)
                   ],
                   if (controller.selectedWidget.value is FTrixButton) ...[
                     ButtonToolBarSettingComponent(
@@ -106,7 +106,8 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                   ],
                   if (controller.selectedWidget.value is FTrixRichText) ...[
                     RichTextToolBarSettingComponent(
-                        widget: controller.selectedWidget.value as FTrixRichText)
+                        widget:
+                            controller.selectedWidget.value as FTrixRichText)
                   ],
                   if (controller.selectedWidget.value is FTrixImage) ...[
                     ImageToolBarSettingComponent(
@@ -114,11 +115,13 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                   ],
                   if (controller.selectedWidget.value is FTrixListView) ...[
                     ListViewToolBarSettingComponent(
-                        widget: controller.selectedWidget.value as FTrixListView)
+                        widget:
+                            controller.selectedWidget.value as FTrixListView)
                   ],
                   if (controller.selectedWidget.value is FTrixContainer) ...[
                     ContainerToolBarSettingComponent(
-                        widget: controller.selectedWidget.value as FTrixContainer)
+                        widget:
+                            controller.selectedWidget.value as FTrixContainer)
                   ],
                   if (controller.selectedWidget.value is FTrixScaffold) ...[
                     ScaffoldToolBarSettingComponent(
@@ -130,8 +133,11 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                       widget: controller.selectedWidget.value as FTrixAlign,
                     )
                   ],
-                  if (controller.selectedWidget.value is FTrixColumn || controller.selectedWidget.value is FTrixRow) ...[
-                    ColumnRowToolBarSettingComponent(widget: controller.selectedWidget.value as FTrixWidgetWithChildren)
+                  if (controller.selectedWidget.value is FTrixColumn ||
+                      controller.selectedWidget.value is FTrixRow) ...[
+                    ColumnRowToolBarSettingComponent(
+                        widget: controller.selectedWidget.value
+                            as FTrixWidgetWithChildren)
                   ],
                 ],
               ),
