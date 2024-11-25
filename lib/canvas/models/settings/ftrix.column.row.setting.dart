@@ -1,9 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
-import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 import 'package:get/get.dart';
 
@@ -56,8 +52,7 @@ class FTrixColumnRowSetting extends FTrixWidgetSetting {
       CrossAxisAlignment.values
           .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
           .toList();
-  List<InputDropdownItem<MainAxisSize>> get maxSizeValue =>
-      MainAxisSize.values.map((e) => InputDropdownItem(e.name.capitalizeFirst!, e)).toList();
-
-
+  List<InputDropdownItem<MainAxisSize>> get maxSizeValue => MainAxisSize.values
+      .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
+      .toList();
 }

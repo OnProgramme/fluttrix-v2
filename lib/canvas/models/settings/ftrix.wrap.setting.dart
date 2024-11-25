@@ -1,9 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
-import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 import 'package:get/get.dart';
 
@@ -26,19 +22,20 @@ class FTrixWrapSetting extends FTrixWidgetSetting {
     this.direction = Axis.horizontal,
   });
 
-  FTrixWrapSetting.fromJson(Map<String, dynamic> json)
-      : super.fromJson(json) {
-    alignment = WrapAlignment.values
-        .firstWhere((el) => el.name == json["alignment"]);
+  FTrixWrapSetting.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+    alignment =
+        WrapAlignment.values.firstWhere((el) => el.name == json["alignment"]);
     runAlignment = WrapAlignment.values
         .firstWhere((el) => el.name == json["runAlignment"]);
     crossAxisAlignment = WrapCrossAlignment.values
         .firstWhere((el) => el.name == json["crossAxisAlignment"]);
     spacing = json["spacing"] ?? 0.0;
     runSpacing = json["runSpacing"] ?? 0.0;
-    alignment = WrapAlignment.values
-        .firstWhere((el) => el.name == json["alignment"], orElse: ()=> WrapAlignment.start);
-    direction = Axis.values.firstWhere((el)=> el.name == json["direction"], orElse: ()=> Axis.horizontal);
+    alignment = WrapAlignment.values.firstWhere(
+        (el) => el.name == json["alignment"],
+        orElse: () => WrapAlignment.start);
+    direction = Axis.values.firstWhere((el) => el.name == json["direction"],
+        orElse: () => Axis.horizontal);
   }
 
   static FTrixWrapSetting get zero => FTrixWrapSetting(
@@ -68,8 +65,7 @@ class FTrixWrapSetting extends FTrixWidgetSetting {
       CrossAxisAlignment.values
           .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
           .toList();
-  List<InputDropdownItem<MainAxisSize>> get maxSizeValue =>
-      MainAxisSize.values.map((e) => InputDropdownItem(e.name.capitalizeFirst!, e)).toList();
-
-
+  List<InputDropdownItem<MainAxisSize>> get maxSizeValue => MainAxisSize.values
+      .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
+      .toList();
 }

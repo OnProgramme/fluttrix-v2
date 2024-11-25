@@ -42,7 +42,7 @@ class FTrixAlign extends FTrixWidgetWithChild {
       isDraggable: false,
       constraints: child == null ? BoxConstraints(minHeight: 100) : null,
       child: Align(
-        alignment: setting.alignment ?? Alignment.center,
+        alignment: setting.alignment,
         child: child?.render(),
       ),
     );

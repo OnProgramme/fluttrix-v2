@@ -34,7 +34,7 @@ class FTrixScaffoldSetting extends FTrixWidgetSetting {
   Map<String, dynamic> toJson() {
     return super.toJson()
       ..addAll({
-        "backgroundColor": backgroundColor?.value,
+        "backgroundColor": backgroundColor.value,
         "showAppbar": showAppbar,
         "showBottomNavBar": showBottomNavBar,
       })

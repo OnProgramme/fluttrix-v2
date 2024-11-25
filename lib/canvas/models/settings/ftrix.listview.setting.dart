@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
-import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 
 class FTrixListViewSetting extends FTrixWidgetSetting {
   late Axis scrollDirection;

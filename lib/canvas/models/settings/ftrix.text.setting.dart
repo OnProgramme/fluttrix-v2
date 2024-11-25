@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';

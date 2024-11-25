@@ -1,7 +1,6 @@
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
-import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 
 class FTrixDropWidgetEventData extends FTrixEventData {
   final DropPosition dropPosition;
