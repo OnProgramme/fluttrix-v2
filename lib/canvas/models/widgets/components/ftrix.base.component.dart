@@ -47,7 +47,7 @@ class FTrixBaseComponent extends StatefulWidget {
 class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
   bool isHovered = false;
   DropPosition dropPosition = DropPosition.NONE;
-  Size? widgetSize;
+  OverlayEntry? _overlayEntry;
 
   bool get isActive => widget.isSelected || isHovered;
 
@@ -69,21 +69,69 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
     return DropPosition.INSIDE;
   }
 
-  void _getWidgetSize() {
-    final renderBox =
-        _childKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox != null) {
-      setState(() {
-        widgetSize = renderBox.size;
-      });
-    }
+  void _showOverlay() {
+    _removeOverlay();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final renderBox =
+          _childKey.currentContext!.findRenderObject() as RenderBox;
+      final size = renderBox.size;
+      final offset = renderBox.localToGlobal(Offset.zero);
+
+      _overlayEntry = OverlayEntry(
+        builder: (context) => Positioned(
+          left: offset.dx,
+          top: offset.dy,
+          width: size.width,
+          height: size.height,
+          child: IgnorePointer(
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: -23,
+                  left: 0,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 100),
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 1.5),
+                    child: Text(
+                      widget.widget.type.name.toLowerCase().capitalizeFirst!,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.orange, width: 2),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      Overlay.of(context).insert(_overlayEntry!);
+    });
+  }
+
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
   }
 
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 1000), () => _getWidgetSize());
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,46 +160,21 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
       child: MouseRegion(
         key: _key,
         cursor: SystemMouseCursors.click,
-        onEnter: (_) {
-          setState(() => isHovered = true);
-        },
+        onEnter: (_) => setState(() => isHovered = true),
         onExit: (_) => setState(() => isHovered = false),
         child: GestureDetector(
           onTap: widget.onTap,
           onLongPress: widget.onLongPress,
           onLongPressEnd: widget.onLongPressEnd,
           child: Container(
+            key: _childKey,
             constraints: widget.disableConstraints
                 ? null
                 : (widget.constraints ?? boxConstraint),
             margin: widget.setting.marginValue,
-            // duration: Duration(milliseconds: 100),
-            decoration: BoxDecoration(
-              border:
-                  isActive ? Border.all(color: Colors.orange, width: 1) : null,
-            ),
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                if (isActive)
-                  Positioned(
-                    top: -24.1,
-                    left: -2,
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 100),
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                      ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 1.5),
-                      child: Text(
-                        widget.widget.type.name.toLowerCase().capitalizeFirst!,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                 widget.isDraggable
                     ? Draggable<IWidget>(
                         data: widget.widget,
@@ -161,6 +184,33 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
                         child: child,
                       )
                     : child,
+                if (isActive) ...[
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.orange, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: -23,
+                    left: 0,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      decoration: const BoxDecoration(
+                        color: Colors.orange,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 1.5),
+                      child: Text(
+                        widget.widget.type.name.toLowerCase().capitalizeFirst!,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
@@ -13,10 +13,8 @@ class FTrixAppBar extends FTrixWidgetWithChild {
   String text;
   TextStyle style = TextStyle();
 
-  FTrixAppBar({this.text = "Fluttrix", super.parentId}) {
-    type = WidgetType.APPBAR;
-    setting = FTrixWidgetSetting.zero;
-  }
+  FTrixAppBar({this.text = "Fluttrix", super.parentId})
+      : super(type: WidgetType.APPBAR, setting: FTrixWidgetSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
@@ -37,13 +35,13 @@ class FTrixAppBar extends FTrixWidgetWithChild {
       onTap: select,
       child: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(text, style: TextStyle(color: Colors.white),),
+        title: Text(
+          text,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
-
-  @override
-  late WidgetType type;
 
   @override
   Map<String, dynamic> toJson() {
@@ -52,10 +50,4 @@ class FTrixAppBar extends FTrixWidgetWithChild {
         "text": text,
       });
   }
-
-  @override
-  late FTrixWidgetSetting setting;
-
-  @override
-  IWidget? child;
 }

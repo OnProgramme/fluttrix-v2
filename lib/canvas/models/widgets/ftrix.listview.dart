@@ -6,26 +6,20 @@ import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.listview.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.listview.component.dart';
 
-class FTrixListView extends FTrixWidgetChildren {
-
-  @override
-  late WidgetType type;
-
-  FTrixListView({super.parentId}){
-    type = WidgetType.LISTVIEW;
-    setting = FTrixListViewSetting.zero;
-  }
+class FTrixListView extends FTrixWidgetWithChildren {
+  FTrixListView({super.parentId, FTrixListViewSetting? setting})
+      : super(
+            type: WidgetType.LISTVIEW,
+            setting: setting ?? FTrixListViewSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    // TODO: implement loadFromJson
   }
 
   @override
   IWidget clone([String? parentId]) {
     return this;
   }
-
 
   @override
   Widget render() {
@@ -35,14 +29,13 @@ class FTrixListView extends FTrixWidgetChildren {
       widget: this,
       onTap: select,
       key: ValueKey(id),
-      children: children.map((c)=>Align(
-        alignment: Alignment.centerLeft,
-        child: c.render(),
-      )).toList(),
-      onDrop: (e)=>handleDropWidget(e),
+      children: children
+          .map((c) => Align(
+                alignment: Alignment.centerLeft,
+                child: c.render(),
+              ))
+          .toList(),
+      onDrop: (e) => handleDropWidget(e),
     );
   }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

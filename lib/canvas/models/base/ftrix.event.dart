@@ -6,8 +6,8 @@ enum FTrixWidgetEventType {
   SELECT,
   DELETE,
   UNSELECT,
-  UPDATE_ALL,
   DROP,
+  WRAP_PARENT,
 }
 
 class FTrixWidgetEvent {
@@ -23,4 +23,10 @@ class FTrixWidgetEvent {
     this.dropPosition = DropPosition.NONE,
     this.dragTargetWidgetId,
   });
+}
+
+
+abstract class FTrixEventData {
+  FTrixWidgetEventType type;
+  FTrixEventData(this.type);
 }

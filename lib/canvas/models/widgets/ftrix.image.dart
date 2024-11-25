@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
@@ -7,17 +7,13 @@ import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/utils/generate.random.image.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.image.component.dart';
 
-class FTrixImage extends FTrixDroppableWidgetWithSingleChild {
-  @override
-  late WidgetType type;
+class FTrixImage extends FTrixDroppableWidgetWithoutChild {
   String src;
-
   FTrixImage({
     this.src = '',
     super.parentId,
-    required this.setting,
-  }) {
-    type = WidgetType.IMAGE;
+    FTrixImageSetting? setting,
+  }):super(type: WidgetType.IMAGE, setting: setting ?? FTrixImageSetting.zero) {
     src = src.isEmpty ? generateRandomImage() : src;
   }
 
@@ -32,7 +28,7 @@ class FTrixImage extends FTrixDroppableWidgetWithSingleChild {
     return FTrixImage(
       parentId: parentId ?? this.parentId,
       src: src,
-      setting: FTrixWidgetSetting.fromJson(setting.toJson()),
+      setting: FTrixImageSetting.fromJson(setting.toJson()),
     );
   }
 
@@ -53,10 +49,6 @@ class FTrixImage extends FTrixDroppableWidgetWithSingleChild {
     return super.toJson()
       ..addAll({
         "src": src,
-        "setting": setting.toJson(),
       });
   }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

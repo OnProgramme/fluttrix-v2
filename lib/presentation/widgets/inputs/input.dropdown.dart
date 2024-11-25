@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 
 class InputDropdownItem<T> {
@@ -39,50 +40,88 @@ class InputDropdown<T> extends StatelessWidget {
           Text(
             label!,
             style: Get.textTheme.labelLarge?.copyWith(
-              color: Colors.black,
+              color: AppColors.white,
             ),
           ),
           const SizedBox(
             height: 6,
           ),
         ],
-        DropdownButtonFormField<T>(
-          isExpanded: true,
-          items: items.map((item) {
-            return DropdownMenuItem(
-              value: item.value,
-              child: Text(
-                item.label,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            );
-          }).toList(),
-          value: value,
-          onChanged: (value) {
-            if (value == null) return;
-            onChanged.call(value);
-          },
-          hint: hint == null ? null : Text(hint!),
-          decoration: InputDecoration(
-            suffixIcon: Icon(Icons.keyboard_arrow_down),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+        SizedBox(
+          height: 35,
+          child: DropdownButtonFormField<T>(
+            isExpanded: true,
+            items: items.map((item) {
+              return DropdownMenuItem(
+                value: item.value,
+                child: Text(
+                  item.label,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: AppColors.white,
+                  ),
+                ),
+              );
+            }).toList(),
+            value: value,
+            onChanged: (value) {
+              if (value == null) return;
+              onChanged.call(value);
+            },
+            hint: hint == null ? null : Text(hint!, style: TextStyle(color: AppColors.white),),
+            style: TextStyle(
+              color: AppColors.white,
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 15)
+            selectedItemBuilder: (context) {
+              return items.map((item) {
+                return Container(
+                  color: AppColors.primary,
+                  child: Text(
+                    item.label,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                );
+              }).toList();
+            },
+            dropdownColor: AppColors.primary,
+            decoration: InputDecoration(
+              suffixIcon: Icon(Icons.keyboard_arrow_down),
+              hintStyle: TextStyle(color: AppColors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: AppColors.grey,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: AppColors.focusBorder,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: AppColors.grey,
+                  ),
+                ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 15)
+            ),
+            icon: const SizedBox(
+              width: 0,
+            ),
+            // validator: (value) {
+            //   if (validators == null) {
+            //     return null;
+            //   }
+            //   for (var validator in validators!) {
+            //     if (validator(value?.label ?? "") != null) {
+            //       return validator.call(value?.label ?? "");
+            //     }
+            //   }
+            // },
           ),
-          icon: const SizedBox(
-            width: 0,
-          ),
-          // validator: (value) {
-          //   if (validators == null) {
-          //     return null;
-          //   }
-          //   for (var validator in validators!) {
-          //     if (validator(value?.label ?? "") != null) {
-          //       return validator.call(value?.label ?? "");
-          //     }
-          //   }
-          // },
         ),
       ],
     );

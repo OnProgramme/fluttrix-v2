@@ -48,7 +48,7 @@ class _TextToolBarSettingComponentState
             Expanded(
               child: InputDropdown<TextAlign>(
                 label: "Text Align",
-                hint: "Sélectionner",
+                hint: "Select",
                 value: setting.textAlign,
                 items: setting.textAlignValue,
                 onChanged: (value) {
@@ -63,7 +63,7 @@ class _TextToolBarSettingComponentState
             Expanded(
               child: InputDropdown<TextDecorationEnum>(
                 label: "Text Decoration",
-                hint: "Sélectionner",
+                hint: "Select",
                 value: setting.decoration,
                 items: setting.textDecorationValues,
                 onChanged: (value) {

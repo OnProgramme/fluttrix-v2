@@ -1,24 +1,20 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../enums/widget.type.dart';
 
-class FTrixText extends FTrixDroppableWidgetWithSingleChild {
+class FTrixText extends FTrixDroppableWidgetWithoutChild {
   String text;
   int? maxLines;
 
   FTrixText({
     this.text = "Hello Word",
     this.maxLines, super.parentId,
-    required this.setting,
-  }){
-    type = WidgetType.TEXT;
-  }
+    FTrixTextSetting? setting,
+  }):super(type: WidgetType.TEXT, setting: setting ?? FTrixTextSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
@@ -38,9 +34,6 @@ class FTrixText extends FTrixDroppableWidgetWithSingleChild {
     return FTrixBaseComponent(
       widget: this,
       isSelected: isWidgetSelected,
-      constraints: BoxConstraints(
-        minWidth: 100
-      ),
       setting: setting,
       onTap: select,
       child: Text(
@@ -59,15 +52,9 @@ class FTrixText extends FTrixDroppableWidgetWithSingleChild {
   }
 
   @override
-  late WidgetType type;
-
-  @override
   Map<String, dynamic> toJson() {
     return super.toJson()..addAll({
       "text": text,
     });
   }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

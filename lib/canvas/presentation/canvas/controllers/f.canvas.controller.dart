@@ -19,6 +19,7 @@ class FCanvasController extends GetxController {
   final canvasSize = Rx(Size.zero);
   final frameKey = GlobalKey();
   final currentDeviceInfo = Devices.ios.iPhone13ProMax.obs;
+  final isThreeOpened = false.obs;
 
   @override
   void onInit() {
@@ -36,6 +37,7 @@ class FCanvasController extends GetxController {
 
   void handleUpdateCanvas(){
     canvas.value.update.listen((event){
+      print(event.type);
       canvas.refresh();
     });
   }

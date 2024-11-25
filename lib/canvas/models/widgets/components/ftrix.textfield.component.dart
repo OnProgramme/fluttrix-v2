@@ -43,7 +43,6 @@ class _FtrixTextFieldComponentState extends State<FtrixTextFieldComponent> {
   Widget build(BuildContext context) {
     return FTrixBaseComponent(
       isSelected: widget.isSelected,
-      onTap: widget.onTap,
       widget: widget.widget,
       setting: widget.setting,
       onDrop: widget.onDrop,
@@ -58,6 +57,7 @@ class _FtrixTextFieldComponentState extends State<FtrixTextFieldComponent> {
       //   });
       // },
       child: TextFormField(
+        onTap: widget.onTap,
         enabled: !isLongPressed,
         obscureText: setting.isPassword,
         decoration: InputDecoration(

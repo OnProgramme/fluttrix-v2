@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/i.ftrix.canvas.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.update.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/files/ftrix.base.file.dart';
@@ -18,8 +20,7 @@ class FTrixCanvas implements IFTrixCanvas {
 
   @override
   IWidget getSelectedWidget() {
-    // TODO: implement getSelectedWidget
-    throw UnimplementedError();
+    return _scaffold;
   }
 
   @override
@@ -43,15 +44,8 @@ class FTrixCanvas implements IFTrixCanvas {
   }
 
   @override
-  Stream<FTrixWidgetEvent> get update =>
-      _scaffold.streamUpdate.where(shouldTriggerUpdate);
+  Stream<FTrixEventData> get update => FTrixStream.instance.updateCanvas;
 
-  bool shouldTriggerUpdate(FTrixWidgetEvent event) {
-    return event.type == FTrixWidgetEventType.UPDATE ||
-        event.type == FTrixWidgetEventType.DELETE ||
-        event.type == FTrixWidgetEventType.SELECT ||
-        event.type == FTrixWidgetEventType.UPDATE_ALL;
-  }
 
   List<String> get widgetsImported =>
       [WidgetType.INPUT, WidgetType.TEXT, WidgetType.BUTTON]

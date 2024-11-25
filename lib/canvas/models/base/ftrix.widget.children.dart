@@ -1,43 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
-import 'package:get/get.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.drop.widget.event.data.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';
 import 'package:fluttrix/canvas/models/utils/insert.element.on.the.list.dart';
 import 'package:fluttrix/utils/message.dart';
-import 'package:uuid/uuid.dart' show Uuid;
-
 import '../enums/widget.type.dart';
 import 'i.widget.dart';
 
-typedef CustomType = void Function(IWidget widget);
 
-abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
-  @override
-  late String id;
-  @override
-  String? parentId;
-  @override
-  late bool isWidgetSelected;
+abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
   List<IWidget> children = [];
 
-  FTrixWidgetChildren({this.parentId}) {
-    id = Uuid().v4();
-    isWidgetSelected = false;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
+  FTrixWidgetWithChildren({super.parentId, required super.setting, required super.type}){
+    FTrixStream.instance.deleteWidgetEvent
+        .listen(_handleListenWhenChildDeleted);
+    FTrixStream.instance.wrapParentWidgetEvent
+        .listen(_handleListenWhenChildWrapped);
+    FTrixStream.instance.dropWidgetEvent.listen(_handleListenWhenWidgetDropped);
   }
 
-  @override
-  Stream<FTrixWidgetEvent> get streamUpdate => FTrixStream.instance.stream;
-
-  @override
-  void notifyUpdate() {
-    setEventType(FTrixWidgetEventType.UPDATE_ALL);
-  }
 
   @override
   void handleDropWidget(DroppedWidgetEvent event) {
@@ -55,51 +43,12 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
         value.delete();
         children.add(copyWidget);
       }
-      notifyUpdate();
+      update();
     } catch (e) {
       //error
     }
   }
 
-  @override
-  void setEventType(FTrixWidgetEventType type) {
-    FTrixStream.instance
-        .addToStream(FTrixWidgetEvent(id: id, widget: this, type: type));
-  }
-
-  @override
-  OnWidgetUpdate onWidgetUpdate(OnWidgetUpdateCallback callback) {
-    return (event) {
-      isWidgetSelected = event.id == id;
-      if (isWidgetSelected && event.type == FTrixWidgetEventType.UPDATE) {
-        callback.call(event.type, event.widget);
-        return;
-      }
-      if (event.type == FTrixWidgetEventType.DELETE &&
-          event.widget.parentId == id) {
-        children.removeWhere((w) => w.id == event.widget.id);
-        unselect();
-        return;
-      }
-      if (event.type == FTrixWidgetEventType.DROP &&
-          event.widget.parentId == id) {
-        handleChangedPositionOfWidgetDropped(event);
-      }
-    };
-  }
-
-  @override
-  void update() {
-    setEventType(FTrixWidgetEventType.UPDATE);
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      "type": type.name,
-      "children": children.map((child) => child.toJson()).toList(),
-    };
-  }
 
   void throwExceptionWhenDropIsNoAuthorized(WidgetType type) {
     if (this.type == WidgetType.COLUMN && type == WidgetType.LISTVIEW) {
@@ -108,25 +57,34 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
     }
   }
 
-  @override
-  void select() {
-    setEventType(FTrixWidgetEventType.SELECT);
+  void _handleListenWhenChildWrapped(FTrixWrapParentEventData event) {
+    if (event.currentParentId != id || children.isEmpty) return;
+    final parent = FTrixWidgetBuilder.build(event.parentType, id);
+    final indexedChild = children.indexWhere((el) => el.id == event.widgetId);
+    if (indexedChild == -1) return;
+    final child = children[indexedChild];
+    child.parentId = parent.id;
+    if (parent is FTrixWidgetWithChildren) {
+      parent.children.add(child);
+    }
+    if (parent is FTrixWidgetWithChild) {
+      parent.setChild(child);
+    }
+    children[indexedChild] = child;
+    update();
   }
 
-  @override
-  void delete() {
-    setEventType(FTrixWidgetEventType.DELETE);
+  void _handleListenWhenWidgetDropped(FTrixDropWidgetEventData event) {
+    if (event.parentId != id) return;
+    handleChangedPositionOfWidgetDropped(event);
   }
 
-  @override
-  void unselect() {
-    setEventType(FTrixWidgetEventType.UNSELECT);
+  void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {
+    if (event.deleteWidget.parentId != id) return;
+    children.removeWhere((w) => w.id == event.deleteWidget.id);
   }
 
-  @override
-  void handleUpdateWidget(FTrixWidgetEventType type, IWidget widget) {}
-
-  void handleChangedPositionOfWidgetDropped(FTrixWidgetEvent event) {
+  void handleChangedPositionOfWidgetDropped(FTrixDropWidgetEventData event) {
     assert(event.type == FTrixWidgetEventType.DROP);
     if (event.dropPosition == DropPosition.BEFORE ||
         event.dropPosition == DropPosition.AFTER) {
@@ -134,7 +92,7 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
           children.indexWhere((w) => w.id == event.dragTargetWidgetId);
       if (dropWidgetIndex.isNegative) return;
       final insertWidgetIndex =
-          children.indexWhere((w) => w.id == event.widget.id);
+          children.indexWhere((w) => w.id == event.dropWidget.id);
       if (insertWidgetIndex != -1) {
         final temp = children[dropWidgetIndex];
         children[dropWidgetIndex] = children[insertWidgetIndex];
@@ -142,29 +100,24 @@ abstract class FTrixWidgetChildren implements FTrixWithDropWidget {
       } else {
         insertElementOnTheList(
             list: children,
-            element: event.widget,
+            element: event.dropWidget,
             index: dropWidgetIndex,
             position: event.dropPosition);
       }
-      notifyUpdate();
+      update();
     }
   }
-}
-
-// Abstract class for widget with un-scrollable children
-
-abstract class FTrixWidgetUnScrollChildren extends FTrixWidgetChildren {
-
-  FTrixWidgetUnScrollChildren({super.parentId});
-
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    children = (json['children'] as List<Map<String, dynamic>>).map((child) {
-      final widget = FTrixWidgetBuilder.build(type);
-      widget.loadFromJson(child);
-      return widget;
-    }).toList();
+    super.loadFromJson(json);
+    debugPrint("implement");
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return super.toJson()..addAll({
+      "children": children.map((child) => child.toJson()).toList(),
+    });
   }
 }

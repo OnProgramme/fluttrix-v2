@@ -5,21 +5,20 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
-import 'package:get/get.dart';
 
-class FTrixRow extends FTrixWidgetUnScrollChildren {
-  @override
-  late WidgetType type;
-
-  FTrixRow({super.parentId, required this.setting}) {
-    type = WidgetType.ROW;
-    streamUpdate.listen(onWidgetUpdate(handleUpdateWidget));
-  }
+class FTrixRow extends FTrixWidgetWithChildren {
+  FTrixRow({super.parentId, FTrixColumnRowSetting? setting})
+      : super(
+            type: WidgetType.ROW,
+            setting: setting ?? FTrixColumnRowSetting.zero);
 
   @override
   IWidget clone([String? parentId]) {
     return this;
   }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {}
 
   @override
   Widget render() {
@@ -40,7 +39,4 @@ class FTrixRow extends FTrixWidgetUnScrollChildren {
       ),
     );
   }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
@@ -12,46 +13,21 @@ import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.compone
 import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
 import 'package:get/get.dart';
 
-class FTrixScaffold extends FTrixWithDropWidget {
-  @override
-  late WidgetType type;
-  IWidget? body;
-
+class FTrixScaffold extends FTrixWidgetWithChild {
   FTrixScaffold(
-      {required this.setting, String? id, this.body, super.parentId}) {
-    type = WidgetType.SCAFFOLD;
-    streamUpdate.listen(onWidgetUpdate((type, widget) {
-      if (type == FTrixWidgetEventType.DELETE && widget.id == body?.id) {
-        deleteBody();
-        widget.unselect();
-      }
-    }));
-  }
-
-  void deleteBody() {
-    body = null;
-  }
-
-  void setBody(dynamic value) {
-    if (body != null) return;
-    if (value is WidgetType) {
-      body = FTrixWidgetBuilder.build(value, id);
-    }
-    if (value is IWidget) {
-      body = value;
-    }
-    notifyUpdate();
-  }
+      {String? id, super.child, super.parentId, FTrixScaffoldSetting? setting})
+      : super(
+            type: WidgetType.SCAFFOLD,
+            setting: setting ?? FTrixScaffoldSetting.zero);
 
   @override
   void handleDropWidget(DroppedWidgetEvent event) {
-    setBody(event.value);
+    if (child != null) return;
+    super.handleDropWidget(event);
   }
 
   @override
-  void loadFromJson(Map<String, dynamic> json) {
-    // TODO: implement loadFromJson
-  }
+  void loadFromJson(Map<String, dynamic> json) {}
 
   @override
   IWidget clone([String? parentId]) {
@@ -60,14 +36,22 @@ class FTrixScaffold extends FTrixWithDropWidget {
 
   @override
   Widget render() {
+    final setting = this.setting as FTrixScaffoldSetting;
     return FTrixScaffoldComponent(
       onDrop: handleDropWidget,
-      setting: setting as FTrixScaffoldSetting,
+      setting: setting,
       isSelected: isWidgetSelected,
       widget: this,
       select: select,
       appBar: FTrixAppBar(),
-      child: body?.render(),
+      child: Container(
+        decoration: BoxDecoration(
+          color: setting.backgroundColor,
+        ),
+        width: double.infinity,
+        height: double.infinity,
+        child: child?.render(),
+      ),
     );
   }
 
@@ -75,10 +59,7 @@ class FTrixScaffold extends FTrixWithDropWidget {
   Map<String, dynamic> toJson() {
     return super.toJson()
       ..addAll({
-        "body": body?.toJson(),
+        "body": child?.toJson(),
       });
   }
-
-  @override
-  FTrixWidgetSetting setting;
 }

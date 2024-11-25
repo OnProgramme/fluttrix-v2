@@ -1,12 +1,17 @@
 enum WidgetType{
   COLUMN,
   ROW,
+  WRAP,
   CONTAINER,
   IMAGE,
   LISTVIEW,
+  GRIDVIEW,
   SCAFFOLD,
   INPUT,
   BUTTON,
   TEXT,
+  RICH_TEXT,
   APPBAR,
+  CENTER,
+  ALIGN
 }

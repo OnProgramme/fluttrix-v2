@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.container.setting.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';

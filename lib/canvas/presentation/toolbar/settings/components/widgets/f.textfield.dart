@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/utils/app.colors.dart';
+import 'package:get/get.dart';
 
 class FTextField extends StatelessWidget {
   const FTextField({
@@ -27,8 +29,8 @@ class FTextField extends StatelessWidget {
         if (label != null) ...[
           Text(
             label!,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
+            style: Get.textTheme.labelLarge?.copyWith(
+              color: AppColors.white,
             ),
           ),
           SizedBox(height: 5)
@@ -39,11 +41,31 @@ class FTextField extends StatelessWidget {
           onChanged: onChanged,
           minLines: minLines,
           maxLines: maxLines,
+          style: TextStyle(
+            fontSize: 14,
+          ),
           decoration: InputDecoration(
             hintText: hint,
             isDense: true,
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: AppColors.grey,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: AppColors.focusBorder,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: AppColors.grey,
+              ),
+            ),
           ),
         ),
       ],

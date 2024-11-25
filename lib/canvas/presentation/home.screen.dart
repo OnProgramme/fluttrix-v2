@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/frame.canvas.dart';
+import 'package:fluttrix/canvas/presentation/canvas/tree/canvas.tree.widget.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/components/widgets.toolbar.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/toolbar.settings.component.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
+import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 import 'controllers/home.controller.dart';
 
@@ -20,32 +23,56 @@ class HomeScreen extends GetView<HomeController> {
     // },
     final fCanvasController = Get.find<FCanvasController>();
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
-          WidgetsToolBar(),
+          Container(
+            margin: EdgeInsets.only(bottom: 3),
+            height: 60,
+            width: MediaQuery.sizeOf(context).width,
+            color: AppColors.primary,
+          ),
           Expanded(
-            child: Stack(
+            child: Row(
               children: [
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: SizedBox(
-                    width: 250,
-                    child: InputDropdown(
-                      label: "Device",
-                      hint: "Sélectionner un appareil",
-                      items:[ ...Devices.android.all, ...Devices.ios.all]
-                          .map((d) => InputDropdownItem(d.name.capitalizeFirst!, d))
-                          .toList(),
-                      onChanged: fCanvasController.currentDeviceInfo.call,
+                Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      margin: EdgeInsets.only(right: 3),
+                      height: MediaQuery.sizeOf(context).height,
+                      color: AppColors.primary,
+                      child: Column(
+                        children: [
+                          IconButton(onPressed:() {
+                            controller.currentIndex(0);
+                          } , icon: Icon(LucideIcons.layoutList)),
+                          IconButton(onPressed:() {
+                            controller.currentIndex(1);
+                          } , icon: Icon(LucideIcons.folderTree))
+                        ],
+                      ),
                     ),
-                  ),
+                    Obx(
+                        ()=> IndexedStack(
+                          index: controller.currentIndex.value,
+                        children: [
+                          WidgetsToolBar(),
+                          WidgetExplorerPanel(
+                            rootWidget: fCanvasController.canvas.value.getSelectedWidget(),
+                            onWidgetSelected: (p0) {},
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                Center(child: FrameCanvas()),
+                Expanded(
+                  child: FrameCanvas(),
+                ),
+                ToolbarSettingsComponent(),
               ],
             ),
           ),
-          ToolbarSettingsComponent(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -27,6 +27,7 @@ class _FTrixColorPickerState extends State<FTrixColorPicker> {
   @override
   void didUpdateWidget(covariant FTrixColorPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
+    selectedColor = widget.initialColor ?? selectedColor;
   }
 
   void setColor(Color color) {

@@ -17,13 +17,12 @@ class FTrixToolbarSettingsController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    FTrixStream.instance.stream.listen((event){
+    FTrixStream.instance.selectWidgetEvent.listen((event){
       if(event.type == FTrixWidgetEventType.SELECT){
-        handleWidgetSelected(event.widget);
+        handleWidgetSelected(event.selectWidget);
+        return;
       }
-      if(event.type == FTrixWidgetEventType.UNSELECT){
-        handleWidgetSelected(null);
-      }
+      handleWidgetSelected(null);
     });
   }
 

@@ -16,6 +16,7 @@ class FTrixTextSetting extends FTrixWidgetSetting {
   TextDecorationEnum? decoration;
   FontWeightEnum? fontWeight;
   late TextAlign textAlign;
+  int? maxLines;
 
   FTrixTextSetting({
     required super.padding,
@@ -25,6 +26,8 @@ class FTrixTextSetting extends FTrixWidgetSetting {
     this.fontWeight = FontWeightEnum.w400,
     this.color,
     this.fontSize,
+    this.decoration,
+    this.maxLines,
   });
 
   FTrixTextSetting.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
@@ -33,10 +36,13 @@ class FTrixTextSetting extends FTrixWidgetSetting {
         orElse: () => TextAlign.start);
     color = json['color'] != null ? parseIntegerColor(json['color']) : null;
     fontSize = json['fontSize'];
-    decoration = TextDecorationEnum.values.firstWhere(
-        (el) => el.name == json['textAlign'],
-        orElse: () => TextDecorationEnum.none);
-    fontWeight = FontWeightEnum.values.firstWhere((el) => el == json['fontWeight'],
+    decoration = json['decoration'] == null
+        ? null
+        : TextDecorationEnum.values.firstWhere(
+            (el) => el.name == json['decoration'],
+            orElse: () => TextDecorationEnum.none);
+    fontWeight = FontWeightEnum.values.firstWhere(
+        (el) => el == json['fontWeight'],
         orElse: () => FontWeightEnum.w400);
   }
 
@@ -73,8 +79,7 @@ class FTrixTextSetting extends FTrixWidgetSetting {
           .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
           .toList();
 
-
-  TextDecoration get decorationValue {
+  TextDecoration? get decorationValue {
     switch (decoration) {
       case TextDecorationEnum.none:
         return TextDecoration.none;
@@ -85,7 +90,7 @@ class FTrixTextSetting extends FTrixWidgetSetting {
       case TextDecorationEnum.lineThrough:
         return TextDecoration.lineThrough;
       default:
-        return TextDecoration.none;
+        return null;
     }
   }
 

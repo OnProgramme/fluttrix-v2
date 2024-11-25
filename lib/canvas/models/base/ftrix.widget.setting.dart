@@ -32,6 +32,13 @@ class EdgeInsetsSetting {
     right: right ?? this.right,
   );
 
+  EdgeInsetsSetting all(double value) => copyWith(
+    top: value,
+    bottom: value,
+    left: value,
+    right: value
+  );
+
   Map<String, dynamic> toJson() {
     return {
       'top': top,

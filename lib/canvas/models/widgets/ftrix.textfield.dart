@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.textfield.setting.dart';
-import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.textfield.component.dart';
 
-class FTrixTextField extends FTrixDroppableWidgetWithSingleChild {
-  @override
-  late WidgetType type;
+class FTrixTextField extends FTrixDroppableWidgetWithoutChild {
 
   FTrixTextField({
     super.parentId,
-  }) {
-    type = WidgetType.INPUT;
-    setting = FTrixTextFieldSetting.zero;
-  }
+    FTrixTextFieldSetting? setting,
+  }):super(type:  WidgetType.INPUT, setting: setting ?? FTrixTextFieldSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    // TODO: implement loadFromJson
   }
 
   @override
@@ -41,14 +35,4 @@ class FTrixTextField extends FTrixDroppableWidgetWithSingleChild {
     );
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        "setting": setting.toJson(),
-      });
-  }
-
-  @override
-  late FTrixWidgetSetting setting;
 }

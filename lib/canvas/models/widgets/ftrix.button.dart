@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
@@ -8,16 +7,16 @@ import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.d
 
 import '../base/i.widget.dart';
 
-class FTrixButton extends FTrixDroppableWidgetWithSingleChild {
-  @override
-  late WidgetType type;
+class FTrixButton extends FTrixDroppableWidgetWithoutChild {
   String text;
 
   FTrixButton({
     this.text = 'Button',
     super.parentId,
-    required this.setting,
-  }) : type = WidgetType.BUTTON;
+    FTrixButtonSetting? setting,
+  }) : super(
+            type: WidgetType.BUTTON,
+            setting: setting ?? FTrixButtonSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {

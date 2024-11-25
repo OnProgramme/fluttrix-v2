@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -21,6 +22,25 @@ class Main extends StatelessWidget {
       initialRoute: initialRoute,
       getPages: Nav.routes,
       builder: (context, child) => OKToast(child: child ?? const SizedBox()),
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.background,
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        radioTheme: RadioThemeData(
+          overlayColor: WidgetStatePropertyAll(Colors.transparent),
+          fillColor: WidgetStatePropertyAll(AppColors.grey),
+        ),
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
+          bodySmall: TextStyle(color: Colors.white),
+        ),
+        popupMenuTheme: PopupMenuThemeData(
+          color: AppColors.primary,
+          textStyle: TextStyle(color: Colors.white),
+        )
+      ),
     );
   }
 }

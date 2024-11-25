@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.container.setting.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
@@ -15,7 +15,7 @@ import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 
 class ColumnRowToolBarSettingComponent extends StatelessWidget {
   const ColumnRowToolBarSettingComponent({super.key, required this.widget});
-  final FTrixWidgetUnScrollChildren widget;
+  final FTrixWidgetWithChildren widget;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,20 @@ class ColumnRowToolBarSettingComponent extends StatelessWidget {
               setting.crossAxisAlignment = value;
               widget.update();
             }
-        )
+        ),
+        SizedBox(height: 10,),
+        FTrixEditPaddingOrMargin(
+          isMargin: true,
+          setting: setting.margin,
+          onUpdated: () => widget.update(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FTrixEditPaddingOrMargin(
+          setting: setting.padding,
+          onUpdated: () => widget.update(),
+        ),
       ],
     );
   }

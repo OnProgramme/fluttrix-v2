@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.container.setting.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
-import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
-import 'package:get/get.dart';
 
 class FTrixContainer extends FTrixWidgetWithChild {
   @override
-  late WidgetType type;
-  @override
   IWidget? child;
-  @override
-  FTrixWidgetSetting setting;
 
   FTrixContainer({
     this.child,
     super.parentId,
-    required this.setting,
-  }) : type = WidgetType.CONTAINER;
+    FTrixContainerSetting? setting,
+  }) : super(
+          type: WidgetType.CONTAINER,
+          setting: setting ?? FTrixContainerSetting.zero,
+        );
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
@@ -47,7 +42,7 @@ class FTrixContainer extends FTrixWidgetWithChild {
       isSelected: isWidgetSelected,
       onTap: select,
       disablePadding: true,
-      isDraggable: false,
+      // isDraggable: false,
       child: Container(
         padding: setting.paddingValue,
         decoration: BoxDecoration(
