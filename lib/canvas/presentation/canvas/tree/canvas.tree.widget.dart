@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
@@ -85,10 +86,11 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
             }
           },
           child: Container(
+            height: 40,
             color: widget.isWidgetSelected
                 ? Colors.blue.withOpacity(0.1)
                 : Colors.transparent,
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.symmetric(vertical: 0),
             child: Row(
               children: [
                 Expanded(
@@ -117,9 +119,16 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                     ],
                   ),
                 ),
+                if(widget.parentId != null)
                 PopupMenuButton(
+                  constraints: BoxConstraints(minHeight: 0, minWidth: 0),
                   tooltip: "Plus d'options",
-                  icon: Icon(LucideIcons.moreVertical),
+                  icon: Icon(LucideIcons.moreVertical, size: 20,),
+                  onSelected: (i){
+                    if(i == 0){
+                      widget.wrapParent(WidgetType.CONTAINER);
+                    }
+                  },
                   itemBuilder: (context) {
                     return [
                       if (widget.parentId != null)
@@ -136,7 +145,23 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                               )
                             ],
                           ),
-                        )
+                        ),
+                      if(widget is FTrixWidgetWithChildren)...[
+                        PopupMenuItem(
+                          child: Row(
+                            children: [
+                              Icon(LucideIcons.plus),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Ajouter un enfant",
+                                style: TextStyle(color: AppColors.white),
+                              )
+                            ],
+                          ),
+                        ),
+                      ]
                     ];
                   },
                 )

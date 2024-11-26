@@ -6,7 +6,6 @@ import 'package:fluttrix/files/ftrix.base.file.dart';
 abstract class IFTrixCanvas {
   Map<String, dynamic> toJson();
   IWidget getSelectedWidget();
-  void removeWidget(String id);
   void loadFromJson(Map<String, dynamic> json);
   void select();
   Widget render();

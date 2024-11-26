@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
+import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/toolbar/ftrix.toolbar.item.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
@@ -58,21 +59,13 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                     Row(
                       children: [
                         Icon(
-                          widgets
-                              .firstWhere((w) => w.type == widget?.type,
-                                  orElse: () => FTrixToolbarItem(
-                                        type: WidgetType.SCAFFOLD,
-                                        title: "Scaffold",
-                                        icon: Icons.app_blocking,
-                                      ))
-                              .icon,
+                          FTrixWidgetIconBuilder.build(widget!.type),
                           size: 20,
                         ),
                         SizedBox(
                           width: 10,
                         ),
-                        Text(widget?.type.name.capitalizeFirst?.toUpperCase() ??
-                            ''),
+                        Text(widget!.type.name.capitalizeFirst!.toUpperCase()),
                       ],
                     ),
                     if (controller.selectedWidget.value?.parentId != null)

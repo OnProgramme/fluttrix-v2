@@ -3,25 +3,19 @@ import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixContainer extends FTrixWidgetWithChild {
-  @override
-  IWidget? child;
 
   FTrixContainer({
-    this.child,
+    super.child,
     super.parentId,
     FTrixContainerSetting? setting,
   }) : super(
           type: WidgetType.CONTAINER,
           setting: setting ?? FTrixContainerSetting.zero,
         );
-
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    type = WidgetType.CONTAINER;
-  }
 
   @override
   IWidget clone([String? parentId]) {
@@ -68,5 +62,10 @@ class FTrixContainer extends FTrixWidgetWithChild {
         "child": child?.toJson(),
         "setting": setting.toJson(),
       });
+  }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {
+    setting = FTrixContainerSetting.fromJson(normalizeJson(json['setting']));
   }
 }

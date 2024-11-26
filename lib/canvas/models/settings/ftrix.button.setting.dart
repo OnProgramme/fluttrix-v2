@@ -18,7 +18,7 @@ class FTrixButtonSetting extends FTrixWidgetSetting {
         this.color,
         this.textColor,
         this.fullWidth = false,
-      }): super(width: 200, height: 45);
+      }): super(width: 200, height: 50);
 
   FTrixButtonSetting.fromJson(Map<String, dynamic> json)
       : super.fromJson(json) {

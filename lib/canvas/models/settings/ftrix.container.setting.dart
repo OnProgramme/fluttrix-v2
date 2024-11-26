@@ -14,12 +14,9 @@ class FTrixContainerSetting extends FTrixAlignSetting {
       this.shape = BoxShape.rectangle,
       this.color,
       this.backgroundImage,
-      double? width,
-      double? height})
-      : super(alignment: FTrixAlignmentSettingEnum.topLeft.setting) {
-    this.width = width;
-    this.height = height;
-  }
+      FTrixAlignmentSetting? alignment})
+      : super(
+            alignment: alignment ?? FTrixAlignmentSettingEnum.topLeft.setting);
 
   static FTrixContainerSetting get zero => FTrixContainerSetting(
         margin: FTrixWidgetSetting.zero.margin,
@@ -30,14 +27,15 @@ class FTrixContainerSetting extends FTrixAlignSetting {
   factory FTrixContainerSetting.fromJson(Map<String, dynamic> json) {
     return FTrixContainerSetting(
       margin: EdgeInsetsSetting.fromJson(json['margin']),
-      padding: EdgeInsetsSetting.fromJson(json['margin']),
+      padding: EdgeInsetsSetting.fromJson(json['padding']),
       radius: BorderRadiusSetting.fromJson(json['radius']),
       color: json['color'],
-      width: json['width'],
-      height: json['height'],
       shape: BoxShape.values.firstWhere((el) => el.name == json['shape'],
           orElse: () => BoxShape.rectangle),
       backgroundImage: json['backgroundImage'],
+      alignment: json['alignment'] != null
+          ? FTrixAlignmentSetting.fromJson(json['alignment'])
+          : null,
     );
   }
 }

@@ -39,7 +39,15 @@ class Main extends StatelessWidget {
         popupMenuTheme: PopupMenuThemeData(
           color: AppColors.primary,
           textStyle: TextStyle(color: Colors.white),
-        )
+        ),
+        switchTheme: SwitchThemeData(
+          thumbColor: WidgetStatePropertyAll(Colors.white),
+          trackColor: WidgetStatePropertyAll(AppColors.buttonColor),
+        ),
+        listTileTheme: ListTileThemeData(
+          textColor: Colors.white,
+          iconColor: Colors.white,
+        ),
       ),
     );
   }

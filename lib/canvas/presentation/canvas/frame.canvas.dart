@@ -13,50 +13,52 @@ class FrameCanvas extends GetView<FCanvasController> {
     return Obx(() {
       return Stack(
         children: [
-          SingleChildScrollView(
-            child: InteractiveViewer(
+          InteractiveViewer(
+            child: Container(
               alignment: Alignment.center,
-              child: Container(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 390,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: controller.handleSelectCanvas,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 20)
-                                  .copyWith(left: 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text("Page"),
-                                ],
+              child: SingleChildScrollView(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 390,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: controller.handleSelectCanvas,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 20)
+                                    .copyWith(left: 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text("Page"),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Theme(
-                        data: ThemeData(
-                            textTheme: TextTheme(
-                          bodyLarge: TextStyle(color: Colors.black),
-                          bodyMedium: TextStyle(color: Colors.black),
-                          bodySmall: TextStyle(color: Colors.black),
-                        )),
-                        child: SizedBox(
-                          key: controller.frameKey,
-                          height: 840,
-                          width: 390,
-                          child: controller.canvas.value.render(),
+                          ],
                         ),
-                      )
-                    ],
+                        Theme(
+                          data: ThemeData(
+                              textTheme: TextTheme(
+                            bodyLarge: TextStyle(color: Colors.black),
+                            bodyMedium: TextStyle(color: Colors.black),
+                            bodySmall: TextStyle(color: Colors.black),
+                          )),
+                          child: SizedBox(
+                            key: controller.frameKey,
+                            height: 840,
+                            width: 390,
+                            child: controller.canvas.value.render(),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

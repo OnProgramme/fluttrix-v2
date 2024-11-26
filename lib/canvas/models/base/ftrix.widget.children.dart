@@ -5,6 +5,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
+import 'package:fluttrix/canvas/models/builder/ftrix.widget.json.builder.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.drop.widget.event.data.dart';
@@ -108,11 +109,6 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
     }
   }
 
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    super.loadFromJson(json);
-    debugPrint("implement");
-  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -4,6 +4,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.drag.target.dart';
+import 'package:fluttrix/canvas/models/widgets/components/ftrix.resizable.widget.component.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,10 @@ class FTrixBaseComponent extends StatefulWidget {
     this.onLongPress,
     this.onLongPressEnd,
     this.disableConstraints = false,
+    this.enableResizedChild = false,
+    this.enableHorizontalResize = true,
+    this.enableVerticalResize = true,
+    this.onResized,
   });
 
   final FTrixWidgetSetting setting;
@@ -36,6 +41,11 @@ class FTrixBaseComponent extends StatefulWidget {
   final VoidCallback? onLongPress;
   final ValueSetter<LongPressEndDetails>? onLongPressEnd;
   final bool disableConstraints;
+  final bool enableResizedChild;
+  final bool enableHorizontalResize;
+  final bool enableVerticalResize;
+  final ValueSetter<Size>? onResized;
+
   @override
   State<FTrixBaseComponent> createState() => _FTrixBaseComponentState();
 }
@@ -43,7 +53,6 @@ class FTrixBaseComponent extends StatefulWidget {
 class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
   bool isHovered = false;
   DropPosition dropPosition = DropPosition.NONE;
-  OverlayEntry? _overlayEntry;
 
   bool get isActive => widget.isSelected || isHovered;
 
@@ -65,63 +74,6 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
     return DropPosition.INSIDE;
   }
 
-  void _showOverlay() {
-    _removeOverlay();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      final renderBox =
-          _childKey.currentContext!.findRenderObject() as RenderBox;
-      final size = renderBox.size;
-      final offset = renderBox.localToGlobal(Offset.zero);
-
-      _overlayEntry = OverlayEntry(
-        builder: (context) => Positioned(
-          left: offset.dx,
-          top: offset.dy,
-          width: size.width,
-          height: size.height,
-          child: IgnorePointer(
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned(
-                  top: -23,
-                  left: 0,
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 100),
-                    decoration: BoxDecoration(
-                      color: Colors.orange,
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 1.5),
-                    child: Text(
-                      widget.widget.type.name.toLowerCase().capitalizeFirst!,
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.orange, width: 2),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-      Overlay.of(context).insert(_overlayEntry!);
-    });
-  }
-
-  void _removeOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -129,21 +81,25 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final canvasWidth = Get.find<FCanvasController>().canvasSize.value.width;
+    final canvasWidth = Get
+        .find<FCanvasController>()
+        .canvasSize
+        .value
+        .width;
     final boxConstraint = canvasWidth > 0
         ? BoxConstraints(
-            maxWidth: canvasWidth,
-          )
+      maxWidth: canvasWidth,
+    )
         : null;
     final child = ClipRRect(
       borderRadius: widget.setting.radiusValue,
       child: widget.disablePadding
           ? widget.child
           : Container(
-              constraints: boxConstraint,
-              padding: widget.setting.paddingValue,
-              child: widget.child,
-            ),
+        constraints: boxConstraint,
+        padding: widget.setting.paddingValue,
+        child: widget.child,
+      ),
     );
     return FTrixDragTarget(
       isExpended: true,
@@ -166,46 +122,58 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
                 ? null
                 : (widget.constraints ?? boxConstraint),
             margin: widget.setting.marginValue,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                widget.isDraggable
-                    ? Draggable<IWidget>(
-                        data: widget.widget,
-                        feedback: child,
-                        feedbackOffset: const Offset(0, -25),
-                        childWhenDragging: Opacity(opacity: 0.5, child: child),
-                        child: child,
-                      )
-                    : child,
-                if (isActive) ...[
-                  Positioned.fill(
-                    child: IgnorePointer(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.orange, width: 2),
+            child: FTrixResizableWidgetComponent(
+              enableHorizontalResize: widget.enableHorizontalResize,
+              enableVerticalResize: widget.enableVerticalResize,
+              onResized: (size){
+                widget.setting.width = size.width;
+                widget.setting.height = size.height;
+                widget.onResized?.call(size);
+              },
+              disabled: !widget.enableResizedChild,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  widget.isDraggable
+                      ? Draggable<IWidget>(
+                    data: widget.widget,
+                    feedback: child,
+                    feedbackOffset: const Offset(0, -25),
+                    childWhenDragging: Opacity(opacity: 0.5, child: child),
+                    child: child,
+                  )
+                      : child,
+                  if (isActive) ...[
+                    Positioned.fill(
+                      child: IgnorePointer(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.orange, width: 2),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: -23,
-                    left: 0,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 100),
-                      decoration: const BoxDecoration(
-                        color: Colors.orange,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 1.5),
-                      child: Text(
-                        widget.widget.type.name.toLowerCase().capitalizeFirst!,
-                        style: const TextStyle(color: Colors.white),
+                    Positioned(
+                      top: -23,
+                      left: 0,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 100),
+                        decoration: const BoxDecoration(
+                          color: Colors.orange,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 1.5),
+                        child: Text(
+                          widget.widget.type.name
+                              .toLowerCase()
+                              .capitalizeFirst!,
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),

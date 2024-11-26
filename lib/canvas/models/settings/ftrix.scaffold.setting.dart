@@ -20,7 +20,7 @@ class FTrixScaffoldSetting extends FTrixWidgetSetting {
     backgroundColor = json['backgroundColor'] != null
         ? parseIntegerColor(json['backgroundColor'])
         : Colors.white;
-    showAppbar = json['showAppbar'] ?? true;
+    showAppbar = json['showAppbar'] ?? false;
     showBottomNavBar = json['showBottomNavBar'] ?? false;
   }
 

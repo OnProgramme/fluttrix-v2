@@ -9,10 +9,6 @@ import 'package:fluttrix/canvas/models/events/ftrix.update.widget.event.data.dar
 import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';
 import 'package:uuid/uuid.dart';
 
-typedef OnWidgetUpdate = void Function(FTrixWidgetEvent event);
-typedef OnWidgetUpdateCallback = void Function(
-    FTrixWidgetEventType type, IWidget widget);
-
 abstract class IWidget {
   late String id;
   late String? parentId;
@@ -68,12 +64,7 @@ abstract class IWidget {
     };
   }
 
-  void loadFromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    parentId = json["parentId"];
-    type =
-        WidgetType.values.firstWhere((element) => element.name == json["type"]);
-  }
+  void loadFromJson(Map<String, dynamic> json);
 
   void wrapParent(WidgetType type) {
     if (parentId == null) return;

@@ -4,13 +4,19 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.component.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
 
 class FTrixScaffold extends FTrixWidgetWithChild {
-  FTrixScaffold(
-      {String? id, super.child, super.parentId, FTrixScaffoldSetting? setting})
-      : super(
+  FTrixAppBar? appBar;
+  FTrixScaffold({
+    String? id,
+    super.child,
+    super.parentId,
+    this.appBar,
+    FTrixScaffoldSetting? setting,
+  }) : super(
             type: WidgetType.SCAFFOLD,
             setting: setting ?? FTrixScaffoldSetting.zero);
 
@@ -19,9 +25,6 @@ class FTrixScaffold extends FTrixWidgetWithChild {
     if (child != null) return;
     super.handleDropWidget(event);
   }
-
-  @override
-  void loadFromJson(Map<String, dynamic> json) {}
 
   @override
   IWidget clone([String? parentId]) {
@@ -37,7 +40,7 @@ class FTrixScaffold extends FTrixWidgetWithChild {
       isSelected: isWidgetSelected,
       widget: this,
       select: select,
-      appBar: FTrixAppBar(),
+      appBar: setting.showAppbar ? FTrixAppBar() : null,
       child: Container(
         decoration: BoxDecoration(
           color: setting.backgroundColor,
@@ -53,7 +56,12 @@ class FTrixScaffold extends FTrixWidgetWithChild {
   Map<String, dynamic> toJson() {
     return super.toJson()
       ..addAll({
-        "body": child?.toJson(),
+        "appBar": appBar?.toJson(),
       });
+  }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {
+    setting = FTrixScaffoldSetting.fromJson(normalizeJson(json['setting']));
   }
 }

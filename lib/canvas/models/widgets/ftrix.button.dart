@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../base/i.widget.dart';
@@ -17,11 +18,6 @@ class FTrixButton extends FTrixDroppableWidgetWithoutChild {
             type: WidgetType.BUTTON,
             setting: setting ?? FTrixButtonSetting.zero);
 
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    type = WidgetType.BUTTON;
-    text = json["text"];
-  }
 
   @override
   IWidget clone([String? parentId]) {
@@ -71,5 +67,11 @@ class FTrixButton extends FTrixDroppableWidgetWithoutChild {
       ..addAll({
         "text": text,
       });
+  }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {
+    text = json['text'];
+    setting = FTrixButtonSetting.fromJson(normalizeJson(json['setting']));
   }
 }

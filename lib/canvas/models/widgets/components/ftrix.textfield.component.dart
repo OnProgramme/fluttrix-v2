@@ -43,16 +43,9 @@ class _FtrixTextFieldComponentState extends State<FtrixTextFieldComponent> {
       widget: widget.widget,
       setting: widget.setting,
       onDrop: widget.onDrop,
-      // onLongPress: () {
-      //   setState(() {
-      //     isLongPressed = true;
-      //   });
-      // },
-      // onLongPressEnd: (details) {
-      //   setState(() {
-      //     isLongPressed = false;
-      //   });
-      // },
+      enableResizedChild: true,
+      enableVerticalResize: false,
+      enableHorizontalResize: widget.isSelected,
       child: TextFormField(
         onTap: widget.onTap,
         enabled: !isLongPressed,

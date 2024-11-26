@@ -14,7 +14,7 @@ class FTrixScaffoldComponent extends StatelessWidget {
     required this.setting,
     this.isSelected = false,
     required this.widget,
-    required this.appBar,
+    this.appBar,
   });
   final ValueSetter<DroppedWidgetEvent> onDrop;
   final VoidCallback? select;
@@ -22,7 +22,7 @@ class FTrixScaffoldComponent extends StatelessWidget {
   final FTrixScaffoldSetting setting;
   final bool isSelected;
   final IWidget widget;
-  final FTrixAppBar appBar;
+  final FTrixAppBar? appBar;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class FTrixScaffoldComponent extends StatelessWidget {
       backgroundColor: setting.backgroundColor,
       body: Column(
         children: [
-          if (setting.showAppbar) appBar.render(),
+          if (setting.showAppbar) appBar?.render() ?? SizedBox(),
           Expanded(
             child: FTrixBaseComponent(
               widget: widget,

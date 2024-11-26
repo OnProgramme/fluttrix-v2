@@ -19,6 +19,8 @@ class FTrixTextFieldSetting extends FTrixWidgetSetting {
       : super.fromJson(json) {
     isPassword = json["isPassword"];
     isUnderlinedBorder = json["isUnderlinedBorder"];
+    label = json["label"];
+    hint = json["hint"];
   }
 
   static FTrixTextFieldSetting get zero => FTrixTextFieldSetting(
@@ -29,10 +31,13 @@ class FTrixTextFieldSetting extends FTrixWidgetSetting {
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      "isPassword": isPassword,
-      "isUnderlinedBorder": isUnderlinedBorder,
-      ...super.toJson(),
-    }..removeWhere((key, value) => value == null);
+    return super.toJson()
+      ..addAll({
+        "isPassword": isPassword,
+        "isUnderlinedBorder": isUnderlinedBorder,
+        "label": label,
+        "hint": hint,
+      })
+      ..removeWhere((key, value) => value == null);
   }
 }

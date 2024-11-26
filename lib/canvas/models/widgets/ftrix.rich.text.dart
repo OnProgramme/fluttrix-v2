@@ -3,6 +3,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.rich.text.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../enums/widget.type.dart';
@@ -30,12 +31,6 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
             ..color = Colors.blue,
           index: 1),
     ];
-  }
-
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    text = json['text'];
-    maxLines = json['maxLines'];
   }
 
   @override
@@ -96,5 +91,11 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
       ..addAll({
         "text": text.map((e) => e.toJson()).toList(),
       });
+  }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {
+    text = List<FTrixRichTextSetting>.from(json["text"].map((x) => FTrixRichTextSetting.fromJson(normalizeJson(x))));
+    setting = FTrixTextSetting.fromJson(normalizeJson(json['setting']));
   }
 }

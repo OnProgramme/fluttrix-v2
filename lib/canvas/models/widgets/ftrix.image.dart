@@ -4,6 +4,7 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/utils/generate.random.image.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.image.component.dart';
 
 class FTrixImage extends FTrixDroppableWidgetWithoutChild {
@@ -16,12 +17,6 @@ class FTrixImage extends FTrixDroppableWidgetWithoutChild {
             type: WidgetType.IMAGE,
             setting: setting ?? FTrixImageSetting.zero) {
     src = src.isEmpty ? generateRandomImage() : src;
-  }
-
-  @override
-  void loadFromJson(Map<String, dynamic> json) {
-    type = WidgetType.IMAGE;
-    src = json["src"];
   }
 
   @override
@@ -38,7 +33,6 @@ class FTrixImage extends FTrixDroppableWidgetWithoutChild {
     return FtrixImageComponent(
       onDrop: handleDropWidget,
       widget: this,
-      src: src,
       setting: setting as FTrixImageSetting,
       isSelected: isWidgetSelected,
       onTap: select,
@@ -51,5 +45,10 @@ class FTrixImage extends FTrixDroppableWidgetWithoutChild {
       ..addAll({
         "src": src,
       });
+  }
+
+  @override
+  void loadFromJson(Map<String, dynamic> json) {
+    setting = FTrixImageSetting.fromJson(normalizeJson(json['setting']));
   }
 }

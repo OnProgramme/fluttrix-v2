@@ -10,5 +10,6 @@ class AppColors {
   static const Color focusBorder = Color(0xFF112480);
   static const Color buttonColor = Color(0xFF9850cf);
   static const Color grey = Colors.grey;
+  static const Color selectColor = Colors.orange;
   static const Color white = Color(0xFFFFFFFF);
 }
