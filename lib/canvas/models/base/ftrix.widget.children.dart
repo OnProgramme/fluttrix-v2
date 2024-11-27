@@ -71,7 +71,7 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
     if (parent is FTrixWidgetWithChild) {
       parent.setChild(child);
     }
-    children[indexedChild] = child;
+    children[indexedChild] = parent;
     update();
   }
 

@@ -47,16 +47,6 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
     update();
   }
 
-  @override
-  void wrapParent(WidgetType type) {
-    if (parentId == null) return;
-    FTrixStream.instance.addToStreamEvent(FTrixWrapParentEventData(
-      currentParentId: parentId!,
-      widgetId: id,
-      parentType: type,
-    ));
-  }
-
   void _handleListenWhenChildWrapped(FTrixWrapParentEventData event) {
     if (event.currentParentId != id || child?.id != event.widgetId) return;
     final parent = FTrixWidgetBuilder.build(event.parentType, id);

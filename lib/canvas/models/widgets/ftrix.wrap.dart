@@ -3,6 +3,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.wrap.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:get/get.dart';
@@ -12,11 +13,15 @@ class FTrixWrap extends FTrixWidgetWithChildren {
       : super(type: WidgetType.WRAP, setting: setting ?? FTrixWrapSetting.zero);
 
   @override
-  void loadFromJson(Map<String, dynamic> json) {}
+  void loadFromJson(Map<String, dynamic> json) {
+    setting = FTrixWrapSetting.fromJson(normalizeJson(json["setting"]));
+  }
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixWrap(
+      parentId: parentId?? this.parentId,
+    );
   }
 
   @override

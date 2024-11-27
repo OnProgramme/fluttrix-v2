@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
@@ -73,5 +75,10 @@ abstract class IWidget {
       widgetId: id,
       currentParentId: parentId!,
     ));
+  }
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }
