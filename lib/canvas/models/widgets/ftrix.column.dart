@@ -19,7 +19,13 @@ class FTrixColumn extends FTrixWidgetWithChildren {
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    final cloneWidget = FTrixColumn(
+      parentId: parentId ?? this.parentId,
+      setting: FTrixColumnRowSetting.fromJson(setting.toJson()),
+    );
+    cloneWidget.children =
+        children.map((el) => el.clone(cloneWidget.id)).toList();
+    return cloneWidget;
   }
 
   @override

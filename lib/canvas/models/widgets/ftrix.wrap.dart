@@ -19,9 +19,13 @@ class FTrixWrap extends FTrixWidgetWithChildren {
 
   @override
   IWidget clone([String? parentId]) {
-    return FTrixWrap(
-      parentId: parentId?? this.parentId,
+    final cloneWidget = FTrixWrap(
+      parentId: parentId ?? this.parentId,
+      setting: FTrixWrapSetting.fromJson(setting.toJson()),
     );
+    cloneWidget.children =
+        children.map((el) => el.clone(cloneWidget.id)).toList();
+    return cloneWidget;
   }
 
   @override

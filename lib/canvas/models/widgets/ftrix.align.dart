@@ -22,11 +22,11 @@ class FTrixAlign extends FTrixWidgetWithChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return FTrixAlign(
+    final cloneWidget = FTrixAlign(
       setting: FTrixAlignSetting.fromJson(setting.toJson()),
-      parentId: parentId,
-      child: child,
+      parentId: parentId ?? this.parentId,
     );
+    return cloneWidget..child = child?.clone(cloneWidget.id);
   }
 
   @override

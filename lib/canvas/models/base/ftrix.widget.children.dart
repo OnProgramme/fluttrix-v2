@@ -109,7 +109,6 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
     }
   }
 
-
   @override
   Map<String, dynamic> toJson() {
     return super.toJson()..addAll({

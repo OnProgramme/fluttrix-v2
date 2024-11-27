@@ -10,10 +10,7 @@ import '../enums/widget.type.dart';
 
 class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
   late List<FTrixRichTextSetting> text;
-  int? maxLines;
-
   FTrixRichText({
-    this.maxLines,
     super.parentId,
     FTrixTextSetting? setting,
   }) : super(
@@ -35,7 +32,10 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixRichText(
+      setting: FTrixTextSetting.fromJson(setting.toJson()),
+      parentId: parentId ?? this.parentId,
+    )..text = text;
   }
 
   void addText() {
@@ -95,7 +95,8 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    text = List<FTrixRichTextSetting>.from(json["text"].map((x) => FTrixRichTextSetting.fromJson(normalizeJson(x))));
+    text = List<FTrixRichTextSetting>.from(json["text"]
+        .map((x) => FTrixRichTextSetting.fromJson(normalizeJson(x))));
     setting = FTrixTextSetting.fromJson(normalizeJson(json['setting']));
   }
 }

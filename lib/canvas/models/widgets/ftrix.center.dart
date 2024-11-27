@@ -23,8 +23,8 @@ class FTrixCenter extends FTrixWidgetWithChild {
   @override
   IWidget clone([String? parentId]) {
     return FTrixCenter(
-      parentId: parentId,
-      child: child,
+      parentId: parentId ?? this.parentId,
+      child: child?.clone(),
     );
   }
 

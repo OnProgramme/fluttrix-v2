@@ -8,7 +8,6 @@ import '../enums/widget.type.dart';
 
 class FTrixAppBar extends FTrixWidgetWithChild {
   String text;
-  TextStyle style = TextStyle();
 
   FTrixAppBar({this.text = "Fluttrix", super.parentId})
       : super(type: WidgetType.APPBAR, setting: FTrixWidgetSetting.zero);
@@ -20,7 +19,7 @@ class FTrixAppBar extends FTrixWidgetWithChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixAppBar();
   }
 
   @override

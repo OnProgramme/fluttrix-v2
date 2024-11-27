@@ -8,25 +8,26 @@ import '../enums/widget.type.dart';
 
 class FTrixText extends FTrixDroppableWidgetWithoutChild {
   String text;
-  int? maxLines;
 
   FTrixText({
     this.text = "Hello Word",
-    this.maxLines, super.parentId,
+    super.parentId,
     FTrixTextSetting? setting,
-  }):super(type: WidgetType.TEXT, setting: setting ?? FTrixTextSetting.zero);
+  }) : super(type: WidgetType.TEXT, setting: setting ?? FTrixTextSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
     text = json['text'];
-    maxLines = json['maxLines'];
   }
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixText(
+      parentId: parentId ?? this.parentId,
+      setting: FTrixTextSetting.fromJson(setting.toJson()),
+      text: text,
+    );
   }
-
 
   @override
   Widget render() {
@@ -44,17 +45,17 @@ class FTrixText extends FTrixDroppableWidgetWithoutChild {
           color: setting.color,
           fontWeight: setting.fontWeightValue,
         ),
-        maxLines: maxLines,
+        maxLines: setting.maxLines,
         textAlign: setting.textAlign,
       ),
     );
-
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({
-      "text": text,
-    });
+    return super.toJson()
+      ..addAll({
+        "text": text,
+      });
   }
 }

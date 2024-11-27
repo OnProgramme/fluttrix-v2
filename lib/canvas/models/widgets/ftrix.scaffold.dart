@@ -9,9 +9,8 @@ import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.compone
 import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
 
 class FTrixScaffold extends FTrixWidgetWithChild {
-  FTrixAppBar? appBar;
+  late FTrixAppBar? appBar;
   FTrixScaffold({
-    String? id,
     super.child,
     super.parentId,
     this.appBar,
@@ -28,7 +27,12 @@ class FTrixScaffold extends FTrixWidgetWithChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixScaffold(
+      setting: FTrixScaffoldSetting.fromJson(setting.toJson()),
+      parentId: parentId ?? this.parentId,
+      child: child?.clone(),
+      appBar: appBar != null ? (appBar!.clone() as FTrixAppBar) : null,
+    );
   }
 
   @override

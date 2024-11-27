@@ -16,7 +16,10 @@ class FTrixTextField extends FTrixDroppableWidgetWithoutChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return this;
+    return FTrixTextField(
+      setting: FTrixTextFieldSetting.fromJson(setting.toJson()),
+      parentId: parentId ?? this.parentId,
+    );
   }
 
   @override

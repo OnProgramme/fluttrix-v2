@@ -7,7 +7,6 @@ import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixContainer extends FTrixWidgetWithChild {
-
   FTrixContainer({
     super.child,
     super.parentId,
@@ -19,11 +18,11 @@ class FTrixContainer extends FTrixWidgetWithChild {
 
   @override
   IWidget clone([String? parentId]) {
-    return FTrixContainer(
+    final cloneWidget = FTrixContainer(
       setting: FTrixContainerSetting.fromJson(setting.toJson()),
-      parentId: parentId,
-      child: child,
+      parentId: parentId ?? this.parentId,
     );
+    return cloneWidget..child = child?.clone(cloneWidget.id);
   }
 
   @override
