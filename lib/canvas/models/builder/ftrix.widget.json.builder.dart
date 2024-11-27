@@ -8,6 +8,8 @@ class FTrixWidgetJsonBuilder {
   FTrixWidgetJsonBuilder._();
   static IWidget fromJson(Map<String, dynamic> json) {
     final type = WidgetType.values.firstWhere((el) => el.name == json['type']);
-    return FTrixWidgetBuilder.build(type, json["parentId"])..loadFromJson(json);
+    return FTrixWidgetBuilder.build(type, json["parentId"])
+      ..id = json['id']
+      ..loadFromJson(json);
   }
 }

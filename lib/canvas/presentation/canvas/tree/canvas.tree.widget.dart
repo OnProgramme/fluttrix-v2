@@ -133,6 +133,7 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                     return [
                       if (widget.parentId != null)
                         PopupMenuItem(
+                          value: 0,
                           child: Row(
                             children: [
                               Icon(LucideIcons.box),
@@ -148,6 +149,7 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                         ),
                       if(widget is FTrixWidgetWithChildren)...[
                         PopupMenuItem(
+                          value: 1,
                           child: Row(
                             children: [
                               Icon(LucideIcons.plus),
