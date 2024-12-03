@@ -83,6 +83,7 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
   void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {
     if (event.deleteWidget.parentId != id) return;
     children.removeWhere((w) => w.id == event.deleteWidget.id);
+    unselect();
   }
 
   void handleChangedPositionOfWidgetDropped(FTrixDropWidgetEventData event) {
@@ -99,9 +100,10 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
         children[dropWidgetIndex] = children[insertWidgetIndex];
         children[insertWidgetIndex] = temp;
       } else {
+        event.dropWidget.delete();
         insertElementOnTheList(
             list: children,
-            element: event.dropWidget,
+            element: event.dropWidget.clone(id),
             index: dropWidgetIndex,
             position: event.dropPosition);
       }

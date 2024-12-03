@@ -3,7 +3,7 @@ import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 
 class InputDropdownItem<T> {
-  String  label;
+  String label;
   T value;
   InputDropdownItem(this.label, this.value);
 
@@ -21,6 +21,7 @@ class InputDropdown<T> extends StatelessWidget {
     this.hint,
     this.label,
     this.value,
+    this.height = 35,
     // this.validators,
   });
 
@@ -30,6 +31,7 @@ class InputDropdown<T> extends StatelessWidget {
   final String? label;
   // final List<ValidatorType>? validators;
   final T? value;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class InputDropdown<T> extends StatelessWidget {
           ),
         ],
         SizedBox(
-          height: 35,
+          height: height,
           child: DropdownButtonFormField<T>(
             isExpanded: true,
             items: items.map((item) {
@@ -57,8 +59,8 @@ class InputDropdown<T> extends StatelessWidget {
                 child: Text(
                   item.label,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: AppColors.white,
-                  ),
+                        color: AppColors.white,
+                      ),
                 ),
               );
             }).toList(),
@@ -67,7 +69,12 @@ class InputDropdown<T> extends StatelessWidget {
               if (value == null) return;
               onChanged.call(value);
             },
-            hint: hint == null ? null : Text(hint!, style: TextStyle(color: AppColors.white),),
+            hint: hint == null
+                ? null
+                : Text(
+                    hint!,
+                    style: TextStyle(color: AppColors.white),
+                  ),
             style: TextStyle(
               color: AppColors.white,
             ),
@@ -78,16 +85,16 @@ class InputDropdown<T> extends StatelessWidget {
                   child: Text(
                     item.label,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: AppColors.white,
-                    ),
+                          color: AppColors.white,
+                        ),
                   ),
                 );
               }).toList();
             },
             dropdownColor: AppColors.primary,
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.keyboard_arrow_down),
-              hintStyle: TextStyle(color: AppColors.grey),
+                suffixIcon: Icon(Icons.keyboard_arrow_down),
+                hintStyle: TextStyle(color: AppColors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
@@ -106,8 +113,7 @@ class InputDropdown<T> extends StatelessWidget {
                     color: AppColors.grey,
                   ),
                 ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 15)
-            ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 15)),
             icon: const SizedBox(
               width: 0,
             ),

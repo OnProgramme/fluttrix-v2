@@ -6,7 +6,6 @@ void insertElementOnTheList<T>({
   required int index,
   required DropPosition position,
 }) {
-  print('index: $index list: ${list.length} ${index < 0 || index >= list.length}');
   if (index < 0 || index >= list.length) {
     return;
   }

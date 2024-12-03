@@ -11,7 +11,8 @@ class FTextField extends StatelessWidget {
     this.controller,
     this.hint,
     this.maxLines = 1,
-    this.minLines = 1
+    this.minLines = 1,
+    this.prefixIcon,
   });
   final String? label;
   final String? hint;
@@ -20,6 +21,7 @@ class FTextField extends StatelessWidget {
   final TextEditingController? controller;
   final int minLines;
   final int maxLines;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +47,12 @@ class FTextField extends StatelessWidget {
             fontSize: 14,
           ),
           decoration: InputDecoration(
+            prefixIcon: prefixIcon,
             hintText: hint,
             isDense: true,
+            hintStyle: TextStyle(
+              color: AppColors.grey,
+            ),
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

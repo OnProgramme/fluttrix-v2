@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
@@ -36,6 +37,9 @@ abstract class IWidget {
       update();
     }
   }
+
+
+  void handleDropWidget(DroppedWidgetEvent event);
 
   void _setEventData(FTrixEventData event) {
     FTrixStream.instance.addToStreamEvent(event);

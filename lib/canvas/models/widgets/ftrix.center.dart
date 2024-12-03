@@ -30,7 +30,6 @@ class FTrixCenter extends FTrixWidgetWithChild {
 
   @override
   Widget render() {
-    final setting = this.setting as FTrixContainerSetting;
     return FTrixBaseComponent(
       onDrop: handleDropWidget,
       widget: this,

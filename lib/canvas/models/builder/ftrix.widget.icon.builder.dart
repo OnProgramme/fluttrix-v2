@@ -14,6 +14,8 @@ class FTrixWidgetIconBuilder {
       WidgetType.SCAFFOLD: LucideIcons.layoutTemplate,
       WidgetType.INPUT: LucideIcons.formInput,
       WidgetType.BUTTON: LucideIcons.mousePointer2,
+      WidgetType.ICON_BUTTON: LucideIcons.mousePointer,
+      WidgetType.ICON: LucideIcons.lightbulb,
       WidgetType.TEXT: LucideIcons.text,
       WidgetType.RICH_TEXT: Icons.text_fields,
       WidgetType.APPBAR: LucideIcons.barChart2,

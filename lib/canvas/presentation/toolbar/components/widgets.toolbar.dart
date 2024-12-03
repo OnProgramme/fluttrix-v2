@@ -3,6 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/toolbar/ftrix.toolbar.item.dart';
+import 'package:fluttrix/canvas/presentation/icons/choose.icon.modal.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/components/toolbar.item.component.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
@@ -50,6 +51,16 @@ final widgets = [
     title: "Button",
     icon: FTrixWidgetIconBuilder.build(WidgetType.BUTTON),
     type: WidgetType.BUTTON,
+  ),
+  FTrixToolbarItem(
+    title: "IconButton",
+    icon: FTrixWidgetIconBuilder.build(WidgetType.ICON_BUTTON),
+    type: WidgetType.ICON_BUTTON,
+  ),
+  FTrixToolbarItem(
+    title: "Icon",
+    icon: FTrixWidgetIconBuilder.build(WidgetType.ICON),
+    type: WidgetType.ICON,
   ),
   FTrixToolbarItem(
     title: "Image",
@@ -100,6 +111,10 @@ class WidgetsToolBar extends StatelessWidget {
                   )
                   .toList(),
             ),
+
+            IconButton(onPressed: (){
+              Get.dialog(ChooseIconModal());
+            }, icon: Icon(IconData(60582, fontFamily: 'materialIcons')))
           ],
         ),
       ),

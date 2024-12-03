@@ -49,7 +49,7 @@ class _FtrixTextFieldComponentState extends State<FtrixTextFieldComponent> {
       child: TextFormField(
         onTap: widget.onTap,
         enabled: !isLongPressed,
-        obscureText: setting.isPassword,
+        obscureText: obscureText,
         decoration: InputDecoration(
           labelText: setting.label,
           hintText: setting.hint,

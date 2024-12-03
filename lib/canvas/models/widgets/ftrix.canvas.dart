@@ -31,16 +31,11 @@ class FTrixCanvas implements IFTrixCanvas {
       _loadChildRecursively(_scaffold, json["child"]);
     } else if (json.containsKey("children")) {
       _loadChildrenRecursively(
-          _scaffold,
-          List<Map<String, dynamic>>.from(json["children"])
-      );
+          _scaffold, List<Map<String, dynamic>>.from(json["children"]));
     }
   }
 
-  void _loadChildRecursively(
-      IWidget parent,
-      Map<String, dynamic> childJson
-      ) {
+  void _loadChildRecursively(IWidget parent, Map<String, dynamic> childJson) {
     IWidget child = FTrixWidgetJsonBuilder.fromJson(childJson);
     if (parent is FTrixWidgetWithChild) {
       parent.child = child;
@@ -49,16 +44,14 @@ class FTrixCanvas implements IFTrixCanvas {
       _loadChildRecursively(child, childJson["child"]);
     } else if (childJson.containsKey("children")) {
       _loadChildrenRecursively(
-          child,
-          List<Map<String, dynamic>>.from(childJson["children"])
-      );
+          child, List<Map<String, dynamic>>.from(childJson["children"]));
     }
   }
 
   void _loadChildrenRecursively(
-      IWidget parent,
-      List<Map<String, dynamic>> childrenJson,
-      ) {
+    IWidget parent,
+    List<Map<String, dynamic>> childrenJson,
+  ) {
     if (parent is FTrixWidgetWithChildren) {
       parent.children = childrenJson.map((childJson) {
         IWidget child = FTrixWidgetJsonBuilder.fromJson(childJson);
@@ -66,9 +59,7 @@ class FTrixCanvas implements IFTrixCanvas {
           _loadChildRecursively(child, childJson["child"]);
         } else if (childJson.containsKey("children")) {
           _loadChildrenRecursively(
-              child,
-              List<Map<String, dynamic>>.from(childJson["children"])
-          );
+              child, List<Map<String, dynamic>>.from(childJson["children"]));
         }
 
         return child;
@@ -83,7 +74,9 @@ class FTrixCanvas implements IFTrixCanvas {
 
   @override
   Widget render() {
-    return _scaffold.render();
+    return _CanvasRender(
+      widget: _scaffold,
+    );
   }
 
   @override
@@ -128,5 +121,28 @@ class FTrixCanvas implements IFTrixCanvas {
   @override
   void select() {
     _scaffold.select();
+  }
+}
+
+class _CanvasRender extends StatefulWidget {
+  const _CanvasRender({super.key, required this.widget});
+  final IWidget widget;
+
+  @override
+  State<_CanvasRender> createState() => _CanvasRenderState();
+}
+
+class _CanvasRenderState extends State<_CanvasRender> {
+  @override
+  void initState() {
+    super.initState();
+    FTrixStream.instance.updateCanvas.listen((e) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.widget.render();
   }
 }

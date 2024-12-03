@@ -8,6 +8,7 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.listview.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.rich.text.dart';
@@ -27,6 +28,7 @@ import 'package:fluttrix/canvas/presentation/toolbar/settings/components/rich.te
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/scaffold.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/text.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/textfield.toolbar.setting.component.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/icon.button.toolbar.setting.component.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 
@@ -132,6 +134,9 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
                         widget: controller.selectedWidget.value
                             as FTrixWidgetWithChildren)
                   ],
+                  if(controller.selectedWidget.value is FTrixIconButton)...[
+                    IconButtonToolBarSettingComponent(widget: controller.selectedWidget.value as FTrixIconButton)
+                  ]
                 ],
               ),
             ),

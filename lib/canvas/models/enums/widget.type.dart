@@ -10,6 +10,8 @@ enum WidgetType{
   INPUT,
   BUTTON,
   TEXT,
+  ICON_BUTTON,
+  ICON,
   RICH_TEXT,
   APPBAR,
   CENTER,

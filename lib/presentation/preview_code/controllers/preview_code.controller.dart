@@ -9,7 +9,7 @@ class PreviewCodeController extends GetxController {
 
 
 
-  Map<String, dynamic> get canvasJson => canvasController.canvas.value.toJson();
+  Map<String, dynamic> get canvasJson => canvasController.canvas.toJson();
 
-  List<FTrixBaseFile> get files => canvasController.canvas.value.files;
+  List<FTrixBaseFile> get files => canvasController.canvas.files;
 }

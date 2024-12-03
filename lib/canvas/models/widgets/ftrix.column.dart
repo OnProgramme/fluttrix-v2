@@ -42,7 +42,7 @@ class FTrixColumn extends FTrixWidgetWithChildren {
       onTap: select,
       key: ValueKey(id),
       onDrop: (e) => handleDropWidget(e),
-      constraints: BoxConstraints(minHeight: 200, minWidth: canvasWidth),
+      constraints: children.isEmpty? BoxConstraints(minHeight: 200, minWidth: canvasWidth):null,
       child: Column(
         crossAxisAlignment: setting.crossAxisAlignment,
         mainAxisSize: setting.mainAxisSize,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
+import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
+import 'package:fluttrix/canvas/presentation/canvas/tree/wrap/wrap.component.list.modal.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -119,54 +122,75 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                     ],
                   ),
                 ),
-                if(widget.parentId != null)
-                PopupMenuButton(
-                  constraints: BoxConstraints(minHeight: 0, minWidth: 0),
-                  tooltip: "Plus d'options",
-                  icon: Icon(LucideIcons.moreVertical, size: 20,),
-                  onSelected: (i){
-                    if(i == 0){
-                      widget.wrapParent(WidgetType.CONTAINER);
-                    }
-                  },
-                  itemBuilder: (context) {
-                    return [
-                      if (widget.parentId != null)
-                        PopupMenuItem(
-                          value: 0,
-                          child: Row(
-                            children: [
-                              Icon(LucideIcons.box),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Ajouter un parent",
-                                style: TextStyle(color: AppColors.white),
-                              )
-                            ],
+                if (widget.parentId != null)
+                  PopupMenuButton(
+                    constraints: BoxConstraints(minHeight: 0, minWidth: 0),
+                    tooltip: "Plus d'options",
+                    icon: Icon(
+                      LucideIcons.moreVertical,
+                      size: 20,
+                    ),
+                    onSelected: (i) {
+                      Get.dialog(WrapComponentListModal(
+                        excludeWidgetType: i == 0
+                            ? [
+                                WidgetType.TEXT,
+                                WidgetType.RICH_TEXT,
+                                WidgetType.INPUT,
+                                WidgetType.IMAGE,
+                                WidgetType.BUTTON,
+                              ]
+                            : [],
+                      )).then((type) {
+                        if (type == null) return;
+                        if (i == 0) {
+                          widget.wrapParent(type);
+                        }
+                        if (i == 1 && widget is FTrixWidgetWithChildren) {
+                          widget.handleDropWidget(
+                              DroppedWidgetEvent(DropPosition.INSIDE, type));
+                          setState(() {});
+                        }
+                      });
+                    },
+                    itemBuilder: (context) {
+                      return [
+                        if (widget.parentId != null)
+                          PopupMenuItem(
+                            value: 0,
+                            child: Row(
+                              children: [
+                                Icon(LucideIcons.box),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Ajouter un parent",
+                                  style: TextStyle(color: AppColors.white),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      if(widget is FTrixWidgetWithChildren)...[
-                        PopupMenuItem(
-                          value: 1,
-                          child: Row(
-                            children: [
-                              Icon(LucideIcons.plus),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Ajouter un enfant",
-                                style: TextStyle(color: AppColors.white),
-                              )
-                            ],
+                        if (widget is FTrixWidgetWithChildren) ...[
+                          PopupMenuItem(
+                            value: 1,
+                            child: Row(
+                              children: [
+                                Icon(LucideIcons.plus),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Ajouter un enfant",
+                                  style: TextStyle(color: AppColors.white),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ]
-                    ];
-                  },
-                )
+                        ]
+                      ];
+                    },
+                  )
               ],
             ),
           ),

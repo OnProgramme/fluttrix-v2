@@ -5,6 +5,7 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
+import 'package:fluttrix/utils/app.colors.dart';
 
 class FtrixImageComponent extends StatefulWidget {
   const FtrixImageComponent({
@@ -37,7 +38,7 @@ class _FtrixImageComponentState extends State<FtrixImageComponent> {
         setting: widget.setting,
         onDrop: widget.onDrop,
         onResized: (value) {
-          if(mounted) {
+          if (mounted) {
             setState(() {});
           }
         },
@@ -46,18 +47,35 @@ class _FtrixImageComponentState extends State<FtrixImageComponent> {
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  colorFilter:
-                      ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           placeholder: (context, url) => Container(
             alignment: Alignment.center,
+            decoration: BoxDecoration(
+                border: Border.all(
+              color: AppColors.grey,
+            )),
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-          width: widget.setting.fullWidth ? double.infinity : widget.setting.width,
+          errorWidget: (context, url, error) => Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: AppColors.grey,
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.error),
+                  Text("Erreur de chargement de l'image")
+                ],
+              )),
+          width:
+              widget.setting.fullWidth ? double.infinity : widget.setting.width,
           height: widget.setting.height,
           fit: BoxFit.cover,
         )

@@ -9,9 +9,13 @@ class ToolbarItemComponent extends StatelessWidget {
     super.key,
     this.feedback,
     required this.item,
+    this.disableDraggable = false,
+    this.onTap,
   });
   final Widget? feedback;
   final FTrixToolbarItem item;
+  final bool disableDraggable;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +23,10 @@ class ToolbarItemComponent extends StatelessWidget {
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.background,
-            width: 2,
-          )
-        ),
+            border: Border.all(
+          color: AppColors.background,
+          width: 2,
+        )),
         width: 85,
         height: 70,
         child: Column(
@@ -33,7 +36,9 @@ class ToolbarItemComponent extends StatelessWidget {
               item.icon,
               color: Colors.white,
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
             Text(
               item.title,
               style: Get.textTheme.bodySmall?.copyWith(color: Colors.white),
@@ -42,6 +47,12 @@ class ToolbarItemComponent extends StatelessWidget {
         ),
       ),
     );
+    if (disableDraggable) {
+      return InkWell(
+        onTap: onTap,
+        child: widget,
+      );
+    }
     return Draggable<WidgetType>(
       data: item.type,
       feedback: feedback ?? widget,

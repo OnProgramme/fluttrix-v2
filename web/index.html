@@ -34,6 +34,14 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
-  <script type="text/javascript">window.flutterWebRenderer = "html";</script>
+  <script type="module">
+    import { engineInitializer } from "./flutter.js";
+
+    engineInitializer.initializeEngine({
+      hostElement: document.getElementById("flutter"),
+    }).then((appRunner) => {
+      appRunner.runApp();
+    });
+  </script>
 </body>
 </html>

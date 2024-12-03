@@ -4,6 +4,7 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
 
 class ImageToolBarSettingComponent extends StatefulWidget {
   const ImageToolBarSettingComponent({super.key, required this.widget});
@@ -16,11 +17,23 @@ class ImageToolBarSettingComponent extends StatefulWidget {
 
 class _ImageToolBarSettingComponentState
     extends State<ImageToolBarSettingComponent> {
+
+  final imageUrlController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final setting = widget.widget.setting as FTrixImageSetting;
     return Column(
+      key: ValueKey(widget.widget.id),
       children: [
+        FTextField(
+          label: "Lien de l'image",
+          initialValue: widget.widget.src,
+          onChanged: (value) {
+            widget.widget.src = value;
+            widget.widget.update();
+          },
+        ),
         FTrixEditSize(
           width: setting.width,
           height: setting.height,

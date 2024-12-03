@@ -5,6 +5,8 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.center.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.icon.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.listview.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.rich.text.dart';
@@ -31,7 +33,9 @@ class FTrixWidgetBuilder {
       WidgetType.CONTAINER: FTrixContainer(parentId: parentId),
       WidgetType.ALIGN: FTrixAlign(parentId: parentId),
       WidgetType.CENTER: FTrixCenter(parentId: parentId),
-      WidgetType.WRAP: FTrixWrap(parentId: parentId)
+      WidgetType.WRAP: FTrixWrap(parentId: parentId),
+      WidgetType.ICON_BUTTON: FTrixIconButton(parentId: parentId),
+      WidgetType.ICON: FTrixIcon(parentId: parentId),
     };
     final widget = widgets[type];
     if (widget == null) {

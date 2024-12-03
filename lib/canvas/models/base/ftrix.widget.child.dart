@@ -17,6 +17,7 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
       required super.setting,
       required super.type,
       this.child}) {
+    child?.parentId = id;
     FTrixStream.instance.wrapParentWidgetEvent
         .listen(_handleListenWhenChildWrapped);
     FTrixStream.instance.deleteWidgetEvent
@@ -25,6 +26,7 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
 
   @override
   void handleDropWidget(DroppedWidgetEvent event) {
+    if (child != null) return;
     if (event.value is WidgetType) {
       setChild(FTrixWidgetBuilder.build(event.value, id));
       return;
@@ -35,11 +37,6 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
     widget.delete();
     final copyWidget = widget.clone(id);
     setChild(copyWidget);
-  }
-
-  void deleteChild() {
-    child = null;
-    update();
   }
 
   void setChild(IWidget? child) {
@@ -63,6 +60,7 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
   void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {
     if (event.deleteWidget.parentId != id) return;
     setChild(null);
+    unselect();
   }
 
   @override

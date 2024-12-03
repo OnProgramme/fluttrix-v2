@@ -67,5 +67,6 @@ class FTrixScaffold extends FTrixWidgetWithChild {
   @override
   void loadFromJson(Map<String, dynamic> json) {
     setting = FTrixScaffoldSetting.fromJson(normalizeJson(json['setting']));
+    id = json['id'];
   }
 }

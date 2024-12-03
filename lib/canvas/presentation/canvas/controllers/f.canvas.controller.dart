@@ -16,7 +16,7 @@ class FCanvasControllerBinding extends Bindings{
 }
 
 class FCanvasController extends GetxController {
-  final canvas = FTrixCanvas().obs;
+  final canvas = FTrixCanvas();
   final canvasSize = Rx(Size.zero);
   final frameKey = GlobalKey();
   final currentDeviceInfo = Devices.ios.iPhone13ProMax.obs;
@@ -25,8 +25,7 @@ class FCanvasController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    canvas.value.loadFromJson(localData);
-    handleUpdateCanvas();
+    canvas.loadFromJson(localData);
     WidgetsBinding.instance.addPostFrameCallback((t){
       final RenderBox renderBox =
       frameKey.currentContext?.findRenderObject() as RenderBox;
@@ -34,14 +33,8 @@ class FCanvasController extends GetxController {
     });
   }
 
-  void handleUpdateCanvas(){
-    canvas.value.update.listen((event){
-      canvas.refresh();
-    });
-  }
-
 
   void handleSelectCanvas() {
-    canvas.value.select();
+    canvas.select();
   }
 }

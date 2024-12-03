@@ -59,7 +59,7 @@ class HomeScreen extends GetView<HomeController> {
                         children: [
                           WidgetsToolBar(),
                           WidgetExplorerPanel(
-                            rootWidget: fCanvasController.canvas.value
+                            rootWidget: fCanvasController.canvas
                                 .getSelectedWidget(),
                             onWidgetSelected: (p0) {},
                           ),

@@ -130,7 +130,7 @@ Map<String, dynamic> localData = {
                 },
                 "text": [
                   {
-                    "text": "Vous n'avez pas de compte?",
+                    "text": "Vous n'avez pas de compte? ",
                     "index": 0,
                     "setting": {
                       "padding": {},
