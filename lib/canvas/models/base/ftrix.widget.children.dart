@@ -19,12 +19,15 @@ import 'i.widget.dart';
 abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
   List<IWidget> children = [];
 
-  FTrixWidgetWithChildren({super.parentId, required super.setting, required super.type}){
+  FTrixWidgetWithChildren({super.parentId, required super.setting, required super.type, this.children = const []}){
     FTrixStream.instance.deleteWidgetEvent
         .listen(_handleListenWhenChildDeleted);
     FTrixStream.instance.wrapParentWidgetEvent
         .listen(_handleListenWhenChildWrapped);
     FTrixStream.instance.dropWidgetEvent.listen(_handleListenWhenWidgetDropped);
+    for (var child in children) {
+      child.parentId = id;
+    }
   }
 
 

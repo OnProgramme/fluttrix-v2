@@ -53,6 +53,11 @@ final widgets = [
     type: WidgetType.BUTTON,
   ),
   FTrixToolbarItem(
+    title: "Button2",
+    icon: FTrixWidgetIconBuilder.build(WidgetType.BUTTON),
+    type: WidgetType.BUTTON_WITH_CHILD,
+  ),
+  FTrixToolbarItem(
     title: "IconButton",
     icon: FTrixWidgetIconBuilder.build(WidgetType.ICON_BUTTON),
     type: WidgetType.ICON_BUTTON,
@@ -111,10 +116,6 @@ class WidgetsToolBar extends StatelessWidget {
                   )
                   .toList(),
             ),
-
-            IconButton(onPressed: (){
-              Get.dialog(ChooseIconModal());
-            }, icon: Icon(IconData(60582, fontFamily: 'materialIcons')))
           ],
         ),
       ),

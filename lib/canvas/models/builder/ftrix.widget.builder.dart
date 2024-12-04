@@ -1,7 +1,8 @@
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.child.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.center.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
@@ -27,7 +28,8 @@ class FTrixWidgetBuilder {
       WidgetType.RICH_TEXT: FTrixRichText(parentId: parentId),
       WidgetType.IMAGE: FTrixImage(parentId: parentId),
       WidgetType.INPUT: FTrixTextField(parentId: parentId),
-      WidgetType.BUTTON: FTrixButton(parentId: parentId),
+      WidgetType.BUTTON: FTrixButtonWithText(parentId: parentId),
+      WidgetType.BUTTON_WITH_CHILD: FTrixButtonWithChild(parentId: parentId),
       WidgetType.SCAFFOLD: FTrixScaffold(parentId: parentId),
       WidgetType.LISTVIEW: FTrixListView(parentId: parentId),
       WidgetType.CONTAINER: FTrixContainer(parentId: parentId),

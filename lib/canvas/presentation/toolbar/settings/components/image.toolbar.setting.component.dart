@@ -33,7 +33,10 @@ class _ImageToolBarSettingComponentState
             widget.widget.src = value;
             widget.widget.update();
           },
+          maxLines: 3,
+          minLines: 3,
         ),
+        SizedBox(height: 10),
         FTrixEditSize(
           width: setting.width,
           height: setting.height,

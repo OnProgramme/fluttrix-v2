@@ -38,6 +38,18 @@ class ColumnRowToolBarSettingComponent extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
+        InputDropdown<MainAxisSize>(
+            label: "Main axis size",
+            hint: "Sélectionner",
+            value: setting.mainAxisSize,
+            items: setting.mainAxisSizeValue,
+            onChanged: (value) {
+              setting.mainAxisSize = value;
+              widget.update();
+            }),
+        SizedBox(
+          height: 10,
+        ),
         FTrixEditPaddingOrMargin(
           isMargin: true,
           setting: setting.margin,

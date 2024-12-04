@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.custom.icon.dart';
 import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
@@ -87,7 +88,7 @@ class ChooseIconModal extends GetView<ChooseIconController> {
                       itemCount: controller.icons.length,
                       itemBuilder: (context, index) {
                         final i = controller.icons[index];
-                        final icon = CustomIcon.fromJson(i);
+                        final icon = FTrixCustomIcon.fromJson(i);
                         return InkWell(
                           onTap: () => Get.back(result: icon),
                           child: Container(

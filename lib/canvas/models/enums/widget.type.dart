@@ -9,6 +9,7 @@ enum WidgetType{
   SCAFFOLD,
   INPUT,
   BUTTON,
+  BUTTON_WITH_CHILD,
   TEXT,
   ICON_BUTTON,
   ICON,

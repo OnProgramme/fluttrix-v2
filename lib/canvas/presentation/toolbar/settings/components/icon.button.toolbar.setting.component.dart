@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.align.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.icon.button.setting.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.icon.setting.dart';
 import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.modal.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.alignment.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.small.input.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 
 class IconButtonToolBarSettingComponent extends StatefulWidget {
   const IconButtonToolBarSettingComponent({super.key, required this.widget});
-  final FTrixIconButton widget;
+  final FTrixWidgetWithIcon widget;
 
   @override
   State<IconButtonToolBarSettingComponent> createState() =>
@@ -22,11 +26,11 @@ class IconButtonToolBarSettingComponent extends StatefulWidget {
 
 class _IconButtonToolBarSettingComponentState
     extends State<IconButtonToolBarSettingComponent> {
-  FTrixIconButton get icon => widget.widget;
+  FTrixWidgetWithIcon get icon => widget.widget;
 
   @override
   Widget build(BuildContext context) {
-    final setting = icon.setting as FTrixIconButtonSetting;
+    final setting = icon.setting as FTrixIconSetting;
     return Column(
       key: ValueKey(icon.id),
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,6 +40,17 @@ class _IconButtonToolBarSettingComponentState
           onChanged: (color) {
             setting.color = color;
             icon.update();
+          },
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        FSmallInput(
+          label: "Icon Size",
+          hint: "25",
+          onChanged: (value) {
+            setting.size = double.tryParse(value);
+            widget.widget.update();
           },
         ),
         SizedBox(
@@ -78,7 +93,13 @@ class _IconButtonToolBarSettingComponentState
               ),
             ),
           ),
-        )
+        ),
+        SizedBox(height: 15),
+        FTrixEditPaddingOrMargin(
+          isMargin: true,
+          setting: setting.margin,
+          onUpdated: () => icon.update(),
+        ),
       ],
     );
   }

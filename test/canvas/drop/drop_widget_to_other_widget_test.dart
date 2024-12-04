@@ -4,7 +4,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
 
@@ -32,7 +32,7 @@ void main(){
       column.handleDropWidget(DroppedWidgetEvent(DropPosition.AFTER, WidgetType.CONTAINER));
       column.handleDropWidget(DroppedWidgetEvent(DropPosition.AFTER, WidgetType.COLUMN));
       column.handleDropWidget(DroppedWidgetEvent(DropPosition.AFTER,FTrixContainer(
-          child: FTrixButton()
+          child: FTrixButtonWithText()
       )));
       await Future.delayed(Duration.zero);
       final firstChildren = column.children.first;

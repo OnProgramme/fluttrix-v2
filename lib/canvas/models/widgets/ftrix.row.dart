@@ -3,10 +3,14 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixRow extends FTrixWidgetWithChildren {
-  FTrixRow({super.parentId, FTrixColumnRowSetting? setting})
+  FTrixRow(
+      {super.parentId,
+      FTrixColumnRowSetting? setting,
+      super.children = const []})
       : super(
             type: WidgetType.ROW,
             setting: setting ?? FTrixColumnRowSetting.zero);
@@ -23,7 +27,9 @@ class FTrixRow extends FTrixWidgetWithChildren {
   }
 
   @override
-  void loadFromJson(Map<String, dynamic> json) {}
+  void loadFromJson(Map<String, dynamic> json) {
+    setting = FTrixColumnRowSetting.fromJson(normalizeJson(json['setting']));
+  }
 
   @override
   Widget render() {

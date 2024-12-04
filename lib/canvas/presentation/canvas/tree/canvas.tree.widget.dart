@@ -45,7 +45,9 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
         }
         break;
       case WidgetType.CONTAINER:
+      case WidgetType.BUTTON_WITH_CHILD:
       case WidgetType.ALIGN:
+      case WidgetType.CENTER:
         final containerWidget = widget as FTrixWidgetWithChild;
         if (containerWidget.child != null) {
           children.add(containerWidget.child!);
@@ -231,6 +233,9 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
   @override
   void initState() {
     super.initState();
+    FTrixStream.instance.updateCanvas.listen((e) {
+      if (mounted) setState(() {});
+    });
     FTrixStream.instance.selectWidgetEvent.listen((event) {
       if (event.type == FTrixWidgetEventType.SELECT) {
         selectedWidgetId = event.selectWidget.id;

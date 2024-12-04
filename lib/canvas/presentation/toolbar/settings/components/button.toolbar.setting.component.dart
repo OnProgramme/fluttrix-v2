@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.button.dart';
+import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.button.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.button.with.text.setting.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
@@ -12,24 +15,46 @@ class ButtonToolBarSettingComponent extends StatefulWidget {
   final FTrixButton widget;
 
   @override
-  State<ButtonToolBarSettingComponent> createState() => _ButtonToolBarSettingComponentState();
+  State<ButtonToolBarSettingComponent> createState() =>
+      _ButtonToolBarSettingComponentState();
 }
 
-class _ButtonToolBarSettingComponentState extends State<ButtonToolBarSettingComponent> {
+class _ButtonToolBarSettingComponentState
+    extends State<ButtonToolBarSettingComponent> {
   @override
   Widget build(BuildContext context) {
     final setting = widget.widget.setting as FTrixButtonSetting;
     return Column(
+      key: ValueKey(widget.widget.id),
       children: [
-        FTextField(
-          key: ValueKey(widget.widget.text),
-          label: "Text",
-          initialValue: widget.widget.text,
-          onChanged: (value) {
-            widget.widget.text = value;
-            widget.widget.update();
-          },
-        ),
+        if (setting is FTrixButtonWithTextSetting) ...[
+          Builder(
+            builder: (context) {
+              final button = widget.widget as FTrixButtonWithText;
+              return Column(
+                children: [
+                  FTextField(
+                    label: "Text",
+                    initialValue: button.text,
+                    onChanged: (value) {
+                      button.text = value;
+                      widget.widget.update();
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  FTrixColorPicker(
+                    label: "Text Color",
+                    initialColor: setting.textColor,
+                    onChanged: (color) {
+                      setting.textColor = color;
+                      widget.widget.update();
+                    },
+                  ),
+                ],
+              );
+            },
+          )
+        ],
         SizedBox(height: 10),
         FTrixEditSize(
           width: setting.width,
@@ -57,15 +82,6 @@ class _ButtonToolBarSettingComponentState extends State<ButtonToolBarSettingComp
           initialColor: setting.color,
           onChanged: (color) {
             setting.color = color;
-            widget.widget.update();
-          },
-        ),
-        SizedBox(height: 10),
-        FTrixColorPicker(
-          label: "Text Color",
-          initialColor: setting.textColor,
-          onChanged: (color) {
-            setting.textColor = color;
             widget.widget.update();
           },
         ),

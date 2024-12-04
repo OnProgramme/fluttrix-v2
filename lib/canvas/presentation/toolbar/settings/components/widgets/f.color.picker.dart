@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttrix/utils/app.colors.dart';
+import 'package:get/get.dart';
 import 'package:web_color_picker/web_color_picker.dart';
 
 class FTrixColorPicker extends StatefulWidget {
@@ -45,9 +47,8 @@ class _FTrixColorPickerState extends State<FTrixColorPicker> {
         if (widget.label != null)
           Text(
             widget.label!,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            style: Get.textTheme.labelLarge?.copyWith(
+              color: AppColors.white,
             ),
           ),
         Wrap(

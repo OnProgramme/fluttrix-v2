@@ -5,17 +5,20 @@ import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 
 class FTrixIconSetting extends FTrixWidgetSetting {
   Color? color;
+  double? size;
 
   FTrixIconSetting({
     required super.padding,
     required super.margin,
     required super.radius,
     this.color,
+    this.size,
   }) : super(width: 200, height: 50);
 
   FTrixIconSetting.fromJson(Map<String, dynamic> json)
       : super.fromJson(json) {
     color = json["color"] != null ? parseIntegerColor(json["color"]) : null;
+    size = json['size'];
   }
 
   static FTrixIconSetting get zero => FTrixIconSetting(
@@ -29,6 +32,7 @@ class FTrixIconSetting extends FTrixWidgetSetting {
     return super.toJson()
       ..addAll({
         "color": color,
+        "size": size,
       })
       ..removeWhere((key, value) => value == null);
   }

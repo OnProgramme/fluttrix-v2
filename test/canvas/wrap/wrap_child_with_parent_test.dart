@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.icon.dart';
 
 void main(){
   group("Test can wrap widget on other widget", (){
@@ -24,6 +26,12 @@ void main(){
       container.child!.wrapParent(WidgetType.ALIGN);
       await Future.delayed(Duration.zero);
       expect(container.child?.type, WidgetType.ALIGN);
+    });
+
+    test("ok je teste juste", (){
+      final icon = FTrixColumn();
+      final t =  icon is FTrixWidgetWithIcon;
+      expect(t, true);
     });
   });
 }

@@ -52,7 +52,7 @@ class FTrixColumnRowSetting extends FTrixWidgetSetting {
       CrossAxisAlignment.values
           .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
           .toList();
-  List<InputDropdownItem<MainAxisSize>> get maxSizeValue => MainAxisSize.values
+  List<InputDropdownItem<MainAxisSize>> get mainAxisSizeValue => MainAxisSize.values
       .map((e) => InputDropdownItem(e.name.capitalizeFirst!, e))
       .toList();
 }

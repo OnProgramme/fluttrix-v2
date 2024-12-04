@@ -24,7 +24,6 @@ class _ScaffoldToolBarSettingComponentState
           initialColor: setting.backgroundColor,
           onChanged: (color) {
             setting.backgroundColor = color;
-            print(setting.backgroundColor);
             widget.widget.update();
           },
         ),

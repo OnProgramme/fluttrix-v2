@@ -54,7 +54,7 @@ class FSmallInput extends StatelessWidget {
             maxLength: maxLength,
             decoration: InputDecoration(
               hintStyle: TextStyle(
-                color: Colors.white,
+                color: AppColors.grey,
               ),
               isDense: false,
               hintText: hint,

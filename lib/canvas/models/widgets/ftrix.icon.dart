@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
+import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.icon.button.setting.dart';
@@ -10,14 +11,12 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
 
 import '../base/i.widget.dart';
 
-class FTrixIcon extends FTrixDroppableWidgetWithoutChild {
-  late CustomIcon icon;
-
+class FTrixIcon extends FTrixDroppableWidgetWithoutChild
+    with FTrixWidgetWithIcon {
   FTrixIcon({
     super.parentId,
     FTrixIconSetting? setting,
-  })  : icon = CustomIcon(60582, 'arrow_back'),
-        super(
+  }) : super(
           type: WidgetType.ICON,
           setting: setting ?? FTrixIconSetting.zero,
         );
@@ -43,6 +42,7 @@ class FTrixIcon extends FTrixDroppableWidgetWithoutChild {
       child: Icon(
         color: setting.color,
         icon.iconData,
+        size: setting.size,
       ),
     );
   }
@@ -57,7 +57,7 @@ class FTrixIcon extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
-    icon = CustomIcon.fromJson(json['icon']);
+    super.loadFromJson(json);
     setting = FTrixButtonSetting.fromJson(normalizeJson(json['setting']));
   }
 }
