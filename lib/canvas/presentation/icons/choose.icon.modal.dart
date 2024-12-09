@@ -1,11 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.custom.icon.dart';
-import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';

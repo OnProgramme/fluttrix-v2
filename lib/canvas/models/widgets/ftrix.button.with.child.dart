@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.button.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.icon.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.row.dart';
@@ -23,6 +22,7 @@ class FTrixButtonWithChild extends FTrixWidgetWithChild with FTrixButton{
           setting: setting ?? FTrixButtonSetting.zero,
         ){
     child ??= FTrixRow(
+      parentId: id,
       setting: FTrixColumnRowSetting.zero..mainAxisSize = MainAxisSize.min,
       children: [
         FTrixIcon(),

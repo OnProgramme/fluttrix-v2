@@ -1,15 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.align.setting.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.icon.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.icon.setting.dart';
-import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.icon.button.dart';
+import 'package:fluttrix/canvas/models/utils/parse.snake.to.pascal.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.modal.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
-import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.alignment.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.small.input.dart';
 import 'package:fluttrix/utils/app.colors.dart';

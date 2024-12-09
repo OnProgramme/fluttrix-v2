@@ -55,7 +55,10 @@ class ToolbarItemComponent extends StatelessWidget {
     }
     return Draggable<WidgetType>(
       data: item.type,
-      feedback: feedback ?? widget,
+      feedback: Container(
+        color: AppColors.primary,
+        child: feedback ?? widget,
+      ),
       childWhenDragging: widget,
       child: widget,
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.button.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.with.text.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';

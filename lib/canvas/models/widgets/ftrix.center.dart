@@ -3,7 +3,6 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixCenter extends FTrixWidgetWithChild {

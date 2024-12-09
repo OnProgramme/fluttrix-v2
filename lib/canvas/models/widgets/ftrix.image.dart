@@ -4,7 +4,7 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/utils/generate.random.image.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.image.component.dart';
 
 class FTrixImage extends FTrixDroppableWidgetWithoutChild {

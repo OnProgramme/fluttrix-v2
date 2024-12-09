@@ -20,8 +20,6 @@ class FTrixBaseComponent extends StatefulWidget {
     this.disablePadding = false,
     this.isDraggable = true,
     this.constraints,
-    this.onLongPress,
-    this.onLongPressEnd,
     this.disableConstraints = false,
     this.enableResizedChild = false,
     this.enableHorizontalResize = true,
@@ -38,8 +36,6 @@ class FTrixBaseComponent extends StatefulWidget {
   final bool disablePadding;
   final bool isDraggable;
   final BoxConstraints? constraints;
-  final VoidCallback? onLongPress;
-  final ValueSetter<LongPressEndDetails>? onLongPressEnd;
   final bool disableConstraints;
   final bool enableResizedChild;
   final bool enableHorizontalResize;
@@ -114,8 +110,6 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
         onExit: (_) => setState(() => isHovered = false),
         child: GestureDetector(
           onTap: widget.onTap,
-          onLongPress: widget.onLongPress,
-          onLongPressEnd: widget.onLongPressEnd,
           child: Container(
             key: _childKey,
             constraints: widget.disableConstraints

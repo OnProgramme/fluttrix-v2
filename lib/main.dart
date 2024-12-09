@@ -1,15 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
+import 'package:fluttrix/firebase_options.dart';
+import 'package:fluttrix/shared/injection/infra/memory.injector.dart';
+import 'package:fluttrix/shared/navigation/infra/get.router.dart';
+import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:fluttrix/utils/app.colors.dart';
+import 'package:fluttrix/utils/app.dependencies.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 
-import 'infrastructure/navigation/navigation.dart';
-import 'infrastructure/navigation/routes.dart';
-
 void main() async {
+  await GetStorage.init();
+  await AppDependencies.init(MemoryInjector());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   var initialRoute = await Routes.initialRoute;
-  Get.put(ChooseIconController());
   runApp(Main(initialRoute));
 }
 
@@ -22,7 +30,7 @@ class Main extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
-      getPages: Nav.routes,
+      getPages: GetRouter.routes,
       builder: (context, child) => OKToast(child: child ?? const SizedBox()),
       theme: ThemeData(
           scaffoldBackgroundColor: AppColors.background,
@@ -35,7 +43,10 @@ class Main extends StatelessWidget {
             fillColor: WidgetStatePropertyAll(AppColors.grey),
           ),
           textTheme: TextTheme(
-            bodyLarge: TextStyle(color: Colors.white),
+            bodyLarge: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
             bodyMedium: TextStyle(color: Colors.white),
             bodySmall: TextStyle(color: Colors.white),
           ),
@@ -52,9 +63,9 @@ class Main extends StatelessWidget {
             iconColor: Colors.white,
           ),
           checkboxTheme: CheckboxThemeData(
-            // overlayColor: WidgetStatePropertyAll(AppColors.buttonColor),
+              // overlayColor: WidgetStatePropertyAll(AppColors.buttonColor),
 
-          )),
+              )),
     );
   }
 }

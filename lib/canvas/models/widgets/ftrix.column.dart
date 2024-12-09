@@ -3,14 +3,17 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:get/get.dart';
 
 class FTrixColumn extends FTrixWidgetWithChildren {
-  FTrixColumn({super.parentId, FTrixColumnRowSetting? setting})
-      : super(
+  FTrixColumn({
+    super.parentId,
+    FTrixColumnRowSetting? setting,
+    super.children,
+  }) : super(
           setting: setting ?? FTrixColumnRowSetting.zero,
           type: WidgetType.COLUMN,
         );
@@ -22,13 +25,11 @@ class FTrixColumn extends FTrixWidgetWithChildren {
 
   @override
   IWidget clone([String? parentId]) {
-    final cloneWidget = FTrixColumn(
+    return FTrixColumn(
       parentId: parentId ?? this.parentId,
       setting: FTrixColumnRowSetting.fromJson(setting.toJson()),
+      children: children.map((el) => el.clone()).toList()
     );
-    cloneWidget.children =
-        children.map((el) => el.clone(cloneWidget.id)).toList();
-    return cloneWidget;
   }
 
   @override
@@ -41,8 +42,10 @@ class FTrixColumn extends FTrixWidgetWithChildren {
       widget: this,
       onTap: select,
       key: ValueKey(id),
-      onDrop: (e) => handleDropWidget(e),
-      constraints: children.isEmpty? BoxConstraints(minHeight: 200, minWidth: canvasWidth):null,
+      onDrop: handleDropWidget,
+      constraints: children.isEmpty
+          ? BoxConstraints(minHeight: 200, minWidth: canvasWidth)
+          : null,
       child: Column(
         crossAxisAlignment: setting.crossAxisAlignment,
         mainAxisSize: setting.mainAxisSize,

@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.icon.setting.dart';
-import 'package:fluttrix/canvas/models/utils/parse.interger.to.color.dart';
 
 class FTrixIconButtonSetting extends FTrixIconSetting {
   FTrixIconButtonSetting({

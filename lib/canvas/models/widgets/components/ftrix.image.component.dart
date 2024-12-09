@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';

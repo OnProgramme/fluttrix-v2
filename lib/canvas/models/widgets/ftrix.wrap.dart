@@ -3,14 +3,17 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.wrap.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:get/get.dart';
 
 class FTrixWrap extends FTrixWidgetWithChildren {
-  FTrixWrap({super.parentId, FTrixWrapSetting? setting})
-      : super(type: WidgetType.WRAP, setting: setting ?? FTrixWrapSetting.zero);
+  FTrixWrap({
+    super.parentId,
+    FTrixWrapSetting? setting,
+    super.children,
+  }) : super(type: WidgetType.WRAP, setting: setting ?? FTrixWrapSetting.zero);
 
   @override
   void loadFromJson(Map<String, dynamic> json) {

@@ -4,7 +4,6 @@ import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
-import 'package:fluttrix/canvas/models/builder/ftrix.widget.json.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';

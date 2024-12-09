@@ -5,6 +5,7 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.color.picker.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 
 class ContainerToolBarSettingComponent extends StatelessWidget {
   const ContainerToolBarSettingComponent({super.key, required this.widget});
@@ -15,7 +16,18 @@ class ContainerToolBarSettingComponent extends StatelessWidget {
     final setting = widget.setting as FTrixContainerSetting;
     return Column(
       children: [
+        FTrixEditSize(
+          width: setting.width,
+          height: setting.height,
+          onSizeChanged: (width, height) {
+            setting.width = width;
+            setting.height = height;
+            widget.update();
+          },
+        ),
+        SizedBox(height: 10),
         FTrixColorPicker(
+          label: "Background Color",
           initialColor: setting.color,
           onChanged: (color) {
             setting.color = color;

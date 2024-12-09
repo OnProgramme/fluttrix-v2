@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';

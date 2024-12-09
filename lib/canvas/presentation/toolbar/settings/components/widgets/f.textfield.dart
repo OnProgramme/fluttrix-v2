@@ -13,6 +13,7 @@ class FTextField extends StatelessWidget {
     this.maxLines = 1,
     this.minLines = 1,
     this.prefixIcon,
+    this.keyboardType,
   });
   final String? label;
   final String? hint;
@@ -22,6 +23,7 @@ class FTextField extends StatelessWidget {
   final int minLines;
   final int maxLines;
   final Widget? prefixIcon;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class FTextField extends StatelessWidget {
           SizedBox(height: 5)
         ],
         TextFormField(
+          keyboardType: keyboardType,
           controller: controller,
           initialValue: initialValue,
           onChanged: onChanged,

@@ -8,7 +8,7 @@ import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/utils/parseSnakeToPascal.dart';
+import 'package:fluttrix/canvas/models/utils/parse.snake.to.pascal.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/canvas/presentation/canvas/tree/wrap/wrap.component.list.modal.dart';
 import 'package:fluttrix/utils/app.colors.dart';
@@ -149,8 +149,7 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                           widget.wrapParent(type);
                         }
                         if (i == 1 && widget is FTrixWidgetWithChildren) {
-                          widget.handleDropWidget(
-                              DroppedWidgetEvent(DropPosition.INSIDE, type));
+                          widget.handleDropWidget(DroppedWidgetEvent(DropPosition.INSIDE, type));
                           setState(() {});
                         }
                       });

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/base/ftrix.custom.icon.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.button.setting.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.icon.button.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../base/i.widget.dart';

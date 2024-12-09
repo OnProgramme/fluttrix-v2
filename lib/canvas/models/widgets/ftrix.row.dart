@@ -3,15 +3,15 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.column.row.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixRow extends FTrixWidgetWithChildren {
-  FTrixRow(
-      {super.parentId,
-      FTrixColumnRowSetting? setting,
-      super.children = const []})
-      : super(
+  FTrixRow({
+    super.parentId,
+    FTrixColumnRowSetting? setting,
+    super.children,
+  }) : super(
             type: WidgetType.ROW,
             setting: setting ?? FTrixColumnRowSetting.zero);
 
@@ -40,7 +40,7 @@ class FTrixRow extends FTrixWidgetWithChildren {
       widget: this,
       onTap: select,
       key: ValueKey(id),
-      onDrop: (e) => handleDropWidget(e),
+      onDrop: handleDropWidget,
       constraints: children.isEmpty ? BoxConstraints(minHeight: 100) : null,
       child: Row(
         crossAxisAlignment: setting.crossAxisAlignment,

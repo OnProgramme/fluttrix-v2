@@ -48,7 +48,6 @@ class _FtrixTextFieldComponentState extends State<FtrixTextFieldComponent> {
       enableHorizontalResize: widget.isSelected,
       child: TextFormField(
         onTap: widget.onTap,
-        enabled: !isLongPressed,
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: setting.label,

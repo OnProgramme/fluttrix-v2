@@ -3,7 +3,6 @@ import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';

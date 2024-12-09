@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/components/toolbar.item.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/components/widgets.toolbar.dart';

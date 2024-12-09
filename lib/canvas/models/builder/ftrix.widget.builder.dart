@@ -1,8 +1,8 @@
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.child.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.button.with.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.center.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';

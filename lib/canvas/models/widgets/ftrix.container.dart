@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/settings/ftrix.container.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 class FTrixContainer extends FTrixWidgetWithChild {
@@ -35,9 +35,12 @@ class FTrixContainer extends FTrixWidgetWithChild {
       isSelected: isWidgetSelected,
       onTap: select,
       disablePadding: true,
+      // enableResizedChild: true,
       // isDraggable: false,
       child: Container(
         padding: setting.paddingValue,
+        width: setting.width,
+        height: setting.height,
         decoration: BoxDecoration(
           color: setting.color,
           borderRadius: setting.radiusValue,

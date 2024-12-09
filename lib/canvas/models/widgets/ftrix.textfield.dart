@@ -3,7 +3,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.textfield.setting.dart';
-import 'package:fluttrix/canvas/models/utils/normalizeJson.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.textfield.component.dart';
 
 class FTrixTextField extends FTrixDroppableWidgetWithoutChild {

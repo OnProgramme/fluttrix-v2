@@ -5,7 +5,6 @@ import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.icon.dart';
 
 void main(){
   group("Test can wrap widget on other widget", (){

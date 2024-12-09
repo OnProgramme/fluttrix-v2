@@ -1,8 +1,6 @@
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 
 class FTrixWidgetJsonBuilder {
   FTrixWidgetJsonBuilder._();
