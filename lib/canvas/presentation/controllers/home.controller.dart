@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttrix/infrastructure/navigation/routes.dart';
+import 'package:fluttrix/shared/navigation/application/router.dart';
+import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -13,6 +14,6 @@ class HomeController extends GetxController {
   }
 
   void handlePreviewCode() {
-    Get.toNamed(Routes.PREVIEW_CODE);
+    AppRouter.navigate(Routes.PREVIEW_CODE);
   }
 }

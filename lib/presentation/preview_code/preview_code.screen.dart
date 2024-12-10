@@ -19,7 +19,7 @@ class PreviewCodeScreen extends GetView<PreviewCodeController> {
         children: [
           Container(
             width: 250,
-            height: Get.height,
+            height: MediaQuery.sizeOf(context).height,
             color: Colors.black.withOpacity(.87),
             padding: EdgeInsets.all(10),
             child: FTrixFileTreeComponent(files: controller.files),

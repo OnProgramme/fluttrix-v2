@@ -22,6 +22,7 @@ mixin _$AppFailure {
     required TResult Function() emailOrPasswordInvalid,
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
+    required TResult Function() failSaved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$AppFailure {
     TResult? Function()? emailOrPasswordInvalid,
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$AppFailure {
     TResult Function()? emailOrPasswordInvalid,
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
+    TResult Function()? failSaved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,7 @@ mixin _$AppFailure {
         emailOrPasswordInvalid,
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$AppFailure {
     TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +69,7 @@ mixin _$AppFailure {
     TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,6 +149,7 @@ class _$EmailAlreadyInUseImpl
     required TResult Function() emailOrPasswordInvalid,
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
+    required TResult Function() failSaved,
   }) {
     return emailAlreadyInUse();
   }
@@ -154,6 +161,7 @@ class _$EmailAlreadyInUseImpl
     TResult? Function()? emailOrPasswordInvalid,
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
   }) {
     return emailAlreadyInUse?.call();
   }
@@ -165,6 +173,7 @@ class _$EmailAlreadyInUseImpl
     TResult Function()? emailOrPasswordInvalid,
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
+    TResult Function()? failSaved,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -181,6 +190,7 @@ class _$EmailAlreadyInUseImpl
         emailOrPasswordInvalid,
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -192,6 +202,7 @@ class _$EmailAlreadyInUseImpl
     TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
   }) {
     return emailAlreadyInUse?.call(this);
   }
@@ -203,6 +214,7 @@ class _$EmailAlreadyInUseImpl
     TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -273,6 +285,7 @@ class _$EmailOrPasswordInvalidImpl
     required TResult Function() emailOrPasswordInvalid,
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
+    required TResult Function() failSaved,
   }) {
     return emailOrPasswordInvalid();
   }
@@ -284,6 +297,7 @@ class _$EmailOrPasswordInvalidImpl
     TResult? Function()? emailOrPasswordInvalid,
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
   }) {
     return emailOrPasswordInvalid?.call();
   }
@@ -295,6 +309,7 @@ class _$EmailOrPasswordInvalidImpl
     TResult Function()? emailOrPasswordInvalid,
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
+    TResult Function()? failSaved,
     required TResult orElse(),
   }) {
     if (emailOrPasswordInvalid != null) {
@@ -311,6 +326,7 @@ class _$EmailOrPasswordInvalidImpl
         emailOrPasswordInvalid,
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
   }) {
     return emailOrPasswordInvalid(this);
   }
@@ -322,6 +338,7 @@ class _$EmailOrPasswordInvalidImpl
     TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
   }) {
     return emailOrPasswordInvalid?.call(this);
   }
@@ -333,6 +350,7 @@ class _$EmailOrPasswordInvalidImpl
     TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
     required TResult orElse(),
   }) {
     if (emailOrPasswordInvalid != null) {
@@ -400,6 +418,7 @@ class _$InternetConnectionImpl
     required TResult Function() emailOrPasswordInvalid,
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
+    required TResult Function() failSaved,
   }) {
     return internetConnection();
   }
@@ -411,6 +430,7 @@ class _$InternetConnectionImpl
     TResult? Function()? emailOrPasswordInvalid,
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
   }) {
     return internetConnection?.call();
   }
@@ -422,6 +442,7 @@ class _$InternetConnectionImpl
     TResult Function()? emailOrPasswordInvalid,
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
+    TResult Function()? failSaved,
     required TResult orElse(),
   }) {
     if (internetConnection != null) {
@@ -438,6 +459,7 @@ class _$InternetConnectionImpl
         emailOrPasswordInvalid,
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
   }) {
     return internetConnection(this);
   }
@@ -449,6 +471,7 @@ class _$InternetConnectionImpl
     TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
   }) {
     return internetConnection?.call(this);
   }
@@ -460,6 +483,7 @@ class _$InternetConnectionImpl
     TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
     required TResult orElse(),
   }) {
     if (internetConnection != null) {
@@ -524,6 +548,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     required TResult Function() emailOrPasswordInvalid,
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
+    required TResult Function() failSaved,
   }) {
     return userNotExist();
   }
@@ -535,6 +560,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult? Function()? emailOrPasswordInvalid,
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
   }) {
     return userNotExist?.call();
   }
@@ -546,6 +572,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult Function()? emailOrPasswordInvalid,
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
+    TResult Function()? failSaved,
     required TResult orElse(),
   }) {
     if (userNotExist != null) {
@@ -562,6 +589,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
         emailOrPasswordInvalid,
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
   }) {
     return userNotExist(this);
   }
@@ -573,6 +601,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
   }) {
     return userNotExist?.call(this);
   }
@@ -584,6 +613,7 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
     required TResult orElse(),
   }) {
     if (userNotExist != null) {
@@ -595,4 +625,134 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
 
 abstract class UserNotExist implements AppFailure {
   factory UserNotExist() = _$UserNotExistImpl;
+}
+
+/// @nodoc
+abstract class _$$FailSavedImplCopyWith<$Res> {
+  factory _$$FailSavedImplCopyWith(
+          _$FailSavedImpl value, $Res Function(_$FailSavedImpl) then) =
+      __$$FailSavedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FailSavedImplCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res, _$FailSavedImpl>
+    implements _$$FailSavedImplCopyWith<$Res> {
+  __$$FailSavedImplCopyWithImpl(
+      _$FailSavedImpl _value, $Res Function(_$FailSavedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppFailure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
+  _$FailSavedImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AppFailure.failSaved()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AppFailure.failSaved'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FailSavedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() emailOrPasswordInvalid,
+    required TResult Function() internetConnection,
+    required TResult Function() userNotExist,
+    required TResult Function() failSaved,
+  }) {
+    return failSaved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? emailAlreadyInUse,
+    TResult? Function()? emailOrPasswordInvalid,
+    TResult? Function()? internetConnection,
+    TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
+  }) {
+    return failSaved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? emailOrPasswordInvalid,
+    TResult Function()? internetConnection,
+    TResult Function()? userNotExist,
+    TResult Function()? failSaved,
+    required TResult orElse(),
+  }) {
+    if (failSaved != null) {
+      return failSaved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(EmailOrPasswordInvalid value)
+        emailOrPasswordInvalid,
+    required TResult Function(InternetConnection value) internetConnection,
+    required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
+  }) {
+    return failSaved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult? Function(InternetConnection value)? internetConnection,
+    TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
+  }) {
+    return failSaved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult Function(InternetConnection value)? internetConnection,
+    TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
+    required TResult orElse(),
+  }) {
+    if (failSaved != null) {
+      return failSaved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FailSaved implements AppFailure {
+  factory FailSaved() = _$FailSavedImpl;
 }

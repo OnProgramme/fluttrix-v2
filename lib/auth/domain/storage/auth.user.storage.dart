@@ -4,9 +4,9 @@ import 'package:fluttrix/user/domain/entities/user.entity.dart';
 
 abstract class AuthUserStorage implements BaseStorage{
   Future<String?> getToken();
-  Future<AuthUser?> getAuthUser();
+  Future<User?> getAuthUser();
   Future<void> saveToken(String token);
   Future<void> saveAuthUser(User user);
-  Stream<AuthUser?> get onChangeAuthUser;
+  Stream<User?> get onChangeAuthUser;
   Future<bool> get isLogin;
 }

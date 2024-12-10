@@ -10,4 +10,5 @@ class AppFailure with _$AppFailure {
   factory AppFailure.emailOrPasswordInvalid() = EmailOrPasswordInvalid;
   factory AppFailure.internetConnection() = InternetConnection;
   factory AppFailure.userNotExist() = UserNotExist;
+  factory AppFailure.failSaved() = FailSaved;
 }

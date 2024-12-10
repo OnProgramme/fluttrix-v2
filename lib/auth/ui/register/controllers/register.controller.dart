@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fluttrix/auth/application/usecases/login/login.async.dart';
-import 'package:fluttrix/auth/application/usecases/login/login.command.dart';
 import 'package:fluttrix/auth/application/usecases/register/register.async.dart';
 import 'package:fluttrix/auth/application/usecases/register/register.command.dart';
 import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
-import 'package:fluttrix/infrastructure/navigation/routes.dart';
 import 'package:fluttrix/shared/form/validator/form.validator.dart';
+import 'package:fluttrix/shared/navigation/application/router.dart';
+import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:fluttrix/utils/app.dependencies.dart';
 import 'package:fluttrix/utils/message.dart';
 import 'package:get/get.dart';
@@ -40,13 +39,13 @@ class RegisterController extends GetxController{
       response.fold((err){
         Message.errors("Email ou mot de passe incorrect");
       }, (result){
-        Get.offAllNamed(Routes.HOME);
+        AppRouter.navigate(Routes.HOME);
       });
     });
   }
 
 
   void handleNavigateToRegister() {
-    Get.toNamed(Routes.REGISTER);
+    AppRouter.back();
   }
 }

@@ -7,12 +7,27 @@ import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.control
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/controllers/home.controller.binding.dart';
 import 'package:fluttrix/canvas/presentation/home.screen.dart';
+import 'package:fluttrix/dashboard/presentation/controllers/dashboard.controller.dart';
+import 'package:fluttrix/dashboard/presentation/dashboard.screen.dart';
 import 'package:fluttrix/presentation/preview_code/controllers/preview_code.controller.dart';
 import 'package:fluttrix/presentation/preview_code/preview_code.screen.dart';
+import 'package:fluttrix/shared/navigation/domain/navigator.service.dart';
 import 'package:fluttrix/shared/navigation/middlewares/auth.middleware.dart';
 import 'package:fluttrix/shared/navigation/middlewares/non.auth.middleware.dart';
 import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:get/get.dart';
+
+class GetRouterService implements NavigatorService {
+  @override
+  Future<void> back([result]) async {
+    Get.back(result: result);
+  }
+
+  @override
+  Future navigate(String route, {arguments}) async {
+    Get.toNamed(route, arguments: arguments);
+  }
+}
 
 class GetRouter {
   static List<GetPage> routes = [
@@ -32,6 +47,11 @@ class GetRouter {
       name: Routes.APP,
       page: () => Container(),
       children: [
+        GetPage(
+          name: Routes.DASHBOARD,
+          page: () => const DashboardScreen(),
+          binding: DashboardControllerBinding(),
+        ),
         GetPage(
             name: Routes.HOME,
             page: () => const HomeScreen(),

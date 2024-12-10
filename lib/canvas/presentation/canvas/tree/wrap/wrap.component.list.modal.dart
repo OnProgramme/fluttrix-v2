@@ -27,7 +27,7 @@ class WrapComponentListModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: Get.width,
+              width: MediaQuery.sizeOf(context).width,
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               decoration: BoxDecoration(

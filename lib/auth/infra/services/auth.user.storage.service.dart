@@ -15,10 +15,10 @@ class AuthUserStorageService implements AuthUserStorage{
   }
 
   @override
-  Future<AuthUser?> getAuthUser() async{
+  Future<User?> getAuthUser() async{
     final data = await _storage.read(_USER_KEY);
     if(data == null) return null;
-    return AuthUser.fromJson(data);
+    return User.fromJson(data);
   }
 
   @override
@@ -30,7 +30,7 @@ class AuthUserStorageService implements AuthUserStorage{
   Future<bool> get isLogin async => (await getAuthUser()) != null;
 
   @override
-  Stream<AuthUser?> get onChangeAuthUser => throw UnimplementedError();
+  Stream<User?> get onChangeAuthUser => throw UnimplementedError();
 
   @override
   Future<void> saveAuthUser(User user) async{

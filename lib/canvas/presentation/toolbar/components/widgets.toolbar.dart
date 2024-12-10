@@ -95,7 +95,7 @@ class WidgetsToolBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.primary,
-      height: Get.height,
+      height: MediaQuery.sizeOf(context).height,
       padding: EdgeInsets.symmetric(vertical: 10),
       width: 300,
       child: SingleChildScrollView(

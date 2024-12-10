@@ -5,6 +5,7 @@ import 'package:fluttrix/shared/exceptions/app.failure.dart';
 abstract class UseCase<Return, Command> extends ChangeNotifier {
   bool _isLoading = false;
   bool _isError = false;
+  Return? data;
 
   Future<Either<AppFailure, Return>> execute(Command command);
 
@@ -21,6 +22,7 @@ abstract class UseCase<Return, Command> extends ChangeNotifier {
         notifyListeners();
         return Left(err);
       }, (result) {
+        data = result;
         notifyListeners();
         return Right(result);
       });

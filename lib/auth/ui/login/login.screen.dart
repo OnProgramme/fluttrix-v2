@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttrix/auth/ui/login/controllers/login.controller.dart';
-import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
 import 'package:fluttrix/shared/components/button/app.button.dart';
 import 'package:fluttrix/shared/components/consumer.async.dart';
 import 'package:fluttrix/shared/components/textfield/app.textfield.dart';

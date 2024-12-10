@@ -4,7 +4,7 @@ import 'package:fluttrix/utils/app.dependencies.dart';
 class Routes {
   static Future<String> get initialRoute async {
     final userStorage = AppDependencies.resolve<AuthUserStorage>();
-    return (await userStorage.isLogin) ? HOME : LOGIN;
+    return (await userStorage.isLogin) ? DASHBOARD : LOGIN;
   }
 
   static const APP = '/';
