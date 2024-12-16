@@ -1,4 +1,3 @@
-import 'package:fluttrix/auth/domain/entities/auth.user.entity.dart';
 import 'package:fluttrix/shared/services/storage/domain/core/base.storage.dart';
 import 'package:fluttrix/user/domain/entities/user.entity.dart';
 

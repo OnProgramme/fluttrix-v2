@@ -34,6 +34,7 @@ class AuthUserStorageService implements AuthUserStorage{
 
   @override
   Future<void> saveAuthUser(User user) async{
+    print(user);
     await _storage.write(_USER_KEY, user.toJson());
   }
 

@@ -39,7 +39,7 @@ class RegisterController extends GetxController{
       response.fold((err){
         Message.errors("Email ou mot de passe incorrect");
       }, (result){
-        AppRouter.navigate(Routes.HOME);
+        AppRouter.navigate(Routes.DASHBOARD);
       });
     });
   }

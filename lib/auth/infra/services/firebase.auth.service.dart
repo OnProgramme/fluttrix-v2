@@ -50,4 +50,10 @@ class FirebaseAuthService implements AuthGateway {
       return Left(AppFailure.internetConnection());
     }
   }
+
+  @override
+  Future<Either<AppFailure, Unit>> logout() async{
+    await FirebaseAuth.instance.signOut();
+    return Right(unit);
+  }
 }

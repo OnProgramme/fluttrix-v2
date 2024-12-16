@@ -5,7 +5,7 @@ import 'package:fluttrix/shared/usecases/usecase.dart';
 import 'package:fluttrix/user/domain/entities/user.entity.dart';
 
 class GetUserToFirestoreAfterLoginListener extends EventListener<UserLogged> {
-  final UseCase<User, String> useCase;
+  final UseCaseWithCommand<User, String> useCase;
   final AuthUserStorage storage;
   GetUserToFirestoreAfterLoginListener({
     required this.useCase,

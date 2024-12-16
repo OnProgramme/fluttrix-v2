@@ -1,13 +1,14 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/shared/exceptions/app.failure.dart';
 
-abstract class UseCase<Return, Command> extends ChangeNotifier {
+abstract class UseCase<Return> extends ChangeNotifier {
   bool _isLoading = false;
   bool _isError = false;
   Return? data;
-
-  Future<Either<AppFailure, Return>> execute(Command command);
+  final _stream = StreamController<Return>.broadcast();
 
   @protected
   Future<Either<AppFailure, Return>> call(
@@ -23,6 +24,7 @@ abstract class UseCase<Return, Command> extends ChangeNotifier {
         return Left(err);
       }, (result) {
         data = result;
+        _stream.sink.add(result);
         notifyListeners();
         return Right(result);
       });
@@ -30,5 +32,15 @@ abstract class UseCase<Return, Command> extends ChangeNotifier {
   }
 
   bool get isPending => _isLoading;
-  bool get isFailed => _isLoading;
+  bool get isFailed => _isError;
+
+  Stream<Return> get stream => _stream.stream;
+}
+
+abstract class UseCaseWithCommand<Return, Command> extends UseCase<Return> {
+  Future<Either<AppFailure, Return>> execute(Command command);
+}
+
+abstract class UseCaseWithoutCommand<Return> extends UseCase<Return> {
+  Future<Either<AppFailure, Return>> execute();
 }

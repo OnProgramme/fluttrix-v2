@@ -6,7 +6,7 @@ import 'package:fluttrix/user/domain/entities/user.entity.dart';
 
 class SaveUserToFirestoreAfterRegisterListener
     extends EventListener<UserRegistered> {
-  final UseCase<User, User> useCase;
+  final UseCaseWithCommand<User, User> useCase;
   final AuthUserStorage storage;
   SaveUserToFirestoreAfterRegisterListener({
     required this.storage,

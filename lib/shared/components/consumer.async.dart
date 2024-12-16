@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
+import 'package:fluttrix/shared/usecases/usecase.dart';
 
-class ConsumerAsync<T extends ChangeNotifier> extends StatefulWidget {
-  final List<T> notifier;
-  final Widget Function(BuildContext context, List<T> async) builder;
+class ConsumerAsync<T extends UseCaseWithoutCommand> extends StatefulWidget {
+  final List<UseCase> notifier;
+  final Widget Function(BuildContext context, List<UseCase> async)
+      builder;
 
   const ConsumerAsync({
     super.key,
@@ -11,11 +13,10 @@ class ConsumerAsync<T extends ChangeNotifier> extends StatefulWidget {
   });
 
   @override
-  State<ConsumerAsync<T>> createState() => _ConsumerAsyncState<T>();
+  State<ConsumerAsync> createState() => _ConsumerAsyncState();
 }
 
-class _ConsumerAsyncState<T extends ChangeNotifier>
-    extends State<ConsumerAsync<T>> {
+class _ConsumerAsyncState extends State<ConsumerAsync> {
   @override
   void initState() {
     super.initState();
@@ -28,7 +29,8 @@ class _ConsumerAsyncState<T extends ChangeNotifier>
   void dispose() {
     for (var action in widget.notifier) {
       action.removeListener(_onNotifierChanged);
-    }    super.dispose();
+    }
+    super.dispose();
   }
 
   void _onNotifierChanged() {

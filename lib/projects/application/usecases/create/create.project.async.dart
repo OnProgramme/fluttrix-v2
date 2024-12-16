@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:fluttrix/dashboard/application/usecases/create/create.project.command.dart';
-import 'package:fluttrix/dashboard/domain/entities/project.entity.dart';
-import 'package:fluttrix/dashboard/domain/repo/project.repository.dart';
+import 'package:fluttrix/projects/application/usecases/create/create.project.command.dart';
+import 'package:fluttrix/projects/domain/entities/project.entity.dart';
+import 'package:fluttrix/projects/domain/repo/project.repository.dart';
 import 'package:fluttrix/shared/exceptions/app.failure.dart';
 import 'package:fluttrix/shared/usecases/usecase.dart';
 
-class CreateProjectAsync extends UseCase<Project, CreateProjectCommand>{
+class CreateProjectAsync extends UseCaseWithCommand<Project, CreateProjectCommand>{
   final ProjectRepository repo;
   CreateProjectAsync(this.repo);
 

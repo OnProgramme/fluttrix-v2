@@ -7,6 +7,9 @@ class AppRouter{
   static Future<dynamic> navigate(String route, {dynamic argument}){
     return _navigator.navigate(route, arguments: argument);
   }
+  static Future<dynamic> offAllNames(String route, {dynamic argument}){
+    return _navigator.ofAllNames(route, arguments: argument);
+  }
   static void back([dynamic result]){
     _navigator.back(result);
   }

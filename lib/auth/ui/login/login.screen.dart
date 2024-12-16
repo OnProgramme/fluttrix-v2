@@ -50,7 +50,7 @@ class LoginScreen extends GetView<LoginController> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 70, vertical: 48),
                       child: ConsumerAsync(
-                        notifier: [controller.loginAsync],
+                        notifier: [controller.loginAsync, controller.getProfileAsync],
                         builder: (context, async) {
                           return Obx(
                             () => Form(
@@ -95,7 +95,7 @@ class LoginScreen extends GetView<LoginController> {
                                     height: 30,
                                   ),
                                   AppButton(
-                                    title: async[0].isPending
+                                    title: async[0].isPending || async[1].isPending
                                         ? Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,

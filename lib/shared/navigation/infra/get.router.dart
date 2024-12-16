@@ -7,10 +7,10 @@ import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.control
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/controllers/home.controller.binding.dart';
 import 'package:fluttrix/canvas/presentation/home.screen.dart';
-import 'package:fluttrix/dashboard/presentation/controllers/dashboard.controller.dart';
-import 'package:fluttrix/dashboard/presentation/dashboard.screen.dart';
 import 'package:fluttrix/presentation/preview_code/controllers/preview_code.controller.dart';
 import 'package:fluttrix/presentation/preview_code/preview_code.screen.dart';
+import 'package:fluttrix/projects/presentation/controllers/dashboard.controller.dart';
+import 'package:fluttrix/projects/presentation/dashboard.screen.dart';
 import 'package:fluttrix/shared/navigation/domain/navigator.service.dart';
 import 'package:fluttrix/shared/navigation/middlewares/auth.middleware.dart';
 import 'package:fluttrix/shared/navigation/middlewares/non.auth.middleware.dart';
@@ -26,6 +26,11 @@ class GetRouterService implements NavigatorService {
   @override
   Future navigate(String route, {arguments}) async {
     Get.toNamed(route, arguments: arguments);
+  }
+
+  @override
+  Future ofAllNames(String route, {arguments}) async {
+    Get.offAllNamed(route, arguments: arguments);
   }
 }
 

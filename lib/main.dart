@@ -22,6 +22,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   var initialRoute = await Routes.initialRoute;
+  print(initialRoute);
   runApp(Main(initialRoute));
 }
 

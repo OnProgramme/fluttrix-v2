@@ -7,4 +7,5 @@ import 'package:fluttrix/shared/exceptions/app.failure.dart';
 abstract class AuthGateway{
   Future<Either<AppFailure, AuthUser>> login(LoginCommand command);
   Future<Either<AppFailure, AuthUser>> register(RegisterCommand command);
+  Future<Either<AppFailure, Unit>> logout();
 }

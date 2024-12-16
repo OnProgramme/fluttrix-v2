@@ -5,7 +5,7 @@ import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/shared/exceptions/app.failure.dart';
 import 'package:fluttrix/shared/usecases/usecase.dart';
 
-class RegisterAsync extends UseCase<AuthUser, RegisterCommand>{
+class RegisterAsync extends UseCaseWithCommand<AuthUser, RegisterCommand>{
   final IAuthFacade _facade;
   RegisterAsync(this._facade);
   @override
