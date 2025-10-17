@@ -30,7 +30,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: Routes.HOME,
+      initialRoute: initialRoute,
       // routerConfig: goRoutes(initialRoute),
       getPages: GetRouter.routes,
       debugShowCheckedModeBanner: false,

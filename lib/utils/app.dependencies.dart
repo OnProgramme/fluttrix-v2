@@ -1,8 +1,5 @@
-import 'package:fluttrix/auth/application/facades/auth.facade.dart';
-import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
 import 'package:fluttrix/auth/infra/services/auth.user.storage.service.dart';
-import 'package:fluttrix/auth/infra/services/firebase.auth.service.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
 import 'package:fluttrix/projects/application/listeners/listen.when.project.created.and.create.first.screen.dart';
 import 'package:fluttrix/projects/application/listeners/listen.when.project.deleted.and.delete.all.screens.dart';
@@ -14,6 +11,8 @@ import 'package:fluttrix/shared/events/infra/in.memory.event.dispatcher.dart';
 import 'package:fluttrix/shared/injection/domain/dependency.injector.dart';
 import 'package:fluttrix/shared/navigation/domain/navigator.service.dart';
 import 'package:fluttrix/shared/navigation/infra/get.router.dart';
+import 'package:fluttrix/shared/services/files/domain/file.picker.service.dart';
+import 'package:fluttrix/shared/services/files/infra/file.picker.service.dart';
 import 'package:fluttrix/shared/services/storage/infra/services/get.storage.service.dart';
 import 'package:fluttrix/user/application/listeners/get.user.to.firestore.after.login.listener.dart';
 import 'package:fluttrix/user/application/listeners/save.user.to.firestore.after.register.listener.dart';
@@ -38,7 +37,7 @@ class AppDependencies {
     AppDependenciesUseCases.init(injector);
     _subscribeToEvents(dispatcher);
 
-
+    injector.register<FilePickerService>(FilePickerPackageService());
 
     Get.put(ChooseIconController());
   }
@@ -47,22 +46,29 @@ class AppDependencies {
     return _injector.resolve<T>();
   }
 
-
-  static void _subscribeToEvents(EventDispatcher dispatcher){
+  static void _subscribeToEvents(EventDispatcher dispatcher) {
     final authStorage = get<AuthUserStorage>();
-    dispatcher.subscribe(EventName.login, GetUserToFirestoreAfterLoginListener(
-      useCase: get<GetProfileAsync>(),
-      storage: authStorage,
-    ));
-    dispatcher.subscribe(EventName.register, SaveUserToFirestoreAfterRegisterListener(
-      useCase: get<SaveUserAsync>(),
-      storage: authStorage,
-    ));
-    dispatcher.subscribe(EventName.projectCreated, ListenWhenProjectCreatedAndCreateFirstScreen(
-      useCase: get<CreateScreenAsync>(),
-    ));
-    dispatcher.subscribe(EventName.projectDeleted, ListenWhenProjectDeletedAndDeleteAllScreens(
-      useCase: get<DeleteAllScreensAsync>(),
-    ));
+    dispatcher.subscribe(
+        EventName.login,
+        GetUserToFirestoreAfterLoginListener(
+          useCase: get<GetProfileAsync>(),
+          storage: authStorage,
+        ));
+    dispatcher.subscribe(
+        EventName.register,
+        SaveUserToFirestoreAfterRegisterListener(
+          useCase: get<SaveUserAsync>(),
+          storage: authStorage,
+        ));
+    dispatcher.subscribe(
+        EventName.projectCreated,
+        ListenWhenProjectCreatedAndCreateFirstScreen(
+          useCase: get<CreateScreenAsync>(),
+        ));
+    dispatcher.subscribe(
+        EventName.projectDeleted,
+        ListenWhenProjectDeletedAndDeleteAllScreens(
+          useCase: get<DeleteAllScreensAsync>(),
+        ));
   }
 }

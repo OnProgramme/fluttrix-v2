@@ -25,48 +25,51 @@ class FrameCanvas extends GetView<FCanvasController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: controller.handleSelectCanvas,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 20)
-                                  .copyWith(left: 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                      ConsumerAsync(
+                          notifier: [controller.getAllScreensAsync],
+                          builder: (context, async) {
+                            if (async.first.isPending) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return Theme(
+                              data: ThemeData(
+                                  textTheme: TextTheme(
+                                bodyLarge: TextStyle(color: Colors.black),
+                                bodyMedium: TextStyle(color: Colors.black),
+                                bodySmall: TextStyle(color: Colors.black),
+                              )),
+                              child: Column(
                                 children: [
-                                  Text("Page"),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: controller.handleSelectCanvas,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  vertical: 5, horizontal: 20)
+                                              .copyWith(left: 0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text("Page"),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    key: controller.frameKey,
+                                    height: 840,
+                                    width: 390,
+                                    child: controller.canvas.render(),
+                                  ),
                                 ],
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      ConsumerAsync(
-                          notifier:[controller.getAllScreensAsync],
-                          builder: (context, async) {
-                          if(async.first.isPending){
-                            return Center(
-                              child: CircularProgressIndicator(),
                             );
-                          }
-                          return Theme(
-                            data: ThemeData(
-                                textTheme: TextTheme(
-                                  bodyLarge: TextStyle(color: Colors.black),
-                                  bodyMedium: TextStyle(color: Colors.black),
-                                  bodySmall: TextStyle(color: Colors.black),
-                                )),
-                            child: SizedBox(
-                              key: controller.frameKey,
-                              height: 840,
-                              width: 390,
-                              child: controller.canvas.render(),
-                            ),
-                          );
-                        }
-                      )
+                          })
                     ],
                   ),
                 ),
@@ -75,7 +78,7 @@ class FrameCanvas extends GetView<FCanvasController> {
           ),
         ),
         Obx(
-              () => AnimatedPositioned(
+          () => AnimatedPositioned(
             left: controller.isThreeOpened.value ? 0 : -304,
             bottom: 0,
             top: 0,
@@ -100,7 +103,7 @@ class FrameCanvas extends GetView<FCanvasController> {
                     color: AppColors.primary,
                     onPressed: () {
                       controller.isThreeOpened.value =
-                      !controller.isThreeOpened.value;
+                          !controller.isThreeOpened.value;
                     },
                     padding: EdgeInsets.all(20),
                     child: Icon(

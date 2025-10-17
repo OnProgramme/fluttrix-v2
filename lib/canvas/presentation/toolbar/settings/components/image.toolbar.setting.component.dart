@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.image.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.image.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/image/image.toolbar.setting.controller.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.padding.or.margin.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.radius.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.size.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.textfield.dart';
+import 'package:fluttrix/shared/components/button/app.button.dart';
+import 'package:fluttrix/utils/app.colors.dart';
+import 'package:get/get.dart';
 
 class ImageToolBarSettingComponent extends StatefulWidget {
   const ImageToolBarSettingComponent({super.key, required this.widget});
@@ -17,8 +21,7 @@ class ImageToolBarSettingComponent extends StatefulWidget {
 
 class _ImageToolBarSettingComponentState
     extends State<ImageToolBarSettingComponent> {
-
-  final imageUrlController = TextEditingController();
+  final controller = Get.put(ImageToolbarSettingController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,25 @@ class _ImageToolBarSettingComponentState
           maxLines: 3,
           minLines: 3,
         ),
+        SizedBox(height: 10),
+        AppButton(
+            onPressed: controller.handleImportImage,
+            title: Row(
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.folder,
+                  color: AppColors.white,
+                ),
+                Text(
+                  'Importer une image',
+                  style: TextStyle(
+                    color: AppColors.white,
+                  ),
+                )
+              ],
+            )),
         SizedBox(height: 10),
         FTrixEditSize(
           width: setting.width,

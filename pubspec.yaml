@@ -36,6 +36,11 @@ dependencies:
   go_router: ^14.6.2
   auto_route: ^9.2.2
   url_strategy: ^0.3.0
+  permission_handler: ^12.0.1
+  file_picker: ^10.3.3
+  image_picker: ^1.2.0
+  flutter_image_compress: ^2.4.0
+  image: ^4.5.4
 
 dev_dependencies:
   flutter_test:

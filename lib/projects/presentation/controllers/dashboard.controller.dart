@@ -52,18 +52,23 @@ class DashboardController extends GetxController {
   void handleCreateNewProject() async {
     final user = await storage.getAuthUser();
     if (user == null) return;
+    final projectCount = getAllProjectsAsync.data?.length ?? 0;
     createProjectAsync
         .execute(CreateProjectCommand(
-            userId: user.userId, projectName: 'Mon projet'))
+            userId: user.userId,
+            projectName:
+                'Mon projet ${projectCount > 0 ? ' ${projectCount + 1}' : ''}'))
         .then((response) {
       response.fold((err) {}, (result) {
-        createScreenAsync.execute(
+        createScreenAsync
+            .execute(
           CreateScreenCommand(
             projectId: result.id,
             name: "HomePage",
             screenData: FTrixCanvas().toJson(),
           ),
-        ).then((response){
+        )
+            .then((response) {
           Get.toNamed(Routes.PROJECT_DETAILS);
         });
       });

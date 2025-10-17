@@ -1,6 +1,5 @@
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttrix/canvas/models/utils/data.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.canvas.dart';
 import 'package:fluttrix/projects/application/usecases/screens/all/get.all.screens.async.dart';
 import 'package:fluttrix/projects/application/usecases/screens/create/create.screen.async.dart';
@@ -41,13 +40,14 @@ class FCanvasController extends GetxController {
     WidgetsBinding.instance.addPostFrameCallback((t) {
       final renderBox =
           frameKey.currentContext?.findRenderObject() as RenderBox?;
-      if(renderBox == null) return;
+      if (renderBox == null) return;
       canvasSize.value = renderBox.size;
     });
     handleGetAllScreens();
     handleListenWhenCanvasUpdated();
-    ever(currentScreenId, (screenId){
-      final screen = screensFetcher.value.firstWhere((screen) => screen.id == screenId);
+    ever(currentScreenId, (screenId) {
+      final screen =
+          screensFetcher.value.firstWhere((screen) => screen.id == screenId);
       canvas.loadFromJson(screen.data);
     });
   }
@@ -56,21 +56,18 @@ class FCanvasController extends GetxController {
     canvas.select();
   }
 
-
   void handleGetAllScreens() {
     RunUseCase(
       fetcher: screensFetcher,
       useCase: getAllScreensAsync.execute(projectId),
-    ).execute(
-      onSuccess: (screens){
-        if(screens.isEmpty) return;
-        currentScreenId.value = screens.first.id;
-      }
-    );
+    ).execute(onSuccess: (screens) {
+      if (screens.isEmpty) return;
+      currentScreenId.value = screens.first.id;
+    });
   }
 
   void handleListenWhenCanvasUpdated() {
-    canvas.update.listen((event) async{
+    canvas.update.listen((event) async {
       await Future.delayed(Duration.zero);
       updateScreenAsync.execute(
         UpdateScreenCommand(
@@ -80,11 +77,17 @@ class FCanvasController extends GetxController {
       );
     });
   }
-  
-  void createNewScreen(){
+
+  void createNewScreen() {
     RunUseCase(
-      useCase: CreateScreenAsync(AppDependencies.get()).execute(CreateScreenCommand(projectId: projectId, name: 'Screen', screenData: FTrixCanvas().toJson()))
-    ).execute(
-    );
+            useCase: CreateScreenAsync(AppDependencies.get()).execute(
+                CreateScreenCommand(
+                    projectId: projectId,
+                    name: 'Screen',
+                    screenData: FTrixCanvas().toJson())))
+        .execute();
   }
+
+  Screen get currentScreen => screensFetcher.value
+      .firstWhere((screen) => screen.id == currentScreenId.value);
 }
