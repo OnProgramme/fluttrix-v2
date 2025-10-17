@@ -11,12 +11,14 @@ import 'package:fluttrix/utils/app.dependencies.dart';
 class FirestoreProjectRepository implements ProjectRepository {
   CollectionReference get collection =>
       FirebaseFirestore.instance.collection("Projects");
-  final _eventDispatch = AppDependencies.resolve<EventDispatcher>();
+  final _eventDispatch = AppDependencies.get<EventDispatcher>();
+
 
   @override
   Future<Either<AppFailure, Project>> create(Project project) async {
     try {
       await collection.doc(project.id).set(project.toJson());
+
       return Right(project);
     } catch (e) {
       return Left(AppFailure.failSaved());

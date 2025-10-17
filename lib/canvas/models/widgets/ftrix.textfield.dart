@@ -36,6 +36,7 @@ class FTrixTextField extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     setting = FTrixTextFieldSetting.fromJson(normalizeJson(json['setting']));
   }
 }

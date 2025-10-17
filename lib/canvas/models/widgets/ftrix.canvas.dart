@@ -26,12 +26,15 @@ class FTrixCanvas implements IFTrixCanvas {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    _scaffold.reset();
     _scaffold.loadFromJson(json);
-    if (json.containsKey("child")) {
+    if (json["child"] != null) {
       _loadChildRecursively(_scaffold, json["child"]);
-    } else if (json.containsKey("children")) {
+    } else if (json["children"] != null) {
       _loadChildrenRecursively(
-          _scaffold, List<Map<String, dynamic>>.from(json["children"]));
+        _scaffold,
+        List<Map<String, dynamic>>.from(json["children"]),
+      );
     }
   }
 
@@ -40,11 +43,13 @@ class FTrixCanvas implements IFTrixCanvas {
     if (parent is FTrixWidgetWithChild) {
       parent.child = child;
     }
-    if (childJson.containsKey("child")) {
+    if (childJson["child"] != null) {
       _loadChildRecursively(child, childJson["child"]);
-    } else if (childJson.containsKey("children")) {
+    } else if (childJson["children"] != null) {
       _loadChildrenRecursively(
-          child, List<Map<String, dynamic>>.from(childJson["children"]));
+        child,
+        List<Map<String, dynamic>>.from(childJson["children"]),
+      );
     }
   }
 
@@ -55,13 +60,12 @@ class FTrixCanvas implements IFTrixCanvas {
     if (parent is FTrixWidgetWithChildren) {
       parent.children = childrenJson.map((childJson) {
         IWidget child = FTrixWidgetJsonBuilder.fromJson(childJson);
-        if (childJson.containsKey("child")) {
+        if (childJson["child"] != null) {
           _loadChildRecursively(child, childJson["child"]);
-        } else if (childJson.containsKey("children")) {
+        } else if (childJson["children"] != null) {
           _loadChildrenRecursively(
               child, List<Map<String, dynamic>>.from(childJson["children"]));
         }
-
         return child;
       }).toList();
     }
@@ -137,6 +141,9 @@ class _CanvasRenderState extends State<_CanvasRender> {
   void initState() {
     super.initState();
     FTrixStream.instance.updateCanvas.listen((e) {
+      if (mounted) setState(() {});
+    });
+    FTrixStream.instance.selectWidgetEvent.listen((e) {
       if (mounted) setState(() {});
     });
   }

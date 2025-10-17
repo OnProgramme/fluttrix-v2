@@ -14,7 +14,7 @@ import 'package:fluttrix/utils/app.dependencies.dart';
 import '../../../user/domain/entities/user.entity.dart';
 
 class FirebaseAuthService implements AuthGateway {
-  final _eventDispatch = AppDependencies.resolve<EventDispatcher>();
+  final _eventDispatch = AppDependencies.get<EventDispatcher>();
 
   @override
   Future<Either<AppFailure, AuthUser>> login(LoginCommand command) async {

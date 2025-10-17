@@ -95,6 +95,7 @@ class FTrixRichText extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     text = List<FTrixRichTextSetting>.from(json["text"]
         .map((x) => FTrixRichTextSetting.fromJson(normalizeJson(x))));
     setting = FTrixTextSetting.fromJson(normalizeJson(json['setting']));

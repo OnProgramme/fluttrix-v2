@@ -31,7 +31,7 @@ class FTrixIconSetting extends FTrixWidgetSetting {
   Map<String, dynamic> toJson() {
     return super.toJson()
       ..addAll({
-        "color": color,
+        "color": color?.value,
         "size": size,
       })
       ..removeWhere((key, value) => value == null);

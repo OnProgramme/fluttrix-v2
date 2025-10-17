@@ -232,7 +232,7 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
   @override
   void initState() {
     super.initState();
-    FTrixStream.instance.updateCanvas.listen((e) {
+    FTrixStream.instance.selectWidgetEvent.listen((e) {
       if (mounted) setState(() {});
     });
     FTrixStream.instance.selectWidgetEvent.listen((event) {

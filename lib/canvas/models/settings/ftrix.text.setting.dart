@@ -41,7 +41,7 @@ class FTrixTextSetting extends FTrixWidgetSetting {
             (el) => el.name == json['decoration'],
             orElse: () => TextDecorationEnum.none);
     fontWeight = FontWeightEnum.values.firstWhere(
-        (el) => el == json['fontWeight'],
+        (el) => el.name == json['fontWeight'],
         orElse: () => FontWeightEnum.w400);
   }
 

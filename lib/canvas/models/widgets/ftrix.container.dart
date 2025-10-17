@@ -11,6 +11,7 @@ class FTrixContainer extends FTrixWidgetWithChild {
     super.child,
     super.parentId,
     FTrixContainerSetting? setting,
+    super.disableLabel
   }) : super(
           type: WidgetType.CONTAINER,
           setting: setting ?? FTrixContainerSetting.zero,
@@ -29,12 +30,14 @@ class FTrixContainer extends FTrixWidgetWithChild {
   Widget render() {
     final setting = this.setting as FTrixContainerSetting;
     return FTrixBaseComponent(
+
       onDrop: handleDropWidget,
       widget: this,
       setting: setting,
       isSelected: isWidgetSelected,
       onTap: select,
       disablePadding: true,
+      disableLabel: disableLabel,
       // enableResizedChild: true,
       // isDraggable: false,
       child: Container(

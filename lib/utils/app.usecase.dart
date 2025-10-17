@@ -8,8 +8,10 @@ import 'package:fluttrix/auth/infra/services/firebase.auth.service.dart';
 import 'package:fluttrix/projects/application/usecases/all/get.all.projects.async.dart';
 import 'package:fluttrix/projects/application/usecases/create/create.project.async.dart';
 import 'package:fluttrix/projects/application/usecases/delete/delete.project.async.dart';
+import 'package:fluttrix/projects/application/usecases/screens/all/get.all.screens.async.dart';
 import 'package:fluttrix/projects/application/usecases/screens/create/create.screen.async.dart';
 import 'package:fluttrix/projects/application/usecases/screens/delete_all/delete.all.screens.async.dart';
+import 'package:fluttrix/projects/application/usecases/screens/update/update.screen.async.dart';
 import 'package:fluttrix/projects/infra/repo/firestore/firestore.project.repository.dart';
 import 'package:fluttrix/projects/infra/repo/firestore/firestore.screen.repository.dart';
 import 'package:fluttrix/shared/injection/domain/dependency.injector.dart';
@@ -39,5 +41,7 @@ class AppDependenciesUseCases {
     injector.register<DeleteProjectAsync>(DeleteProjectAsync(firestoreProjects));
     injector.register<CreateScreenAsync>(CreateScreenAsync(firestoreScreens));
     injector.register<DeleteAllScreensAsync>(DeleteAllScreensAsync(firestoreScreens));
+    injector.register<GetAllScreensAsync>(GetAllScreensAsync(firestoreScreens));
+    injector.register<UpdateScreenAsync>(UpdateScreenAsync(firestoreScreens));
   }
 }

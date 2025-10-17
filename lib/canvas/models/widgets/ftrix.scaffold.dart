@@ -6,16 +6,18 @@ import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.scaffold.component.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.app.bar.dart';
+import 'package:fluttrix/canvas/models/widgets/appbar/ftrix.app.bar.dart';
 
 class FTrixScaffold extends FTrixWidgetWithChild {
-  late FTrixAppBar? appBar;
+  FTrixAppBar? appBar;
   FTrixScaffold({
     super.child,
     super.parentId,
-    this.appBar,
+    FTrixAppBar? appBar,
     FTrixScaffoldSetting? setting,
-  }) : super(
+  }) :
+        appBar = appBar ?? FTrixAppBar(),
+        super(
             type: WidgetType.SCAFFOLD,
             setting: setting ?? FTrixScaffoldSetting.zero);
 
@@ -44,7 +46,7 @@ class FTrixScaffold extends FTrixWidgetWithChild {
       isSelected: isWidgetSelected,
       widget: this,
       select: select,
-      appBar: setting.showAppbar ? FTrixAppBar() : null,
+      appBar: setting.showAppbar ? appBar : null,
       child: Container(
         decoration: BoxDecoration(
           color: setting.backgroundColor,
@@ -66,7 +68,17 @@ class FTrixScaffold extends FTrixWidgetWithChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     setting = FTrixScaffoldSetting.fromJson(normalizeJson(json['setting']));
     id = json['id'];
+
+  }
+
+  void reset(){
+    child = null;
+    setting = FTrixScaffoldSetting.zero;
+    appBar = FTrixAppBar(
+
+    );
   }
 }

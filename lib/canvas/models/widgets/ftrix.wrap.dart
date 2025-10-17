@@ -17,6 +17,7 @@ class FTrixWrap extends FTrixWidgetWithChildren {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     setting = FTrixWrapSetting.fromJson(normalizeJson(json["setting"]));
   }
 

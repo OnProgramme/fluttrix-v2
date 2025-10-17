@@ -24,6 +24,7 @@ class FTrixBaseComponent extends StatefulWidget {
     this.enableResizedChild = false,
     this.enableHorizontalResize = true,
     this.enableVerticalResize = true,
+    this.disableLabel = false,
     this.onResized,
   });
 
@@ -40,6 +41,7 @@ class FTrixBaseComponent extends StatefulWidget {
   final bool enableResizedChild;
   final bool enableHorizontalResize;
   final bool enableVerticalResize;
+  final bool disableLabel;
   final ValueSetter<Size>? onResized;
 
   @override
@@ -147,6 +149,7 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
                         ),
                       ),
                     ),
+                    if(!widget.disableLabel)
                     Positioned(
                       top: -23,
                       left: 0,

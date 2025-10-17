@@ -4,6 +4,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.with.icon.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.icon.builder.dart';
+import 'package:fluttrix/canvas/models/widgets/appbar/ftrix.app.bar.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.column.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.container.dart';
@@ -16,6 +17,7 @@ import 'package:fluttrix/canvas/models/widgets/ftrix.text.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.textfield.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/ftrix.toolbar.settings.controller.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/align.toolbar.setting.component.dart';
+import 'package:fluttrix/canvas/presentation/toolbar/settings/components/app.bar.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/button.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/column.row.toolbar.setting.component.dart';
 import 'package:fluttrix/canvas/presentation/toolbar/settings/components/container.toolbar.setting.component.dart';
@@ -83,6 +85,11 @@ class ToolbarSettingsComponent extends GetView<FTrixToolbarSettingsController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  if (controller.selectedWidget.value is FTrixAppBar) ...[
+                    FTrixAppBarToolBarSettingComponent(
+                        widget:
+                        controller.selectedWidget.value as FTrixAppBar)
+                  ],
                   if (controller.selectedWidget.value is FTrixTextField) ...[
                     TextFieldToolBarSettingComponent(
                         widget:

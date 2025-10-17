@@ -73,6 +73,7 @@ class FTrixButtonWithText extends FTrixDroppableWidgetWithoutChild with FTrixBut
   @override
   void loadFromJson(Map<String, dynamic> json) {
     text = json['text'];
+    print(json['setting']);
     setting = FTrixButtonWithTextSetting.fromJson(normalizeJson(json['setting']));
   }
 }

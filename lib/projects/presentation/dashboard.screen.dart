@@ -69,33 +69,38 @@ class DashboardScreen extends GetView<DashboardController> {
                                 return ConsumerAsync(
                                     notifier: [controller.deleteProjectAsync],
                                     builder: (context, async) {
-                                      return Container(
-                                        height: 200,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                          color: AppColors.white,
-                                        )),
-                                        width: MediaQuery.sizeOf(context).width,
-                                        child: Stack(
-                                          children: [
-                                            Center(child: Text(project.name)),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: async[0].isPending
-                                                  ? SizedBox(
-                                                      width: 30,
-                                                      height: 30,
-                                                      child:
-                                                          CircularProgressIndicator())
-                                                  : IconButton(
-                                                      onPressed: () => controller
-                                                          .handleDeleteProject(
-                                                              project.id),
-                                                      icon: Icon(
-                                                          LucideIcons.delete)),
-                                            )
-                                          ],
+                                      return InkWell(
+                                        onTap: () => controller
+                                            .handleOpenProject(project.id),
+                                        child: Container(
+                                          height: 200,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                            color: AppColors.white,
+                                          )),
+                                          width:
+                                              MediaQuery.sizeOf(context).width,
+                                          child: Stack(
+                                            children: [
+                                              Center(child: Text(project.name)),
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: async[0].isPending
+                                                    ? SizedBox(
+                                                        width: 30,
+                                                        height: 30,
+                                                        child:
+                                                            CircularProgressIndicator())
+                                                    : IconButton(
+                                                        onPressed: () => controller
+                                                            .handleDeleteProject(
+                                                                project.id),
+                                                        icon: Icon(LucideIcons
+                                                            .delete)),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       );
                                     });

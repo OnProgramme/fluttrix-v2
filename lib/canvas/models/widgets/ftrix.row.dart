@@ -28,6 +28,7 @@ class FTrixRow extends FTrixWidgetWithChildren {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     setting = FTrixColumnRowSetting.fromJson(normalizeJson(json['setting']));
   }
 
