@@ -16,10 +16,11 @@ abstract class IWidget {
   FTrixWidgetSetting setting;
   late WidgetType type;
   late bool isWidgetSelected;
+  late bool disableLabel;
   Widget render();
   IWidget clone([String? parentId]);
 
-  IWidget({required this.type, this.parentId, required this.setting}) {
+  IWidget({required this.type, this.parentId, required this.setting, this.disableLabel = false}) {
     isWidgetSelected = false;
     id = Uuid().v4();
     FTrixStream.instance.selectWidgetEvent
@@ -32,7 +33,6 @@ abstract class IWidget {
         event.type == FTrixWidgetEventType.SELECT) return;
     if (isWidgetSelected || event.selectWidget.id == id) {
       isWidgetSelected = event.selectWidget.id == id;
-      update();
     }
   }
 
@@ -68,7 +68,11 @@ abstract class IWidget {
     };
   }
 
-  void loadFromJson(Map<String, dynamic> json);
+  void loadFromJson(Map<String, dynamic> json){
+    id = json['id'];
+    type = WidgetType.values.firstWhere((el) => el.name == json['type']);
+    parentId = json['parentId'];
+  }
 
   void wrapParent(WidgetType type) {
     if (parentId == null) return;

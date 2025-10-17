@@ -48,7 +48,7 @@ class FTrixStream {
   static final _streamControllerEvent =
       StreamController<FTrixEventData>.broadcast();
 
-  Stream<FTrixEventData> get streamEvent => _streamControllerEvent.stream;//.transform(FirstEventTransformer(Duration(milliseconds: 100)));
+  Stream<FTrixEventData> get streamEvent => _streamControllerEvent.stream;
 
 
   void addToStream(FTrixWidgetEvent widgetType) {
@@ -82,7 +82,9 @@ class FTrixStream {
 
   Stream<FTrixEventData> get updateCanvas =>
       instance.streamEvent
-          .where((e) => e.type == FTrixWidgetEventType.UPDATE || e.type == FTrixWidgetEventType.DELETE);
+          .where((e) {
+            return e.type == FTrixWidgetEventType.UPDATE || e.type == FTrixWidgetEventType.DELETE;
+          });
 
 
   void dispose() {

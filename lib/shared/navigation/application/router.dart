@@ -3,9 +3,9 @@ import 'package:fluttrix/utils/app.dependencies.dart';
 
 class AppRouter{
   AppRouter._();
-  static final _navigator = AppDependencies.resolve<NavigatorService>();
-  static Future<dynamic> navigate(String route, {dynamic argument}){
-    return _navigator.navigate(route, arguments: argument);
+  static final _navigator = AppDependencies.get<NavigatorService>();
+  static Future<dynamic> navigate(String route, {dynamic argument, Map<String, String>? parameters}){
+    return _navigator.navigate(route, arguments: argument, parameters: parameters);
   }
   static Future<dynamic> offAllNames(String route, {dynamic argument}){
     return _navigator.ofAllNames(route, arguments: argument);

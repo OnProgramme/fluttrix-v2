@@ -36,7 +36,7 @@ class FTrixButtonSetting extends FTrixWidgetSetting {
   Map<String, dynamic> toJson() {
     return super.toJson()
       ..addAll({
-        "color": color,
+        "color": color?.value,
         "borderColor": borderColor,
         "fullWidth": fullWidth,
     })..removeWhere((key, value) => value == null);

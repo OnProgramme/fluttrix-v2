@@ -13,6 +13,7 @@ import 'package:fluttrix/projects/presentation/controllers/dashboard.controller.
 import 'package:fluttrix/projects/presentation/dashboard.screen.dart';
 import 'package:fluttrix/shared/navigation/domain/navigator.service.dart';
 import 'package:fluttrix/shared/navigation/middlewares/auth.middleware.dart';
+import 'package:fluttrix/shared/navigation/middlewares/check.project.id.middleware.dart';
 import 'package:fluttrix/shared/navigation/middlewares/non.auth.middleware.dart';
 import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:get/get.dart';
@@ -24,8 +25,8 @@ class GetRouterService implements NavigatorService {
   }
 
   @override
-  Future navigate(String route, {arguments}) async {
-    Get.toNamed(route, arguments: arguments);
+  Future navigate(String route, {arguments, Map<String, String>? parameters}) async {
+    Get.toNamed(route, arguments: arguments, parameters: parameters);
   }
 
   @override
@@ -58,12 +59,15 @@ class GetRouter {
           binding: DashboardControllerBinding(),
         ),
         GetPage(
-            name: Routes.HOME,
+            name: Routes.PROJECT_DETAILS,
             page: () => const HomeScreen(),
             binding: HomeControllerBinding(),
             bindings: [
               FCanvasControllerBinding(),
               FTrixToolbarSettingsControllerBinding(),
+            ],
+            middlewares: [
+              CheckProjectIdMiddleware()
             ]),
         GetPage(
           name: Routes.PREVIEW_CODE,

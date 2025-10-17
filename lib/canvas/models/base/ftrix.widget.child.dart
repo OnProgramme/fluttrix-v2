@@ -15,6 +15,7 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
       {super.parentId,
       required super.setting,
       required super.type,
+        super.disableLabel = false,
       this.child}) {
     child?.parentId = id;
     FTrixStream.instance.wrapParentWidgetEvent

@@ -49,6 +49,8 @@ class FTrixImage extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     setting = FTrixImageSetting.fromJson(normalizeJson(json['setting']));
+    src = json['src'];
   }
 }

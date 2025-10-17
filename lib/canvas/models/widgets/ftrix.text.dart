@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.without.child.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.text.setting.dart';
+import 'package:fluttrix/canvas/models/utils/normalize.json.dart';
 import 'package:fluttrix/canvas/models/widgets/components/ftrix.base.component.dart';
 
 import '../enums/widget.type.dart';
@@ -17,7 +18,9 @@ class FTrixText extends FTrixDroppableWidgetWithoutChild {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    super.loadFromJson(json);
     text = json['text'];
+    setting = FTrixTextSetting.fromJson(normalizeJson(json['setting']));
   }
 
   @override

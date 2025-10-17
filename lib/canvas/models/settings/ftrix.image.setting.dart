@@ -21,7 +21,7 @@ class FTrixImageSetting extends FTrixWidgetSetting {
         padding: FTrixWidgetSetting.zero.padding,
         margin: FTrixWidgetSetting.zero.margin,
         radius: FTrixWidgetSetting.zero.radius,
-        fullWidth: true,
+        fullWidth: false,
         height: 300,
       );
 

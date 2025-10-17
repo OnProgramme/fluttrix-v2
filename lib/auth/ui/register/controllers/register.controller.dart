@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/auth/application/usecases/register/register.async.dart';
 import 'package:fluttrix/auth/application/usecases/register/register.command.dart';
-import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/shared/form/validator/form.validator.dart';
 import 'package:fluttrix/shared/navigation/application/router.dart';
 import 'package:fluttrix/shared/navigation/routes.dart';
@@ -25,7 +24,7 @@ class RegisterController extends GetxController{
   late FormValidator form;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final registerAsync = RegisterAsync(AppDependencies.resolve<IAuthFacade>());
+  final registerAsync = AppDependencies.get<RegisterAsync>();
 
   @override
   void onInit() {

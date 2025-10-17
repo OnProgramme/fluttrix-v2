@@ -43,26 +43,26 @@ class AppDependencies {
     Get.put(ChooseIconController());
   }
 
-  static T resolve<T>() {
+  static T get<T>() {
     return _injector.resolve<T>();
   }
 
 
   static void _subscribeToEvents(EventDispatcher dispatcher){
-    final authStorage = resolve<AuthUserStorage>();
+    final authStorage = get<AuthUserStorage>();
     dispatcher.subscribe(EventName.login, GetUserToFirestoreAfterLoginListener(
-      useCase: resolve<GetProfileAsync>(),
+      useCase: get<GetProfileAsync>(),
       storage: authStorage,
     ));
     dispatcher.subscribe(EventName.register, SaveUserToFirestoreAfterRegisterListener(
-      useCase: resolve<SaveUserAsync>(),
+      useCase: get<SaveUserAsync>(),
       storage: authStorage,
     ));
     dispatcher.subscribe(EventName.projectCreated, ListenWhenProjectCreatedAndCreateFirstScreen(
-      useCase: resolve<CreateScreenAsync>(),
+      useCase: get<CreateScreenAsync>(),
     ));
     dispatcher.subscribe(EventName.projectDeleted, ListenWhenProjectDeletedAndDeleteAllScreens(
-      useCase: resolve<DeleteAllScreensAsync>(),
+      useCase: get<DeleteAllScreensAsync>(),
     ));
   }
 }

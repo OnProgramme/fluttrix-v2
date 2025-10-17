@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:fluttrix/projects/application/usecases/screens/update/udpate.screen.command.dart';
 import 'package:fluttrix/projects/domain/entities/screen.entity.dart';
 import 'package:fluttrix/projects/domain/repo/screen.repository.dart';
 import 'package:fluttrix/shared/exceptions/app.failure.dart';
@@ -43,5 +44,14 @@ class FirestoreScreenRepository implements ScreenRepository {
         return Right(unit);
       });
     });
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> updateScreen(UpdateScreenCommand command) {
+    return collection
+        .doc(command.screenId)
+        .update(command.toJson())
+        .then((value) => Right(unit))
+    ;
   }
 }

@@ -21,6 +21,7 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
       {super.parentId,
       required super.setting,
       required super.type,
+      super.disableLabel,
       List<IWidget>? children}) {
     FTrixStream.instance.deleteWidgetEvent
         .listen(_handleListenWhenChildDeleted);

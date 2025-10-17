@@ -1,8 +1,11 @@
 import 'package:fluttrix/auth/application/usecases/logout/logout.async.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.canvas.dart';
 import 'package:fluttrix/projects/application/usecases/all/get.all.projects.async.dart';
 import 'package:fluttrix/projects/application/usecases/create/create.project.command.dart';
 import 'package:fluttrix/projects/application/usecases/delete/delete.project.async.dart';
+import 'package:fluttrix/projects/application/usecases/screens/create/create.screen.async.dart';
+import 'package:fluttrix/projects/application/usecases/screens/create/create.screen.command.dart';
 import 'package:fluttrix/shared/navigation/application/router.dart';
 import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:fluttrix/user/application/usecases/profile/get.profile.async.dart';
@@ -19,12 +22,13 @@ class DashboardControllerBinding extends Bindings {
 }
 
 class DashboardController extends GetxController {
-  final createProjectAsync = AppDependencies.resolve<CreateProjectAsync>();
-  final getAllProjectsAsync = AppDependencies.resolve<GetAllProjectsAsync>();
-  final deleteProjectAsync = AppDependencies.resolve<DeleteProjectAsync>();
-  final getProfileAsync = AppDependencies.resolve<GetProfileAsync>();
-  final logoutAsync = AppDependencies.resolve<LogoutAsync>();
-  final storage = AppDependencies.resolve<AuthUserStorage>();
+  final createProjectAsync = AppDependencies.get<CreateProjectAsync>();
+  final createScreenAsync = AppDependencies.get<CreateScreenAsync>();
+  final getAllProjectsAsync = AppDependencies.get<GetAllProjectsAsync>();
+  final deleteProjectAsync = AppDependencies.get<DeleteProjectAsync>();
+  final getProfileAsync = AppDependencies.get<GetProfileAsync>();
+  final logoutAsync = AppDependencies.get<LogoutAsync>();
+  final storage = AppDependencies.get<AuthUserStorage>();
 
   @override
   void onInit() {
@@ -48,8 +52,22 @@ class DashboardController extends GetxController {
   void handleCreateNewProject() async {
     final user = await storage.getAuthUser();
     if (user == null) return;
-    createProjectAsync.execute(
-        CreateProjectCommand(userId: user.userId, projectName: 'Mon projet'));
+    createProjectAsync
+        .execute(CreateProjectCommand(
+            userId: user.userId, projectName: 'Mon projet'))
+        .then((response) {
+      response.fold((err) {}, (result) {
+        createScreenAsync.execute(
+          CreateScreenCommand(
+            projectId: result.id,
+            name: "HomePage",
+            screenData: FTrixCanvas().toJson(),
+          ),
+        ).then((response){
+          Get.toNamed(Routes.PROJECT_DETAILS);
+        });
+      });
+    });
   }
 
   void handleLogout() async {
@@ -59,5 +77,11 @@ class DashboardController extends GetxController {
 
   void handleDeleteProject(project) {
     deleteProjectAsync.execute(project);
+  }
+
+  void handleOpenProject(String id) {
+    AppRouter.navigate(Routes.PROJECT_DETAILS, parameters: {
+      'projectId': id,
+    });
   }
 }

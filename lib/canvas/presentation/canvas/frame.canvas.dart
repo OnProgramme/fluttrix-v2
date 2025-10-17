@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/tree/canvas.tree.widget.dart';
+import 'package:fluttrix/shared/components/consumer.async.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -42,19 +43,29 @@ class FrameCanvas extends GetView<FCanvasController> {
                           ),
                         ],
                       ),
-                      Theme(
-                        data: ThemeData(
-                            textTheme: TextTheme(
-                              bodyLarge: TextStyle(color: Colors.black),
-                              bodyMedium: TextStyle(color: Colors.black),
-                              bodySmall: TextStyle(color: Colors.black),
-                            )),
-                        child: SizedBox(
-                          key: controller.frameKey,
-                          height: 840,
-                          width: 390,
-                          child: controller.canvas.render(),
-                        ),
+                      ConsumerAsync(
+                          notifier:[controller.getAllScreensAsync],
+                          builder: (context, async) {
+                          if(async.first.isPending){
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return Theme(
+                            data: ThemeData(
+                                textTheme: TextTheme(
+                                  bodyLarge: TextStyle(color: Colors.black),
+                                  bodyMedium: TextStyle(color: Colors.black),
+                                  bodySmall: TextStyle(color: Colors.black),
+                                )),
+                            child: SizedBox(
+                              key: controller.frameKey,
+                              height: 840,
+                              width: 390,
+                              child: controller.canvas.render(),
+                            ),
+                          );
+                        }
                       )
                     ],
                   ),

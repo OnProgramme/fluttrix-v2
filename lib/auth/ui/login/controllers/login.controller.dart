@@ -27,9 +27,9 @@ class LoginController extends GetxController{
   late FormValidator form;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final loginAsync = AppDependencies.resolve<LoginAsync>();
-  final getProfileAsync = AppDependencies.resolve<GetProfileAsync>();
-  final storage = AppDependencies.resolve<AuthUserStorage>();
+  final loginAsync = AppDependencies.get<LoginAsync>();
+  final getProfileAsync = AppDependencies.get<GetProfileAsync>();
+  final storage = AppDependencies.get<AuthUserStorage>();
 
   @override
   void onInit() {
