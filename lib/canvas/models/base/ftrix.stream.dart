@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.componentize.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.drop.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.select.widget.event.data.dart';
@@ -69,6 +70,11 @@ class FTrixStream {
       instance.streamEvent
           .where((e) => e.type == FTrixWidgetEventType.WRAP_PARENT)
           .map((e) => e as FTrixWrapParentEventData);
+
+  Stream<FTrixComponentizeWidgetEventData> get componentizeWidgetEvent =>
+      instance.streamEvent
+          .where((e) => e.type == FTrixWidgetEventType.COMPONENTIZE)
+          .map((e) => e as FTrixComponentizeWidgetEventData);
 
   Stream<FTrixDeleteWidgetEventData> get deleteWidgetEvent =>
       instance.streamEvent

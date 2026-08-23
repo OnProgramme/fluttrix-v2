@@ -7,7 +7,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.ftrix.canvas.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.json.builder.dart';
-import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/generator/ftrix.widget.generator.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.select.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
@@ -99,39 +99,49 @@ class FTrixCanvas implements IFTrixCanvas {
   Stream<FTrixEventData> get update => FTrixStream.instance.updateCanvas;
 
   List<String> get widgetsImported =>
-      [WidgetType.INPUT, WidgetType.TEXT, WidgetType.BUTTON]
-          .where((el) => toJson().toString().contains('type: ${el.name}'))
-          .map((type) => _customFileNameByType(type))
+      FTrixWidgetGenerator.collectComponents(toJson())
+          .map((component) =>
+              FTrixWidgetGenerator.componentFileName(component.name))
           .toList();
 
   @override
   List<FTrixBaseFile> get files {
+    final screenJson = toJson();
+    final components = FTrixWidgetGenerator.collectComponents(screenJson);
+
+    final componentFiles = components.map((component) {
+      return FTrixFile(
+        FTrixWidgetGenerator.componentFileName(component.name),
+        content: FTrixWidgetGenerator.generateComponentFile(
+          componentName: component.name,
+          componentJson: component.json,
+        ),
+      );
+    }).toList();
+
+    final homeBuffer = StringBuffer();
+    for (final component in components) {
+      homeBuffer.writeln(
+          "import 'widgets/${FTrixWidgetGenerator.componentFileName(component.name)}';");
+    }
+    if (components.isNotEmpty) {
+      homeBuffer.writeln();
+    }
+    homeBuffer.write(FTrixWidgetGenerator.generateCodeFromJson(
+      jsonMap: screenJson,
+      className: 'Home',
+      stateType: FTrixWidgetStateType.STATEFUL,
+    ));
+
     final libFolder = FTrixFolder(name: "Lib", files: [
-      FTrixFolder(name: "home", files: [FTrixFile('home.dart')])
+      FTrixFolder(name: "home", files: [
+        FTrixFile('home.dart', content: homeBuffer.toString()),
+      ]),
+      if (componentFiles.isNotEmpty)
+        FTrixFolder(name: "widgets", files: componentFiles),
     ]);
 
-    if (widgetsImported.isNotEmpty) {
-      libFolder.files.add(FTrixFolder(
-          name: "widgets",
-          files: widgetsImported.map((name) {
-            return FTrixFile(name);
-          }).toList()));
-    }
-
     return [libFolder];
-  }
-
-  String _customFileNameByType(WidgetType type) {
-    switch (type) {
-      case WidgetType.INPUT:
-        return "ftrix.input.dart";
-      case WidgetType.TEXT:
-        return "ftrix.text.dart";
-      case WidgetType.BUTTON:
-        return "ftrix.button.dart";
-      default:
-        throw Exception("Invalid type");
-    }
   }
 
   @override

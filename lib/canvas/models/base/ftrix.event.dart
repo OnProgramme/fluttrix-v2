@@ -8,6 +8,7 @@ enum FTrixWidgetEventType {
   UNSELECT,
   DROP,
   WRAP_PARENT,
+  COMPONENTIZE,
 }
 
 class FTrixWidgetEvent {

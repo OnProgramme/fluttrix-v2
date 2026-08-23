@@ -6,7 +6,7 @@ import 'package:fluttrix/canvas/presentation/toolbar/components/widgets.toolbar.
 import 'package:fluttrix/canvas/presentation/toolbar/settings/toolbar.settings.component.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'controllers/home.controller.dart';
 

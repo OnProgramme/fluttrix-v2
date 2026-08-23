@@ -1,6 +1,13 @@
 import '../enums/widget.type.dart';
+import '../utils/parse.snake.to.pascal.dart';
 
 enum FTrixWidgetStateType { STATELESS, STATEFUL }
+
+class FTrixComponentRef {
+  final String name;
+  final Map<String, dynamic> json;
+  FTrixComponentRef({required this.name, required this.json});
+}
 
 class FTrixWidgetGenerator {
 
@@ -31,6 +38,65 @@ class FTrixWidgetGenerator {
     }
 
     return buffer.toString();
+  }
+
+  /// Collecte les composants utilisés dans l'arbre JSON (dédupliqué par nom).
+  static List<FTrixComponentRef> collectComponents(Map<String, dynamic> json,
+      [Map<String, FTrixComponentRef>? accumulator]) {
+    final components = accumulator ?? {};
+    if (json['type'] == WidgetType.COMPONENT.name &&
+        json['componentName'] != null &&
+        !components.containsKey(json['componentName'])) {
+      components[json['componentName']] = FTrixComponentRef(
+        name: json['componentName'],
+        json: Map<String, dynamic>.from(json),
+      );
+    }
+    final child = json['child'];
+    if (child is Map) {
+      collectComponents(Map<String, dynamic>.from(child), components);
+    }
+    final children = json['children'];
+    if (children is List) {
+      for (final element in children) {
+        if (element is Map) {
+          collectComponents(Map<String, dynamic>.from(element), components);
+        }
+      }
+    }
+    return components.values.toList();
+  }
+
+  /// Nom de classe PascalCase à partir du nom du composant.
+  static String pascalClassName(String name) {
+    return parseSnakeToPascal(name.trim().replaceAll(RegExp(r'\s+'), '_'));
+  }
+
+  /// Nom de fichier snake_case pour un composant.
+  static String componentFileName(String name) {
+    return '${pascalClassName(name)
+        .replaceAllMapped(RegExp(r'[A-Z]'), (match) {
+      return match.group(0) == null ? '' : '_${match.group(0)!.toLowerCase()}';
+    }).replaceFirst(RegExp(r'^_'), '')}.dart';
+  }
+
+  /// Génère le contenu du fichier dart d'un composant réutilisable.
+  static String generateComponentFile({
+    required String componentName,
+    required Map<String, dynamic> componentJson,
+  }) {
+    final className = pascalClassName(componentName);
+    final body = componentJson['child'] ?? componentJson;
+    return generateCodeFromJson(
+      jsonMap: Map<String, dynamic>.from(body),
+      className: className,
+      stateType: FTrixWidgetStateType.STATELESS,
+    );
+  }
+
+  /// Échappe une chaîne utilisateur pour un littéral Dart.
+  static String escapeString(String value) {
+    return value.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('\$', r'\$');
   }
 
   static String _generateStatelessWidget(
@@ -96,9 +162,19 @@ $indent }''';
         return _generateContainerCode(json, indentLevel);
       case WidgetType.IMAGE:
         return _generateImageCode(json, indentLevel);
+      case WidgetType.COMPONENT:
+        return _generateComponentCode(json, indentLevel);
       default:
         return '$indent Container()';
     }
+  }
+
+  static String _generateComponentCode(
+      Map<String, dynamic> json, int indentLevel) {
+    final indent = '  ' * indentLevel;
+    final componentName =
+        json['componentName']?.toString() ?? 'MyComponent';
+    return '$indent ${pascalClassName(componentName)}()';
   }
 
   static String _generateColumnCode(
@@ -127,15 +203,26 @@ $indent }''';
     buffer.writeln('$indent Scaffold(');
 
     if (json['appBar'] != null) {
+      final appBarJson = Map<String, dynamic>.from(json['appBar']);
+      final appBarChild = appBarJson['child'];
       buffer.writeln('$indent   appBar: AppBar(');
-      buffer.writeln(
-          '$indent     title: ${_generateCode(json['appBar'], indentLevel: indentLevel + 2)}');
+      if (appBarJson['centerTitle'] != null) {
+        buffer.writeln(
+            '$indent     centerTitle: ${appBarJson['centerTitle']},');
+      }
+      if (appBarChild != null) {
+        buffer.writeln(
+            '$indent     title: ${_generateCode(Map<String, dynamic>.from(appBarChild), indentLevel: indentLevel + 2)}');
+      }
       buffer.writeln('$indent   ),');
     }
 
-    if (json['body'] != null) {
+    if (json['child'] != null) {
       buffer.writeln(
-          '$indent   body: ${_generateCode(json['body'], indentLevel: indentLevel + 2)},');
+          '$indent   body: ${_generateCode(Map<String, dynamic>.from(json['child']), indentLevel: indentLevel + 2)},');
+    } else if (json['body'] != null) {
+      buffer.writeln(
+          '$indent   body: ${_generateCode(Map<String, dynamic>.from(json['body']), indentLevel: indentLevel + 2)},');
     }
 
     buffer.write('$indent )');
@@ -167,8 +254,8 @@ $indent }''';
 $indent   padding: const EdgeInsets.symmetric(vertical: 8),
 $indent   child: TextField(
 $indent     decoration: InputDecoration(
-$indent       labelText: '${json['label']}',
-$indent       hintText: ${json['hint'] != null ? "'${json['hint']}'" : 'null'},
+$indent       labelText: '${escapeString(json['label']?.toString() ?? '')}',
+$indent       hintText: ${json['hint'] != null ? "'${escapeString(json['hint'].toString())}'" : 'null'},
 $indent       border: const OutlineInputBorder(),
 $indent     ),
 $indent     obscureText: ${json['isPassword'] ?? false},
@@ -181,7 +268,7 @@ $indent )''';
     final indent = '  ' * indentLevel;
     return '''$indent ElevatedButton(
 $indent   onPressed: () {},
-$indent   child: Text('${json['text'] ?? ''}'),
+$indent   child: Text('${escapeString(json['text']?.toString() ?? '')}'),
 $indent   style: ElevatedButton.styleFrom(
 $indent     minimumSize: const Size(double.infinity, 48),
 $indent   ),
@@ -190,7 +277,7 @@ $indent )''';
 
   static String _generateTextCode(Map<String, dynamic> json, int indentLevel) {
     final indent = '  ' * indentLevel;
-    return '$indent Text("${json['text'] ?? ''}")';
+    return '$indent Text("${escapeString(json['text']?.toString() ?? '')}")';
   }
 
   static String _generateRowCode(Map<String, dynamic> json, int indentLevel) {

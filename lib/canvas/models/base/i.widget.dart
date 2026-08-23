@@ -6,6 +6,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.setting.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.componentize.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.select.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.update.widget.event.data.dart';
@@ -97,6 +98,19 @@ abstract class IWidget {
       parentType: type,
       widgetId: id,
       currentParentId: parentId!,
+    ));
+  }
+
+  void componentize({
+    required String componentId,
+    required String componentName,
+  }) {
+    if (parentId == null) return;
+    FTrixStream.instance.addToStreamEvent(FTrixComponentizeWidgetEventData(
+      widgetId: id,
+      currentParentId: parentId!,
+      componentId: componentId,
+      componentName: componentName,
     ));
   }
 

@@ -5,8 +5,10 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.componentize.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.component.dart';
 
 abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
   IWidget? child;
@@ -20,6 +22,8 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
     child?.parentId = id;
     super.onStream(FTrixStream.instance.wrapParentWidgetEvent,
         _handleListenWhenChildWrapped);
+    super.onStream(FTrixStream.instance.componentizeWidgetEvent,
+        _handleListenWhenChildComponentized);
     super.onStream(FTrixStream.instance.deleteWidgetEvent,
         _handleListenWhenChildDeleted);
   }
@@ -64,6 +68,20 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
     }
     oldChild.dispose();
     child = parent;
+  }
+
+  void _handleListenWhenChildComponentized(
+      FTrixComponentizeWidgetEventData event) {
+    if (event.currentParentId != id || child?.id != event.widgetId) return;
+    final oldChild = child!;
+    final component = FTrixComponent(
+      componentId: event.componentId,
+      componentName: event.componentName,
+      parentId: id,
+      child: oldChild,
+    );
+    oldChild.parentId = component.id;
+    setChild(component);
   }
 
   void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {

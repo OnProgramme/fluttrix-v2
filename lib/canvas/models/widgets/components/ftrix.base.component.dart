@@ -25,6 +25,7 @@ class FTrixBaseComponent extends StatefulWidget {
     this.enableHorizontalResize = true,
     this.enableVerticalResize = true,
     this.disableLabel = false,
+    this.label,
     this.onResized,
   });
 
@@ -42,6 +43,7 @@ class FTrixBaseComponent extends StatefulWidget {
   final bool enableHorizontalResize;
   final bool enableVerticalResize;
   final bool disableLabel;
+  final String? label;
   final ValueSetter<Size>? onResized;
 
   @override
@@ -161,9 +163,10 @@ class _FTrixBaseComponentState extends State<FTrixBaseComponent> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 1.5),
                         child: Text(
-                          widget.widget.type.name
-                              .toLowerCase()
-                              .capitalizeFirst!,
+                          widget.label ??
+                              widget.widget.type.name
+                                  .toLowerCase()
+                                  .capitalizeFirst!,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

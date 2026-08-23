@@ -12,10 +12,15 @@ import 'package:fluttrix/canvas/models/enums/drop.position.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
 import 'package:fluttrix/canvas/models/utils/parse.snake.to.pascal.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
+import 'package:fluttrix/canvas/presentation/canvas/controllers/f.canvas.controller.dart';
 import 'package:fluttrix/canvas/presentation/canvas/tree/wrap/wrap.component.list.modal.dart';
+import 'package:fluttrix/projects/application/usecases/components/create/create.component.async.dart';
+import 'package:fluttrix/projects/application/usecases/components/create/create.component.command.dart';
 import 'package:fluttrix/utils/app.colors.dart';
+import 'package:fluttrix/utils/app.dependencies.dart';
+import 'package:fluttrix/utils/message.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class CanvasTreeWidgetExplorer extends StatefulWidget {
   final IWidget rootWidget;
@@ -50,6 +55,7 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
       case WidgetType.BUTTON_WITH_CHILD:
       case WidgetType.ALIGN:
       case WidgetType.CENTER:
+      case WidgetType.COMPONENT:
         final containerWidget = widget as FTrixWidgetWithChild;
         if (containerWidget.child != null) {
           children.add(containerWidget.child!);
@@ -134,7 +140,11 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                       LucideIcons.moreVertical,
                       size: 20,
                     ),
-                    onSelected: (i) {
+                    onSelected: (i) async {
+                      if (i == 2) {
+                        await _handleDefineAsComponent(widget);
+                        return;
+                      }
                       Get.dialog(WrapComponentListModal(
                         excludeWidgetType: i == 0
                             ? [
@@ -190,7 +200,22 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
                               ],
                             ),
                           ),
-                        ]
+                        ],
+                        PopupMenuItem(
+                          value: 2,
+                          child: Row(
+                            children: [
+                              Icon(LucideIcons.puzzle),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Définir comme composant",
+                                style: TextStyle(color: AppColors.white),
+                              )
+                            ],
+                          ),
+                        )
                       ];
                     },
                   )
@@ -204,9 +229,61 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
     );
   }
 
+  Future<void> _handleDefineAsComponent(IWidget widget) async {
+    final nameController = TextEditingController(
+      text: parseSnakeToPascal(widget.type.name.toLowerCase()),
+    );
+    final componentName = await Get.dialog<String>(
+      AlertDialog(
+        backgroundColor: AppColors.background,
+        title: Text(
+          "Définir comme composant",
+          style: TextStyle(color: AppColors.white, fontSize: 18),
+        ),
+        content: TextField(
+          controller: nameController,
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: "Nom du composant",
+            hintStyle: TextStyle(color: AppColors.grey),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text("Annuler"),
+          ),
+          ElevatedButton(
+            onPressed: () => Get.back(result: nameController.text.trim()),
+            child: Text("Créer"),
+          ),
+        ],
+      ),
+      barrierColor: Colors.black54,
+    );
+    if (componentName == null || componentName.isEmpty) return;
+    final canvasController = Get.find<FCanvasController>();
+    final createComponentAsync = AppDependencies.get<CreateComponentAsync>();
+    final result = await createComponentAsync.execute(
+      CreateComponentCommand(
+        projectId: canvasController.projectId,
+        name: componentName,
+        data: widget.toJson(),
+      ),
+    );
+    result.fold(
+      (err) => Message.errors("Erreur lors de la création du composant"),
+      (component) {
+        widget.componentize(
+          componentId: component.id,
+          componentName: component.name,
+        );
+      },
+    );
+  }
+
   List<String> _findPathToWidget(IWidget root, String targetId,
-      [List<String> currentPath = const []]) {
-    if (root.id == targetId) {
+      [List<String> currentPath = const []]) {    if (root.id == targetId) {
       return currentPath;
     }
 

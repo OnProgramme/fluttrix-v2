@@ -16,5 +16,6 @@ enum WidgetType{
   RICH_TEXT,
   APPBAR,
   CENTER,
-  ALIGN
+  ALIGN,
+  COMPONENT
 }

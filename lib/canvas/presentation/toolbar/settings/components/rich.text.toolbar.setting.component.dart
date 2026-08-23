@@ -8,7 +8,7 @@ import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets
 import 'package:fluttrix/presentation/widgets/buttons/f.add.button.dart';
 import 'package:fluttrix/presentation/widgets/inputs/input.dropdown.dart';
 import 'package:fluttrix/utils/app.colors.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class RichTextToolBarSettingComponent extends StatefulWidget {
   const RichTextToolBarSettingComponent({super.key, required this.widget});

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
-import 'package:fluttrix/canvas/models/generator/ftrix.widget.generator.dart';
 import 'package:fluttrix/presentation/preview_code/components/ftrix.file.tree.component.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +11,7 @@ class PreviewCodeScreen extends GetView<PreviewCodeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Visualiseur le code'),
+        title: const Text('Visualiseur de code'),
         centerTitle: true,
       ),
       body: Row(
@@ -22,28 +21,48 @@ class PreviewCodeScreen extends GetView<PreviewCodeController> {
             height: MediaQuery.sizeOf(context).height,
             color: Colors.black.withOpacity(.87),
             padding: EdgeInsets.all(10),
-            child: FTrixFileTreeComponent(files: controller.files),
-            // child: Column(
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Icon(Icons.keyboard_arrow_down_outlined, color: Colors.grey,size: 20,),
-            //         Icon(Icons.folder_open, color: Colors.grey,size: 20,),
-            //         SizedBox(width: 5,),
-            //         Text("lib", style: TextStyle(color: Colors.grey),)
-            //       ],
-            //     )
-            //   ],
-            // ),
+            child: Obx(() => FTrixFileTreeComponent(
+                  files: controller.files,
+                  selectedFileName: controller.selectedFile.value?.name,
+                  onFileTap: controller.handleSelectFile,
+                )),
           ),
           Expanded(
-            child: SyntaxView(
-                code: FTrixWidgetGenerator.generateCodeFromJson(jsonMap: controller.canvasJson, className: 'Home', stateType: FTrixWidgetStateType.STATEFUL),	// Code text
-                syntax: Syntax.DART,	// Language
-                syntaxTheme: SyntaxTheme.vscodeDark(),	// Theme
-                fontSize: 14.0,	// Font size
-                expanded: true,
-            ),
+            child: Obx(() {
+              final file = controller.selectedFile.value;
+              if (file == null) {
+                return Center(
+                  child: Text(
+                    "Sélectionner un fichier",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                );
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    color: Colors.black.withOpacity(.6),
+                    child: Text(
+                      file.name,
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
+                  ),
+                  Expanded(
+                    child: SyntaxView(
+                      code: controller.selectedCode,
+                      syntax: Syntax.DART,
+                      syntaxTheme: SyntaxTheme.vscodeDark(),
+                      fontSize: 14.0,
+                      expanded: true,
+                    ),
+                  ),
+                ],
+              );
+            }),
           ),
         ],
       ),

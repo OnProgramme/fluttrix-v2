@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class FTrixWidgetIconBuilder {
   FTrixWidgetIconBuilder._();
@@ -24,6 +24,7 @@ class FTrixWidgetIconBuilder {
       WidgetType.WRAP: LucideIcons.layers,
       WidgetType.ALIGN: LucideIcons.alignJustify,
       WidgetType.GRIDVIEW: LucideIcons.grid,
+      WidgetType.COMPONENT: LucideIcons.puzzle,
     };
     final icon = icons[type];
     if (icon == null) {

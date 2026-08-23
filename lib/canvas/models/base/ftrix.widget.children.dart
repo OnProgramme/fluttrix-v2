@@ -6,10 +6,12 @@ import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.widget.child.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.builder.dart';
 import 'package:fluttrix/canvas/models/enums/drop.position.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.componentize.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.delete.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.drop.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/events/ftrix.wrap.parent.event.data.dart';
 import 'package:fluttrix/canvas/models/utils/insert.element.on.the.list.dart';
+import 'package:fluttrix/canvas/models/widgets/ftrix.component.dart';
 import 'package:fluttrix/utils/message.dart';
 
 import '../enums/widget.type.dart';
@@ -28,6 +30,8 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
         _handleListenWhenChildDeleted);
     super.onStream(FTrixStream.instance.wrapParentWidgetEvent,
         _handleListenWhenChildWrapped);
+    super.onStream(FTrixStream.instance.componentizeWidgetEvent,
+        _handleListenWhenChildComponentized);
     super.onStream(
         FTrixStream.instance.dropWidgetEvent, _handleListenWhenWidgetDropped);
     this.children = children ?? [];
@@ -89,6 +93,23 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
     }
     child.dispose();
     children[indexedChild] = parent;
+    update();
+  }
+
+  void _handleListenWhenChildComponentized(
+      FTrixComponentizeWidgetEventData event) {
+    if (event.currentParentId != id || children.isEmpty) return;
+    final indexedChild = children.indexWhere((el) => el.id == event.widgetId);
+    if (indexedChild == -1) return;
+    final child = children[indexedChild];
+    final component = FTrixComponent(
+      componentId: event.componentId,
+      componentName: event.componentName,
+      parentId: id,
+      child: child,
+    );
+    child.parentId = component.id;
+    children[indexedChild] = component;
     update();
   }
 
