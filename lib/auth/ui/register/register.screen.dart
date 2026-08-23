@@ -9,7 +9,7 @@ import 'package:fluttrix/shared/form/validator/validator.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:fluttrix/utils/app.images.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
   const RegisterScreen({super.key});
