@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
@@ -229,18 +231,25 @@ class _CanvasTreeWidgetExplorerState extends State<CanvasTreeWidgetExplorer> {
     });
   }
 
+  StreamSubscription? _selectSubscription;
+
   @override
   void initState() {
     super.initState();
-    FTrixStream.instance.selectWidgetEvent.listen((e) {
-      if (mounted) setState(() {});
-    });
-    FTrixStream.instance.selectWidgetEvent.listen((event) {
+    _selectSubscription = FTrixStream.instance.selectWidgetEvent.listen((event) {
+      if (!mounted) return;
       if (event.type == FTrixWidgetEventType.SELECT) {
         selectedWidgetId = event.selectWidget.id;
         _expandParents(event.selectWidget);
       }
+      setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    _selectSubscription?.cancel();
+    super.dispose();
   }
 
   @override

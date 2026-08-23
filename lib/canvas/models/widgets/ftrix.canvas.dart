@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
@@ -6,6 +8,7 @@ import 'package:fluttrix/canvas/models/base/ftrix.widget.children.dart';
 import 'package:fluttrix/canvas/models/base/i.ftrix.canvas.dart';
 import 'package:fluttrix/canvas/models/builder/ftrix.widget.json.builder.dart';
 import 'package:fluttrix/canvas/models/enums/widget.type.dart';
+import 'package:fluttrix/canvas/models/events/ftrix.select.widget.event.data.dart';
 import 'package:fluttrix/canvas/models/settings/ftrix.scaffold.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.scaffold.dart';
 import 'package:fluttrix/files/ftrix.base.file.dart';
@@ -26,6 +29,7 @@ class FTrixCanvas implements IFTrixCanvas {
 
   @override
   void loadFromJson(Map<String, dynamic> json) {
+    _disposeSubtree();
     _scaffold.reset();
     _scaffold.loadFromJson(json);
     if (json["child"] != null) {
@@ -36,6 +40,14 @@ class FTrixCanvas implements IFTrixCanvas {
         List<Map<String, dynamic>>.from(json["children"]),
       );
     }
+  }
+
+  void _disposeSubtree() {
+    final child = _scaffold.child;
+    if (child != null) {
+      child.dispose();
+    }
+    _scaffold.appBar?.dispose();
   }
 
   void _loadChildRecursively(IWidget parent, Map<String, dynamic> childJson) {
@@ -129,7 +141,7 @@ class FTrixCanvas implements IFTrixCanvas {
 }
 
 class _CanvasRender extends StatefulWidget {
-  const _CanvasRender({super.key, required this.widget});
+  const _CanvasRender({required this.widget});
   final IWidget widget;
 
   @override
@@ -137,15 +149,25 @@ class _CanvasRender extends StatefulWidget {
 }
 
 class _CanvasRenderState extends State<_CanvasRender> {
+  StreamSubscription<FTrixEventData>? _updateSubscription;
+  StreamSubscription<FTrixSelectWidgetEventData>? _selectSubscription;
+
   @override
   void initState() {
     super.initState();
-    FTrixStream.instance.updateCanvas.listen((e) {
+    _updateSubscription = FTrixStream.instance.updateCanvas.listen((e) {
       if (mounted) setState(() {});
     });
-    FTrixStream.instance.selectWidgetEvent.listen((e) {
+    _selectSubscription = FTrixStream.instance.selectWidgetEvent.listen((e) {
       if (mounted) setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    _updateSubscription?.cancel();
+    _selectSubscription?.cancel();
+    super.dispose();
   }
 
   @override

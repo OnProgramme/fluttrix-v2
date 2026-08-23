@@ -2,7 +2,6 @@ import 'package:fluttrix/auth/application/facades/auth.facade.dart';
 import 'package:fluttrix/auth/application/usecases/login/login.async.dart';
 import 'package:fluttrix/auth/application/usecases/logout/logout.async.dart';
 import 'package:fluttrix/auth/application/usecases/register/register.async.dart';
-import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
 import 'package:fluttrix/auth/infra/services/firebase.auth.service.dart';
 import 'package:fluttrix/projects/application/usecases/all/get.all.projects.async.dart';

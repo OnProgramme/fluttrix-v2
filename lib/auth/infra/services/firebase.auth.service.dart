@@ -27,9 +27,9 @@ class FirebaseAuthService implements AuthGateway {
       final user = AuthUser(email: response.user!.email!);
       _eventDispatch.dispatch(EventName.login, UserLogged(email: user.email));
       return Right(user);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       return Left(AppFailure.emailOrPasswordInvalid());
-    } catch(e){
+    } catch (_){
       return Left(AppFailure.internetConnection());
     }
   }
@@ -44,9 +44,9 @@ class FirebaseAuthService implements AuthGateway {
       final user = AuthUser(email: response.user!.email!);
       _eventDispatch.dispatch(EventName.register, UserRegistered(user: User.create(email: user.email)));
       return Right(user);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       return Left(AppFailure.emailOrPasswordInvalid());
-    } catch(e){
+    } catch (_){
       return Left(AppFailure.internetConnection());
     }
   }

@@ -18,10 +18,17 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
         super.disableLabel = false,
       this.child}) {
     child?.parentId = id;
-    FTrixStream.instance.wrapParentWidgetEvent
-        .listen(_handleListenWhenChildWrapped);
-    FTrixStream.instance.deleteWidgetEvent
-        .listen(_handleListenWhenChildDeleted);
+    super.onStream(FTrixStream.instance.wrapParentWidgetEvent,
+        _handleListenWhenChildWrapped);
+    super.onStream(FTrixStream.instance.deleteWidgetEvent,
+        _handleListenWhenChildDeleted);
+  }
+
+  @override
+  void dispose() {
+    child?.dispose();
+    child = null;
+    super.dispose();
   }
 
   @override
@@ -46,20 +53,26 @@ abstract class FTrixWidgetWithChild extends FTrixDroppableWidget {
 
   void _handleListenWhenChildWrapped(FTrixWrapParentEventData event) {
     if (event.currentParentId != id || child?.id != event.widgetId) return;
+    final oldChild = child!;
     final parent = FTrixWidgetBuilder.build(event.parentType, id);
-    final cloneChild = child!.clone(parent.id);
+    final cloneChild = oldChild.clone(parent.id);
     if (parent is FTrixWidgetWithChildren) {
       parent.children.add(cloneChild);
     }
     if (parent is FTrixWidgetWithChild) {
       parent.setChild(cloneChild);
     }
+    oldChild.dispose();
     child = parent;
   }
 
   void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {
     if (event.deleteWidget.parentId != id) return;
-    setChild(null);
+    final deleted = event.deleteWidget;
+    if (child?.id == deleted.id) {
+      child!.dispose();
+      setChild(null);
+    }
     unselect();
   }
 

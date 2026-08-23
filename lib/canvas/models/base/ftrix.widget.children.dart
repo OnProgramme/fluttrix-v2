@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.droppable.widget.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
@@ -23,15 +24,24 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
       required super.type,
       super.disableLabel,
       List<IWidget>? children}) {
-    FTrixStream.instance.deleteWidgetEvent
-        .listen(_handleListenWhenChildDeleted);
-    FTrixStream.instance.wrapParentWidgetEvent
-        .listen(_handleListenWhenChildWrapped);
-    FTrixStream.instance.dropWidgetEvent.listen(_handleListenWhenWidgetDropped);
+    super.onStream(FTrixStream.instance.deleteWidgetEvent,
+        _handleListenWhenChildDeleted);
+    super.onStream(FTrixStream.instance.wrapParentWidgetEvent,
+        _handleListenWhenChildWrapped);
+    super.onStream(
+        FTrixStream.instance.dropWidgetEvent, _handleListenWhenWidgetDropped);
     this.children = children ?? [];
     for (var child in this.children) {
       child.parentId = id;
     }
+  }
+
+  @override
+  void dispose() {
+    for (final child in children) {
+      child.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -51,8 +61,7 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
       }
       update();
     } catch (e) {
-      //error
-      print(e);
+      debugPrint('Drop error: $e');
     }
   }
 
@@ -69,13 +78,16 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
     final indexedChild = children.indexWhere((el) => el.id == event.widgetId);
     if (indexedChild == -1) return;
     final child = children[indexedChild];
+    final cloneChild = child.clone(parent.id);
+    cloneChild.parentId = parent.id;
     child.parentId = parent.id;
     if (parent is FTrixWidgetWithChildren) {
-      parent.children.add(child);
+      parent.children.add(cloneChild);
     }
     if (parent is FTrixWidgetWithChild) {
-      parent.setChild(child);
+      parent.setChild(cloneChild);
     }
+    child.dispose();
     children[indexedChild] = parent;
     update();
   }
@@ -87,6 +99,7 @@ abstract class FTrixWidgetWithChildren extends FTrixDroppableWidget {
 
   void _handleListenWhenChildDeleted(FTrixDeleteWidgetEventData event) {
     if (event.deleteWidget.parentId != id) return;
+    children.firstWhere((w) => w.id == event.deleteWidget.id).dispose();
     children.removeWhere((w) => w.id == event.deleteWidget.id);
     unselect();
   }

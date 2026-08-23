@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttrix/canvas/models/utils/data.dart';
 import 'package:fluttrix/canvas/models/widgets/ftrix.canvas.dart';
 import 'package:fluttrix/projects/application/usecases/screens/all/get.all.screens.async.dart';
 import 'package:fluttrix/projects/application/usecases/screens/create/create.screen.async.dart';
@@ -33,11 +34,14 @@ class FCanvasController extends GetxController {
   final isThreeOpened = false.obs;
   final currentScreenId = "".obs;
   late String projectId;
+  StreamSubscription? _canvasUpdateSubscription;
+  Timer? _saveDebounce;
+  static const _saveDebounceDuration = Duration(milliseconds: 800);
 
   @override
   void onInit() {
     super.onInit();
-    projectId = Get.parameters['projectId']!;
+    projectId = Get.parameters['projectId'] ?? '';
     WidgetsBinding.instance.addPostFrameCallback((t) {
       final renderBox =
           frameKey.currentContext?.findRenderObject() as RenderBox?;
@@ -47,9 +51,17 @@ class FCanvasController extends GetxController {
     handleGetAllScreens();
     handleListenWhenCanvasUpdated();
     ever(currentScreenId, (screenId){
-      final screen = screensFetcher.value.firstWhere((screen) => screen.id == screenId);
+      final screen = screensFetcher.value.firstWhereOrNull((screen) => screen.id == screenId);
+      if (screen == null) return;
       canvas.loadFromJson(screen.data);
     });
+  }
+
+  @override
+  void onClose() {
+    _canvasUpdateSubscription?.cancel();
+    _saveDebounce?.cancel();
+    super.onClose();
   }
 
   void handleSelectCanvas() {
@@ -70,15 +82,20 @@ class FCanvasController extends GetxController {
   }
 
   void handleListenWhenCanvasUpdated() {
-    canvas.update.listen((event) async{
-      await Future.delayed(Duration.zero);
-      updateScreenAsync.execute(
-        UpdateScreenCommand(
-          screenId: currentScreenId.value,
-          data: canvas.toJson(),
-        ),
-      );
+    _canvasUpdateSubscription = canvas.update.listen((event) {
+      _saveDebounce?.cancel();
+      _saveDebounce = Timer(_saveDebounceDuration, _persistCurrentScreen);
     });
+  }
+
+  void _persistCurrentScreen() {
+    if (currentScreenId.value.isEmpty) return;
+    updateScreenAsync.execute(
+      UpdateScreenCommand(
+        screenId: currentScreenId.value,
+        data: canvas.toJson(),
+      ),
+    );
   }
   
   void createNewScreen(){

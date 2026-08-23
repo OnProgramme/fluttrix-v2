@@ -216,6 +216,6 @@ class _FTrixResizableWidgetComponentState
           ],
         ],
       ),
-    );;
+    );
   }
 }

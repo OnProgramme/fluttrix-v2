@@ -1,8 +1,5 @@
-import 'package:fluttrix/auth/application/facades/auth.facade.dart';
-import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
 import 'package:fluttrix/auth/infra/services/auth.user.storage.service.dart';
-import 'package:fluttrix/auth/infra/services/firebase.auth.service.dart';
 import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
 import 'package:fluttrix/projects/application/listeners/listen.when.project.created.and.create.first.screen.dart';
 import 'package:fluttrix/projects/application/listeners/listen.when.project.deleted.and.delete.all.screens.dart';

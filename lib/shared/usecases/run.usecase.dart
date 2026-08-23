@@ -30,17 +30,20 @@ class RunUseCase<T, E> {
       fetcher?.reset();
       response.fold(
             (err) {
-          onError?.call(err);
-          if (!ignoreErrors.contains(err.runtimeType)) {
+          if (ignoreErrors.contains(err.runtimeType)) {
             return;
           }
           fetcher?.setError();
+          onError?.call(err);
         },
             (result) {
           fetcher?.value = result;
           onSuccess?.call(result);
         },
       );
+    }).catchError((Object e) {
+      onFinally?.call();
+      fetcher?.setError();
     });
   }
 }

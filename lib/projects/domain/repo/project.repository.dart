@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:fluttrix/projects/domain/entities/project.entity.dart';
-import 'package:fluttrix/projects/domain/entities/screen.entity.dart';
 import 'package:fluttrix/shared/exceptions/app.failure.dart';
 
 abstract class ProjectRepository{

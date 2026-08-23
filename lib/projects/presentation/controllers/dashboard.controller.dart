@@ -64,7 +64,9 @@ class DashboardController extends GetxController {
             screenData: FTrixCanvas().toJson(),
           ),
         ).then((response){
-          Get.toNamed(Routes.PROJECT_DETAILS);
+          AppRouter.navigate(Routes.PROJECT_DETAILS, parameters: {
+            'projectId': result.id,
+          });
         });
       });
     });

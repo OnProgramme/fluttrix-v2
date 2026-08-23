@@ -31,6 +31,6 @@ class UserFacade implements IUserFacade{
         storage.saveAuthUser(result);
         return Right(result);
       });
-    });;
+    });
   }
 }

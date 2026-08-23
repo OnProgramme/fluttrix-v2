@@ -1,11 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/presentation/icons/choose.icon.controller.dart';
 import 'package:fluttrix/firebase_options.dart';
 import 'package:fluttrix/shared/injection/infra/memory.injector.dart';
-import 'package:fluttrix/shared/navigation/infra/auto.router.dart';
 import 'package:fluttrix/shared/navigation/infra/get.router.dart';
-import 'package:fluttrix/shared/navigation/infra/go.router.dart';
 import 'package:fluttrix/shared/navigation/routes.dart';
 import 'package:fluttrix/utils/app.colors.dart';
 import 'package:fluttrix/utils/app.dependencies.dart';
@@ -22,7 +19,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   var initialRoute = await Routes.initialRoute;
-  print(initialRoute);
   runApp(Main(initialRoute));
 }
 

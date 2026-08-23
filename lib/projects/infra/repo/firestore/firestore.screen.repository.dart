@@ -20,38 +20,54 @@ class FirestoreScreenRepository implements ScreenRepository {
   }
 
   @override
-  Future<Either<AppFailure, List<Screen>>> getScreens(String projectId) {
-    return collection.where('projectId', isEqualTo: projectId).get().then((response) {
+  Future<Either<AppFailure, List<Screen>>> getScreens(String projectId) async {
+    try {
+      final response = await collection
+          .where('projectId', isEqualTo: projectId)
+          .get();
       return Right(response.docs
           .map((doc) => Screen.fromJson(doc.data() as Map<String, dynamic>))
           .toList());
-    });
+    } catch (e) {
+      return Left(AppFailure.failFetch());
+    }
   }
 
   @override
-  Future<Either<AppFailure, Unit>> delete(String screenId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<AppFailure, Unit>> delete(String screenId) async {
+    try {
+      await collection.doc(screenId).delete();
+      return Right(unit);
+    } catch (e) {
+      return Left(AppFailure.failDeleted());
+    }
   }
 
   @override
-  Future<Either<AppFailure, Unit>> deleteAll(String projectId) {
-    return getScreens(projectId).then((response){
-      return response.fold((e)=>Left(e), (screens)async{
-        for (var screen in screens) {
-          await collection.doc(screen.id).delete();
-        }
-        return Right(unit);
-      });
-    });
+  Future<Either<AppFailure, Unit>> deleteAll(String projectId) async {
+    try {
+      final response = await collection
+          .where('projectId', isEqualTo: projectId)
+          .get();
+      if (response.docs.isEmpty) return Right(unit);
+      final batch = FirebaseFirestore.instance.batch();
+      for (final doc in response.docs) {
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
+      return Right(unit);
+    } catch (e) {
+      return Left(AppFailure.failDeleted());
+    }
   }
 
   @override
-  Future<Either<AppFailure, Unit>> updateScreen(UpdateScreenCommand command) {
-    return collection
-        .doc(command.screenId)
-        .update(command.toJson())
-        .then((value) => Right(unit))
-    ;
+  Future<Either<AppFailure, Unit>> updateScreen(UpdateScreenCommand command) async {
+    try {
+      await collection.doc(command.screenId).update(command.toJson());
+      return Right(unit);
+    } catch (e) {
+      return Left(AppFailure.failSaved());
+    }
   }
 }

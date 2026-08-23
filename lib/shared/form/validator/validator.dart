@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 typedef ValidatorType = String? Function(String value);
 typedef Validators = List<ValidatorType>;
@@ -21,6 +20,7 @@ class Validator {
       if (num.tryParse(value) == null) {
         return "Ce champ doit être un nombre";
       }
+      return null;
     };
   }
 

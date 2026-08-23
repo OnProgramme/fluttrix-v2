@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttrix/canvas/models/settings/ftrix.align.setting.dart';
 import 'package:fluttrix/canvas/models/widgets/appbar/ftrix.app.bar.dart';
 import 'package:fluttrix/canvas/models/widgets/appbar/ftrix.app.bar.setting.dart';
-import 'package:fluttrix/canvas/models/widgets/ftrix.align.dart';
-import 'package:fluttrix/canvas/presentation/toolbar/settings/components/widgets/f.edit.alignment.dart';
 
 class FTrixAppBarToolBarSettingComponent extends StatefulWidget {
   const FTrixAppBarToolBarSettingComponent({super.key, required this.widget});

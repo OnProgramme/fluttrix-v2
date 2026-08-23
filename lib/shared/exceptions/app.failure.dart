@@ -11,4 +11,6 @@ class AppFailure with _$AppFailure {
   factory AppFailure.internetConnection() = InternetConnection;
   factory AppFailure.userNotExist() = UserNotExist;
   factory AppFailure.failSaved() = FailSaved;
+  factory AppFailure.failFetch() = FailFetch;
+  factory AppFailure.failDeleted() = FailDeleted;
 }

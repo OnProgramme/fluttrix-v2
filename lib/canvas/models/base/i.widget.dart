@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.dropped.widget.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
@@ -20,11 +22,26 @@ abstract class IWidget {
   Widget render();
   IWidget clone([String? parentId]);
 
+  final List<StreamSubscription<dynamic>> _subscriptions = [];
+
   IWidget({required this.type, this.parentId, required this.setting, this.disableLabel = false}) {
     isWidgetSelected = false;
     id = Uuid().v4();
-    FTrixStream.instance.selectWidgetEvent
-        .listen(_handleListenWhenWidgetSelected);
+    onStream(
+      FTrixStream.instance.selectWidgetEvent,
+      _handleListenWhenWidgetSelected,
+    );
+  }
+
+  void onStream<T>(Stream<T> stream, void Function(T event) handler) {
+    _subscriptions.add(stream.listen(handler));
+  }
+
+  void dispose() {
+    for (final subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    _subscriptions.clear();
   }
 
   void _handleListenWhenWidgetSelected(FTrixSelectWidgetEventData event) {

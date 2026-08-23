@@ -23,6 +23,8 @@ mixin _$AppFailure {
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +34,8 @@ mixin _$AppFailure {
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +45,8 @@ mixin _$AppFailure {
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +58,8 @@ mixin _$AppFailure {
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +69,8 @@ mixin _$AppFailure {
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +80,8 @@ mixin _$AppFailure {
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,9 +103,6 @@ class _$AppFailureCopyWithImpl<$Res, $Val extends AppFailure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -110,9 +119,6 @@ class __$$EmailAlreadyInUseImplCopyWithImpl<$Res>
   __$$EmailAlreadyInUseImplCopyWithImpl(_$EmailAlreadyInUseImpl _value,
       $Res Function(_$EmailAlreadyInUseImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -150,6 +156,8 @@ class _$EmailAlreadyInUseImpl
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) {
     return emailAlreadyInUse();
   }
@@ -162,6 +170,8 @@ class _$EmailAlreadyInUseImpl
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) {
     return emailAlreadyInUse?.call();
   }
@@ -174,6 +184,8 @@ class _$EmailAlreadyInUseImpl
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -191,6 +203,8 @@ class _$EmailAlreadyInUseImpl
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -203,6 +217,8 @@ class _$EmailAlreadyInUseImpl
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) {
     return emailAlreadyInUse?.call(this);
   }
@@ -215,6 +231,8 @@ class _$EmailAlreadyInUseImpl
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -244,9 +262,6 @@ class __$$EmailOrPasswordInvalidImplCopyWithImpl<$Res>
       _$EmailOrPasswordInvalidImpl _value,
       $Res Function(_$EmailOrPasswordInvalidImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -286,6 +301,8 @@ class _$EmailOrPasswordInvalidImpl
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) {
     return emailOrPasswordInvalid();
   }
@@ -298,6 +315,8 @@ class _$EmailOrPasswordInvalidImpl
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) {
     return emailOrPasswordInvalid?.call();
   }
@@ -310,6 +329,8 @@ class _$EmailOrPasswordInvalidImpl
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) {
     if (emailOrPasswordInvalid != null) {
@@ -327,6 +348,8 @@ class _$EmailOrPasswordInvalidImpl
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) {
     return emailOrPasswordInvalid(this);
   }
@@ -339,6 +362,8 @@ class _$EmailOrPasswordInvalidImpl
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) {
     return emailOrPasswordInvalid?.call(this);
   }
@@ -351,6 +376,8 @@ class _$EmailOrPasswordInvalidImpl
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) {
     if (emailOrPasswordInvalid != null) {
@@ -378,9 +405,6 @@ class __$$InternetConnectionImplCopyWithImpl<$Res>
   __$$InternetConnectionImplCopyWithImpl(_$InternetConnectionImpl _value,
       $Res Function(_$InternetConnectionImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -419,6 +443,8 @@ class _$InternetConnectionImpl
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) {
     return internetConnection();
   }
@@ -431,6 +457,8 @@ class _$InternetConnectionImpl
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) {
     return internetConnection?.call();
   }
@@ -443,6 +471,8 @@ class _$InternetConnectionImpl
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) {
     if (internetConnection != null) {
@@ -460,6 +490,8 @@ class _$InternetConnectionImpl
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) {
     return internetConnection(this);
   }
@@ -472,6 +504,8 @@ class _$InternetConnectionImpl
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) {
     return internetConnection?.call(this);
   }
@@ -484,6 +518,8 @@ class _$InternetConnectionImpl
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) {
     if (internetConnection != null) {
@@ -511,9 +547,6 @@ class __$$UserNotExistImplCopyWithImpl<$Res>
   __$$UserNotExistImplCopyWithImpl(
       _$UserNotExistImpl _value, $Res Function(_$UserNotExistImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -549,6 +582,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) {
     return userNotExist();
   }
@@ -561,6 +596,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) {
     return userNotExist?.call();
   }
@@ -573,6 +610,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) {
     if (userNotExist != null) {
@@ -590,6 +629,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) {
     return userNotExist(this);
   }
@@ -602,6 +643,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) {
     return userNotExist?.call(this);
   }
@@ -614,6 +657,8 @@ class _$UserNotExistImpl with DiagnosticableTreeMixin implements UserNotExist {
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) {
     if (userNotExist != null) {
@@ -641,9 +686,6 @@ class __$$FailSavedImplCopyWithImpl<$Res>
   __$$FailSavedImplCopyWithImpl(
       _$FailSavedImpl _value, $Res Function(_$FailSavedImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of AppFailure
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -679,6 +721,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     required TResult Function() internetConnection,
     required TResult Function() userNotExist,
     required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
   }) {
     return failSaved();
   }
@@ -691,6 +735,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     TResult? Function()? internetConnection,
     TResult? Function()? userNotExist,
     TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
   }) {
     return failSaved?.call();
   }
@@ -703,6 +749,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     TResult Function()? internetConnection,
     TResult Function()? userNotExist,
     TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
     required TResult orElse(),
   }) {
     if (failSaved != null) {
@@ -720,6 +768,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     required TResult Function(InternetConnection value) internetConnection,
     required TResult Function(UserNotExist value) userNotExist,
     required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
   }) {
     return failSaved(this);
   }
@@ -732,6 +782,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     TResult? Function(InternetConnection value)? internetConnection,
     TResult? Function(UserNotExist value)? userNotExist,
     TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
   }) {
     return failSaved?.call(this);
   }
@@ -744,6 +796,8 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
     TResult Function(InternetConnection value)? internetConnection,
     TResult Function(UserNotExist value)? userNotExist,
     TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
     required TResult orElse(),
   }) {
     if (failSaved != null) {
@@ -755,4 +809,282 @@ class _$FailSavedImpl with DiagnosticableTreeMixin implements FailSaved {
 
 abstract class FailSaved implements AppFailure {
   factory FailSaved() = _$FailSavedImpl;
+}
+
+/// @nodoc
+abstract class _$$FailFetchImplCopyWith<$Res> {
+  factory _$$FailFetchImplCopyWith(
+          _$FailFetchImpl value, $Res Function(_$FailFetchImpl) then) =
+      __$$FailFetchImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FailFetchImplCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res, _$FailFetchImpl>
+    implements _$$FailFetchImplCopyWith<$Res> {
+  __$$FailFetchImplCopyWithImpl(
+      _$FailFetchImpl _value, $Res Function(_$FailFetchImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FailFetchImpl with DiagnosticableTreeMixin implements FailFetch {
+  _$FailFetchImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AppFailure.failFetch()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AppFailure.failFetch'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FailFetchImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() emailOrPasswordInvalid,
+    required TResult Function() internetConnection,
+    required TResult Function() userNotExist,
+    required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
+  }) {
+    return failFetch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? emailAlreadyInUse,
+    TResult? Function()? emailOrPasswordInvalid,
+    TResult? Function()? internetConnection,
+    TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
+  }) {
+    return failFetch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? emailOrPasswordInvalid,
+    TResult Function()? internetConnection,
+    TResult Function()? userNotExist,
+    TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
+    required TResult orElse(),
+  }) {
+    if (failFetch != null) {
+      return failFetch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(EmailOrPasswordInvalid value)
+        emailOrPasswordInvalid,
+    required TResult Function(InternetConnection value) internetConnection,
+    required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
+  }) {
+    return failFetch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult? Function(InternetConnection value)? internetConnection,
+    TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
+  }) {
+    return failFetch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult Function(InternetConnection value)? internetConnection,
+    TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
+    required TResult orElse(),
+  }) {
+    if (failFetch != null) {
+      return failFetch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FailFetch implements AppFailure {
+  factory FailFetch() = _$FailFetchImpl;
+}
+
+/// @nodoc
+abstract class _$$FailDeletedImplCopyWith<$Res> {
+  factory _$$FailDeletedImplCopyWith(
+          _$FailDeletedImpl value, $Res Function(_$FailDeletedImpl) then) =
+      __$$FailDeletedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FailDeletedImplCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res, _$FailDeletedImpl>
+    implements _$$FailDeletedImplCopyWith<$Res> {
+  __$$FailDeletedImplCopyWithImpl(
+      _$FailDeletedImpl _value, $Res Function(_$FailDeletedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FailDeletedImpl with DiagnosticableTreeMixin implements FailDeleted {
+  _$FailDeletedImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AppFailure.failDeleted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AppFailure.failDeleted'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FailDeletedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() emailOrPasswordInvalid,
+    required TResult Function() internetConnection,
+    required TResult Function() userNotExist,
+    required TResult Function() failSaved,
+    required TResult Function() failFetch,
+    required TResult Function() failDeleted,
+  }) {
+    return failDeleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? emailAlreadyInUse,
+    TResult? Function()? emailOrPasswordInvalid,
+    TResult? Function()? internetConnection,
+    TResult? Function()? userNotExist,
+    TResult? Function()? failSaved,
+    TResult? Function()? failFetch,
+    TResult? Function()? failDeleted,
+  }) {
+    return failDeleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? emailOrPasswordInvalid,
+    TResult Function()? internetConnection,
+    TResult Function()? userNotExist,
+    TResult Function()? failSaved,
+    TResult Function()? failFetch,
+    TResult Function()? failDeleted,
+    required TResult orElse(),
+  }) {
+    if (failDeleted != null) {
+      return failDeleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(EmailOrPasswordInvalid value)
+        emailOrPasswordInvalid,
+    required TResult Function(InternetConnection value) internetConnection,
+    required TResult Function(UserNotExist value) userNotExist,
+    required TResult Function(FailSaved value) failSaved,
+    required TResult Function(FailFetch value) failFetch,
+    required TResult Function(FailDeleted value) failDeleted,
+  }) {
+    return failDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult? Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult? Function(InternetConnection value)? internetConnection,
+    TResult? Function(UserNotExist value)? userNotExist,
+    TResult? Function(FailSaved value)? failSaved,
+    TResult? Function(FailFetch value)? failFetch,
+    TResult? Function(FailDeleted value)? failDeleted,
+  }) {
+    return failDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(EmailOrPasswordInvalid value)? emailOrPasswordInvalid,
+    TResult Function(InternetConnection value)? internetConnection,
+    TResult Function(UserNotExist value)? userNotExist,
+    TResult Function(FailSaved value)? failSaved,
+    TResult Function(FailFetch value)? failFetch,
+    TResult Function(FailDeleted value)? failDeleted,
+    required TResult orElse(),
+  }) {
+    if (failDeleted != null) {
+      return failDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FailDeleted implements AppFailure {
+  factory FailDeleted() = _$FailDeletedImpl;
 }

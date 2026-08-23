@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttrix/auth/application/usecases/login/login.async.dart';
 import 'package:fluttrix/auth/application/usecases/login/login.command.dart';
-import 'package:fluttrix/auth/domain/facades/i.auth.facade.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
 import 'package:fluttrix/shared/form/validator/form.validator.dart';
 import 'package:fluttrix/shared/navigation/application/router.dart';
@@ -61,7 +60,6 @@ class LoginController extends GetxController{
 
   void handleGetProfile() async {
     final user = await storage.getAuthUser();
-    print(user?.toJson());
     if (user == null) return;
     AppRouter.navigate(Routes.DASHBOARD);
   }

@@ -1,4 +1,3 @@
-import 'package:fluttrix/auth/domain/entities/auth.user.entity.dart';
 import 'package:fluttrix/auth/domain/storage/auth.user.storage.dart';
 import 'package:fluttrix/shared/services/storage/domain/core/local.storage.dart';
 import 'package:fluttrix/user/domain/entities/user.entity.dart';
@@ -34,7 +33,6 @@ class AuthUserStorageService implements AuthUserStorage{
 
   @override
   Future<void> saveAuthUser(User user) async{
-    print(user);
     await _storage.write(_USER_KEY, user.toJson());
   }
 

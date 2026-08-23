@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fluttrix/canvas/models/base/ftrix.event.dart';
 import 'package:fluttrix/canvas/models/base/ftrix.stream.dart';
 import 'package:fluttrix/canvas/models/base/i.widget.dart';
@@ -14,10 +16,12 @@ class FTrixToolbarSettingsControllerBinding extends Bindings{
 
 class FTrixToolbarSettingsController extends GetxController{
   final selectedWidget = Rxn<IWidget>();
+  StreamSubscription? _selectSubscription;
+
   @override
   void onInit() {
     super.onInit();
-    FTrixStream.instance.selectWidgetEvent.listen((event){
+    _selectSubscription = FTrixStream.instance.selectWidgetEvent.listen((event){
       if(event.type == FTrixWidgetEventType.SELECT){
         handleWidgetSelected(event.selectWidget);
         return;
@@ -26,6 +30,11 @@ class FTrixToolbarSettingsController extends GetxController{
     });
   }
 
+  @override
+  void onClose() {
+    _selectSubscription?.cancel();
+    super.onClose();
+  }
 
   void handleWidgetSelected(IWidget? widget){
     selectedWidget.value = widget;
